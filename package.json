@@ -13,12 +13,6 @@
     "api": "json-server --watch db.json"
   },
   "private": true,
-  "lint-staged": {
-    "src/**/*.{js,ts,scss,md,html,json}": [
-      "eslint",
-      "prettier --write"
-    ]
-  },
   "dependencies": {
     "@angular/animations": "~12.1.4",
     "@angular/common": "~12.1.4",
@@ -62,5 +56,11 @@
     "protractor": "~7.0.0",
     "ts-node": "~7.0.0",
     "typescript": "~4.3.5"
+  },
+  "lint-staged": {
+    "src/**/*.{js,ts,scss,md,html,json}": [
+      "eslint",
+      "prettier --write"
+    ]
   }
 }
