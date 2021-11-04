@@ -16,7 +16,7 @@ export class AccountService {
     this.url = `${environment.baseUrl}${environment.endpoints.account}`;
   }
 
-  retrieveAccount({ email, password }): Observable<Account> {
+  retrieveAccount(email: string, password: string): Observable<Account> {
     const params = new HttpParams();
     params.append('email', email);
     params.append('password', password);
