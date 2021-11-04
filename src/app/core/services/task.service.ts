@@ -27,15 +27,15 @@ export class TaskService {
     return this.http.post<Task>(this.url, task);
   }
 
-  deleteTask(taskId: number): Observable<any> {
-    return this.http.delete<any>(`${this.url}/${taskId}`);
+  deleteTask(taskId: number): Observable<{}> {
+    return this.http.delete<{}>(`${this.url}/${taskId}`);
   }
 
   updateAllTask(taskId: number, data: Omit<Task, 'id'>): Observable<Task> {
     return this.http.put<Task>(`${this.url}/${taskId}`, data);
   }
 
-  updateTask(taskId: number, data: Omit<Task, 'id'>): Observable<Task | any> {
-    return this.http.patch<Task | any>(`${this.url}/${taskId}`, data);
+  updateTask(taskId: number, data: Omit<Task, 'id'>): Observable<Partial<Task>> {
+    return this.http.patch<Partial<Task>>(`${this.url}/${taskId}`, data);
   }
 }
