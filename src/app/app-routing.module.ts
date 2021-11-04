@@ -5,6 +5,10 @@ import { MainComponent } from '@core/layouts/main/main.component';
 
 const ROUTES: Routes = [
   {
+    path: 'login',
+    loadChildren: () => import('@pages/login/login.module').then((m) => m.LoginModule),
+  },
+  {
     path: '',
     component: MainComponent,
   },
