@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { APP_BASE_HREF } from '@angular/common';
 
-import { CoreModule } from './core/core.module';
+import { CoreModule } from '@core/core.module';
 
 import { AppRoutingModule } from './app-routing.module';
 

@@ -2,7 +2,7 @@ import { TestBed, waitForAsync } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
 import { APP_BASE_HREF } from '@angular/common';
 
-import { CoreModule } from './core/core.module';
+import { CoreModule } from '@core/core.module';
 
 import { AppComponent } from './app.component';
 

@@ -16,7 +16,9 @@
     "esModuleInterop": true,
     "paths": {
       "@core/*": ["./src/app/core/*"],
-      "@layouts/*": ["./src/app/core/layouts/*"]
+      "@layouts/*": ["./src/app/core/layouts/*"],
+      "@pages/*": ["./src/app/pages/*"],
+      "@shared/*": ["./src/app/shared/*"]
     }
   },
   "angularCompilerOptions": {
