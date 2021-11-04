@@ -18,7 +18,9 @@
       "@core/*": ["./src/app/core/*"],
       "@environments/*": ["./src/environments/*"],
       "@layouts/*": ["./src/app/core/layouts/*"],
+      "@models/*": ["./src/app/shared/models/*"],
       "@pages/*": ["./src/app/pages/*"],
+      "@services/*": ["./src/app/core/services/*"],
       "@shared/*": ["./src/app/shared/*"]
     }
   },
