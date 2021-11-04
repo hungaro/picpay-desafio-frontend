@@ -7,7 +7,7 @@ export const environment = {
   baseUrl: 'http://localhost:3000',
   endpoints: {
     account: '/account',
-    tasks: '/tasks',
+    task: '/tasks',
   },
 };
 
