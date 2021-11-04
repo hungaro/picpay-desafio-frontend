@@ -5,7 +5,7 @@ import { map } from 'rxjs/operators';
 
 import { Account } from '@models/account.model';
 
-import { AccountService } from './account.service';
+import { AccountService } from '@services/account.service';
 
 @Injectable()
 export class AuthenticationService {
