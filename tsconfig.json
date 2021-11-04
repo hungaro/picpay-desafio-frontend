@@ -16,6 +16,7 @@
     "esModuleInterop": true,
     "paths": {
       "@core/*": ["./src/app/core/*"],
+      "@environments/*": ["./src/environments/*"],
       "@layouts/*": ["./src/app/core/layouts/*"],
       "@pages/*": ["./src/app/pages/*"],
       "@shared/*": ["./src/app/shared/*"]
