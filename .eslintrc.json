@@ -31,7 +31,8 @@
             "style": "camelCase",
             "type": "attribute"
           }
-        ]
+        ],
+        "import/prefer-default-export": "off"
       }
     },
     {
