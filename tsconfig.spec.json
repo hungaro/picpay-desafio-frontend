@@ -11,7 +11,8 @@
       "@models/*": ["./src/app/shared/models/*"],
       "@pages/*": ["./src/app/pages/*"],
       "@services/*": ["./src/app/core/services/*"],
-      "@shared/*": ["./src/app/shared/*"]
+      "@shared/*": ["./src/app/shared/*"],
+      "@utils/*": ["./src/app/core/utils/*"]
     }
   },
   "files": ["src/polyfills.ts"],
