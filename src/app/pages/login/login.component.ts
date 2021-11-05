@@ -5,8 +5,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { fromEvent, merge, Observable, Subject } from 'rxjs';
 import { finalize, takeUntil } from 'rxjs/operators';
 
-import { ToastrService } from 'ngx-toastr';
-
 import { DisplayMessage, GenericFormValidator } from '@utils/generic-form-validator';
 
 import { AuthenticationService } from '@services/authentication.service';
@@ -39,7 +37,6 @@ export class LoginComponent implements AfterViewInit, OnDestroy {
     private authenticationService: AuthenticationService,
     private route: ActivatedRoute,
     private router: Router,
-    private toastrService: ToastrService,
     private formBuilder: FormBuilder,
   ) {
     this.setDefaults();
