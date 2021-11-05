@@ -44,7 +44,7 @@ export class FormLoginComponent implements OnInit {
 
       this.accountService.login(this.loginForm.get('email')?.value, this.loginForm.get('password')?.value)
         .subscribe((result: Iuser[]) => {
-          this.router.navigate(['payment'])
+          this.router.navigate(['payments'])
         },
         (error: Error) => {
           this.validationError(error);
