@@ -11,10 +11,21 @@ const ROUTES: Routes = [
   {
     path: '',
     component: MainComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: 'home',
+        pathMatch: 'full',
+      },
+      {
+        path: 'home',
+        loadChildren: () => import('@pages/home/home.module').then((m) => m.HomeModule),
+      },
+    ],
   },
   {
     path: '**',
-    redirectTo: '/',
+    redirectTo: '',
     pathMatch: 'full',
   },
 ];
