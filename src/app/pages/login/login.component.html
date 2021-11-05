@@ -1,1 +1,49 @@
-Login
+<div fxLayout fxFlexFill>
+  <section
+    fxFlex
+    fxFlex.gt-xs="50%"
+    fxFlex.gt-sm="40%"
+    fxLayout="row"
+    fxLayoutAlign="center center"
+  >
+    <div fxLayout="column" fxFlex="90%" fxFlex.gt-xs="70%" fxLayoutGap="16px">
+      <img width="27%" src="assets/img/logo-dark.svg" />
+
+      <h1>Bem-vindo de volta</h1>
+
+      <form fxLayout="column" [formGroup]="loginForm" (ngSubmit)="login()">
+        <mat-form-field>
+          <mat-label>Email</mat-label>
+          <input matInput placeholder="payfriends@email.com" formControlName="email" required />
+          <mat-error *ngIf="hasError">Usuário ou senha inválido</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label>Senha</mat-label>
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            matInput
+            placeholder="123"
+            formControlName="password"
+            required
+          />
+          <mat-icon matSuffix (click)="showPassword = !showPassword">{{
+            showPassword ? 'visibility' : 'visibility_off'
+          }}</mat-icon>
+        </mat-form-field>
+
+        <button type="submit" mat-raised-button color="primary">Entrar</button>
+      </form>
+    </div>
+  </section>
+  <div
+    fxLayout
+    fxLayoutAlign="center center"
+    fxFlex.gt-xs="50%"
+    fxFlex.gt-sm="60%"
+    fxHide
+    fxShow.gt-xs
+  >
+    <img width="55%" src="assets/img/bg-login.svg" />
+  </div>
+</div>

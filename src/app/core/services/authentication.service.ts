@@ -25,8 +25,11 @@ export class AuthenticationService {
   login(email: string, password: string) {
     return this.accountService.retrieveAccount(email, password).pipe(
       map((account: Account) => {
-        localStorage.setItem('currentUser', JSON.stringify(account));
-        this.currentUserSubject.next(account);
+        if (account) {
+          localStorage.setItem('currentUser', JSON.stringify(account));
+          this.currentUserSubject.next(account);
+        }
+
         return account;
       }),
     );

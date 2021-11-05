@@ -17,9 +17,9 @@ export class AccountService {
   }
 
   retrieveAccount(email: string, password: string): Observable<Account> {
-    const params = new HttpParams();
-    params.append('email', email);
-    params.append('password', password);
+    let params = new HttpParams();
+    params = params.append('email', email);
+    params = params.append('password', password);
 
     return this.http
       .get<Account[]>(this.url, { params })

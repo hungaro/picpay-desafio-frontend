@@ -1,7 +1,9 @@
+@import 'abstracts/colors';
+
 @import 'base/base', 'base/reset';
 
 @import 'components/scrollbar';
 
 @import 'themes/theme';
 
-@import 'vendor/angular-material', 'vendor/ngx-toastr';
+@import 'vendor/ngx-toastr';

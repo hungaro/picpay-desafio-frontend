@@ -6,13 +6,22 @@ import { APP_BASE_HREF } from '@angular/common';
 
 import { CoreModule } from '@core/core.module';
 
+import { SharedModule } from '@shared/shared.module';
+
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, BrowserAnimationsModule, HttpClientModule, CoreModule, AppRoutingModule],
+  imports: [
+    BrowserModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    CoreModule,
+    SharedModule,
+    AppRoutingModule,
+  ],
   providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
   bootstrap: [AppComponent],
 })
