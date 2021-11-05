@@ -11,11 +11,13 @@
 
       <h1>Bem-vindo de volta</h1>
 
-      <form fxLayout="column" [formGroup]="loginForm" (ngSubmit)="login()">
+      <form novalidate fxLayout="column" [formGroup]="loginForm" (ngSubmit)="login()">
         <mat-form-field>
           <mat-label>Email</mat-label>
           <input matInput placeholder="payfriends@email.com" formControlName="email" required />
-          <mat-error *ngIf="hasError">Usuário ou senha inválido</mat-error>
+          <mat-error *ngIf="displayMessage.email">
+            <p [innerHtml]="displayMessage.email"></p>
+          </mat-error>
         </mat-form-field>
 
         <mat-form-field>
@@ -30,9 +32,19 @@
           <mat-icon matSuffix (click)="showPassword = !showPassword">{{
             showPassword ? 'visibility' : 'visibility_off'
           }}</mat-icon>
+          <mat-error *ngIf="displayMessage.password">
+            <p [innerHtml]="displayMessage.password"></p>
+          </mat-error>
         </mat-form-field>
 
-        <button type="submit" mat-raised-button color="primary">Entrar</button>
+        <button
+          type="submit"
+          mat-raised-button
+          color="primary"
+          [disabled]="!loginForm.valid || loading"
+        >
+          Entrar
+        </button>
       </form>
     </div>
   </section>
