@@ -18,15 +18,17 @@
                 <input matInput formControlName="email">
                 <mat-icon class="material-icons-outlined" matSuffix >mail_outline</mat-icon>
                 <mat-error *ngIf="loginForm.get('email')?.errors?.required">E-mail é obrigatório</mat-error>
-                <mat-error *ngIf="loginForm.get('email')?.errors?.email">Insira um e-mail valido </mat-error>
+                <mat-error *ngIf="loginForm.get('email')?.errors?.email">Insira um e-mail válido </mat-error>
                 </mat-form-field>
             </div>
     
             <div class="mt-2">
                 <mat-form-field appearance="outline" class="w-100">
                     <mat-label> Senha </mat-label>
-                    <input type="password" matInput formControlName="password">
-                    <mat-icon class="material-icons-outlined" matSuffix>https</mat-icon>
+                    <input [type]="visible? 'text' : 'password'" matInput formControlName="password">
+                    <mat-icon class="material-icons-outlined cursor-pointer" matSuffix (click)="visible = !visible">
+                        {{visible? 'visibility_off' : 'visibility'}}
+                    </mat-icon>
                     <mat-error *ngIf="loginForm.get('password')?.errors?.required">Senha é obrigatória</mat-error>
                 </mat-form-field>
             </div>

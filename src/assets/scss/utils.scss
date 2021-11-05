@@ -5,6 +5,10 @@
     align-items: center;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 // snackbar
 .snackbar-success {
     background-color: var(--green) !important;

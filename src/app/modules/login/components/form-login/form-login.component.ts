@@ -15,6 +15,7 @@ import { MessagesSnackbar } from 'src/app/shared/enums/messages-snackbar';
 export class FormLoginComponent implements OnInit {
 
   public loginForm!: FormGroup;
+  public visible!: boolean;
   public disableBtn: boolean = false;
   public txtBtn: string = TextsButton.enter;
 
