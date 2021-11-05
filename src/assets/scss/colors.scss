@@ -1,0 +1,32 @@
+:root {
+    --backgroung-gray: #F2F2F2;
+    --dark-blue: #002d69;
+    --green: #77bfa3;
+    --light-blue: #007DFE;
+    --red: #ff686b;
+}
+
+.bg-gray {
+    background-color: var(--backgroung-gray);
+}
+
+.color-gray {
+    color: var(--backgroung-gray);
+}
+
+.color-dark-blue {
+    color: var(--dark-blue);
+}
+
+.color-green {
+    color: var(--green);
+}
+
+.color-light-blue {
+    color: var(--light-blue);
+}
+
+
+.color-red {
+    color: var(--red);
+}

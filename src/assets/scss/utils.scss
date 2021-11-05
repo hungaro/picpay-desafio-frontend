@@ -1,0 +1,28 @@
+.text-vetical-center {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+// snackbar
+.snackbar-success {
+    background-color: var(--green) !important;
+    color: white !important;
+    text-align: center !important;
+}
+  
+.snackbar-error {
+    background-color: var(--red) !important;
+    color: white !important;
+    text-align: center !important;
+}
+  
+.mat-snack-bar-container {
+    text-align: center;
+}
+  
+.mat-simple-snackbar {
+    display: inline-block !important;
+}
+  
