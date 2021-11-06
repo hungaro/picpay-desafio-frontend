@@ -14,7 +14,13 @@
       <form novalidate fxLayout="column" [formGroup]="loginForm" (ngSubmit)="login()">
         <mat-form-field>
           <mat-label>Email</mat-label>
-          <input matInput placeholder="payfriends@email.com" formControlName="email" required />
+          <input
+            matInput
+            placeholder="payfriends@email.com"
+            formControlName="email"
+            data-test="login-form-email-input"
+            required
+          />
           <mat-error *ngIf="displayMessage.email">
             <p [innerHtml]="displayMessage.email"></p>
           </mat-error>
@@ -27,6 +33,7 @@
             matInput
             placeholder="123"
             formControlName="password"
+            data-test="login-form-password-input"
             required
           />
           <mat-icon matSuffix (click)="showPassword = !showPassword">{{
@@ -43,6 +50,7 @@
           color="primary"
           [class.spinner]="loading"
           [disabled]="!loginForm.valid || loading"
+          data-test="login-button"
         >
           Entrar
         </button>
