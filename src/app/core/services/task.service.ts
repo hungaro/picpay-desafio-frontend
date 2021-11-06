@@ -35,7 +35,7 @@ export class TaskService {
     return this.http.put<Task>(`${this.url}/${taskId}`, data);
   }
 
-  updateTask(taskId: number, data: Omit<Task, 'id'>): Observable<Partial<Task>> {
-    return this.http.patch<Partial<Task>>(`${this.url}/${taskId}`, data);
+  updateTask(taskId: number, data: Omit<Partial<Task>, 'id'>): Observable<Task> {
+    return this.http.patch<Task>(`${this.url}/${taskId}`, data);
   }
 }
