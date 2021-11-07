@@ -35,7 +35,7 @@ describe('HeaderComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should be created header component', () => {
+  it('should create header component', () => {
     expect(component).toBeTruthy();
   });
 
