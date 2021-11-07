@@ -18,10 +18,12 @@
       "@core/*": ["./src/app/core/*"],
       "@environments/*": ["./src/environments/*"],
       "@guards/*": ["./src/app/core/guards/*"],
+      "@layouts/*": ["./src/app/core/layouts/*"],
       "@models/*": ["./src/app/shared/models/*"],
       "@pages/*": ["./src/app/pages/*"],
       "@services/*": ["./src/app/core/services/*"],
       "@shared/*": ["./src/app/shared/*"],
+      "@templates/*": ["./src/app/core/templates/*"],
       "@utils/*": ["./src/app/core/utils/*"]
     }
   },

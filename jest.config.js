@@ -17,6 +17,7 @@ module.exports = {
     '@pages/(.*)$': ['<rootDir>/src/app/pages/$1'],
     '@services/(.*)$': ['<rootDir>/src/app/core/services/$1'],
     '@shared/(.*)$': ['<rootDir>/src/app/shared/$1'],
+    '@templates/(.*)$': ['<rootDir>/src/app/core/templates/$1'],
     '@utils/(.*)$': ['<rootDir>/src/app/core/utils/$1'],
   },
 };

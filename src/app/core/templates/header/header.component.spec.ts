@@ -119,7 +119,7 @@ describe('HeaderComponent', () => {
     logoutIcon.click();
 
     expect(logout).toHaveBeenCalled();
-    expect(currentUserValue.mock.results[0].value).toBeNull();
+    expect(currentUserValue.mock.results).toHaveLength(0);
     expect(routerNavigate).toBeTruthy();
   });
 });

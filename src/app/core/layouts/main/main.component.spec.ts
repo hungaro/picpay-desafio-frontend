@@ -3,12 +3,12 @@ import { RouterModule } from '@angular/router';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MockComponent } from 'ng-mocks';
+import { MockModule } from 'ng-mocks';
 
 import { AccountService } from '@services/account.service';
 import { AuthenticationService } from '@services/authentication.service';
 
-import { HeaderComponent } from '@core/templates/header/header.component';
+import { TemplatesModule } from '@templates/templates.module';
 
 import { MainComponent } from './main.component';
 
@@ -18,8 +18,8 @@ describe('MainComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [MockComponent(HeaderComponent), MainComponent],
-      imports: [RouterModule.forRoot([]), HttpClientTestingModule],
+      declarations: [MainComponent],
+      imports: [RouterModule.forRoot([]), HttpClientTestingModule, MockModule(TemplatesModule)],
       providers: [AccountService, AuthenticationService, { provide: APP_BASE_HREF, useValue: '/' }],
     }).compileComponents();
   });

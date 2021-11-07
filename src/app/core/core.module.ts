@@ -7,15 +7,11 @@ import { TaskService } from '@services/task.service';
 
 import { AuthGuard } from '@guards/auth.guard';
 
-import { SharedModule } from '@shared/shared.module';
-
-import { HeaderComponent } from './templates/header/header.component';
-import { MainComponent } from './layouts/main/main.component';
+import { LayoutsModule } from '@layouts/layouts.module';
 
 @NgModule({
-  declarations: [HeaderComponent, MainComponent],
-  imports: [SharedModule, RouterModule],
-  exports: [MainComponent],
+  imports: [RouterModule, LayoutsModule],
+  exports: [LayoutsModule],
   providers: [AccountService, AuthenticationService, TaskService, AuthGuard],
 })
 export class CoreModule {}
