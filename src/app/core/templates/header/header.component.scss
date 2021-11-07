@@ -1,0 +1,11 @@
+@import '~src/scss/abstracts/colors';
+
+.header {
+  background-color: $accent-color;
+  padding: 0 16px;
+  height: 70px;
+
+  .mat-icon {
+    color: #c9ced6;
+  }
+}

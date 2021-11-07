@@ -23,6 +23,7 @@
       "@pages/*": ["./src/app/pages/*"],
       "@services/*": ["./src/app/core/services/*"],
       "@shared/*": ["./src/app/shared/*"],
+      "@templates/*": ["./src/app/core/templates/*"],
       "@utils/*": ["./src/app/core/utils/*"]
     }
   },
