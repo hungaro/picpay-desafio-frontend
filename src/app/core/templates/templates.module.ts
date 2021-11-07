@@ -7,8 +7,8 @@ import { HeaderComponent } from './header/header.component';
 import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
-  declarations: [HeaderComponent, ProfileComponent],
+  declarations: [ProfileComponent, HeaderComponent],
   imports: [CommonModule, SharedModule],
-  exports: [HeaderComponent, ProfileComponent],
+  exports: [ProfileComponent, HeaderComponent],
 })
 export class TemplatesModule {}
