@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { AuthGuard } from '@guards/auth.guard';
+import { MainComponent } from '@core/layouts/main/main.component';
 
-import { MainComponent } from '@layouts/main/main.component';
+import { AuthGuard } from '@guards/auth.guard';
 
 const ROUTES: Routes = [
   {
