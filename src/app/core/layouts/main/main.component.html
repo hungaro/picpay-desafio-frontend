@@ -1,5 +1,9 @@
 <app-header></app-header>
 <main>
-  <h1 *ngIf="pageTitle">{{ pageTitle }}</h1>
-  <router-outlet></router-outlet>
+  <section>
+    <header class="my-16">
+      <h1 *ngIf="pageTitle">{{ pageTitle }}</h1>
+    </header>
+    <router-outlet></router-outlet>
+  </section>
 </main>

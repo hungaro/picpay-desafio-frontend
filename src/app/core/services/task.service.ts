@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpResponse } from '@angular/common/http';
+import { SortDirection } from '@angular/material/sort';
 
 import { Observable } from 'rxjs';
 
@@ -15,8 +16,22 @@ export class TaskService {
     this.url = `${environment.baseUrl}${environment.endpoints.task}`;
   }
 
-  retrieveTasks(): Observable<Task[]> {
-    return this.http.get<Task[]>(this.url);
+  retrieveTasks(
+    sortActive: string,
+    sortDirection: SortDirection,
+    pageIndex: number,
+    pageSize: number,
+  ): Observable<HttpResponse<Task[]>> {
+    let params = new HttpParams();
+    params = params.append('_sort', sortActive);
+    params = params.append('_order', sortDirection);
+    params = params.append('_page', pageIndex + 1);
+    params = params.append('_limit', pageSize);
+
+    return this.http.get<Task[]>(this.url, {
+      params,
+      observe: 'response',
+    });
   }
 
   retrieveTask(taskId: number): Observable<Task> {

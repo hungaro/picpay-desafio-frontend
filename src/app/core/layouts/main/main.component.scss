@@ -8,4 +8,11 @@ main {
   height: calc(100vh - 70px);
   overflow-y: auto;
   overflow-x: hidden;
+
+  position: relative;
+
+  section {
+    position: relative;
+    height: calc(100% - 16px);
+  }
 }

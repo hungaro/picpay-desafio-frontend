@@ -1,8 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { Subject } from 'rxjs';
-import { filter, map, takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-main-layout',
@@ -14,33 +13,14 @@ export class MainComponent implements OnInit, OnDestroy {
 
   private unsubscribeAll: Subject<any>;
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) {
+  constructor(private activatedRoute: ActivatedRoute) {
     this.unsubscribeAll = new Subject();
   }
 
   ngOnInit(): void {
-    this.router.events
-      .pipe(
-        takeUntil(this.unsubscribeAll),
-        filter((event) => event instanceof NavigationEnd),
-        map(() => {
-          let child = this.activatedRoute.firstChild;
-
-          while (child) {
-            if (child.firstChild) {
-              child = child.firstChild;
-            } else if (child.snapshot.data && child.snapshot.data.title) {
-              return child.snapshot.data.title;
-            } else {
-              return null;
-            }
-          }
-          return null;
-        }),
-      )
-      .subscribe((pageTitle: string) => {
-        this.pageTitle = pageTitle;
-      });
+    this.activatedRoute.firstChild.data.subscribe((data) => {
+      this.pageTitle = data?.title;
+    });
   }
 
   ngOnDestroy(): void {
