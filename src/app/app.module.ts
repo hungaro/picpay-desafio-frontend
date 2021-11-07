@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import localePt from '@angular/common/locales/pt';
+import { ToolbarModule } from './core/toolbar/toolbar.module';
 
 registerLocaleData(localePt, 'pt');
 
@@ -21,7 +22,8 @@ registerLocaleData(localePt, 'pt');
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    ToolbarModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' },

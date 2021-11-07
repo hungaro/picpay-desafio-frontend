@@ -1,6 +1,6 @@
-import { Router } from '@angular/router';
-import { UserService } from './../../../../core/services/user/user.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { UserService } from '../services/user/user.service';
 
 @Component({
   selector: 'app-toolbar',
@@ -21,4 +21,5 @@ export class ToolbarComponent implements OnInit {
     this.userService.logout();
     this.router.navigate(['login'])
   }
+
 }

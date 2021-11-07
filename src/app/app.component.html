@@ -1,1 +1,10 @@
-<router-outlet></router-outlet>
+<div class="size bg-gray">
+    <ng-container *ngIf="user$ | async as user">
+        <ng-container *ngIf="(user | json) != '{}'">
+            <app-toolbar></app-toolbar>
+        </ng-container>
+    </ng-container>
+    <router-outlet></router-outlet>
+</div>
+
+
