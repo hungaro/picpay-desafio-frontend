@@ -1,0 +1,28 @@
+<div class="container">
+    <ng-container *ngIf="dialogPayment.add">
+        <h1 class="ms-2">
+            <span class="font-bold-700 font-montserrat">
+                Adicionar pagamento
+            </span>
+        </h1>
+        <app-form-payment (action)="closeDialog($event)"></app-form-payment>
+    </ng-container>
+    
+    <ng-container *ngIf="dialogPayment.edit">
+        <h1 class="ms-2">
+            <span class="font-bold-700 font-montserrat">
+                Editar pagamento
+            </span>
+        </h1>
+        <app-form-payment [payment]="dialogPayment.payment" (action)="closeDialog($event)"></app-form-payment>
+    </ng-container>
+    
+    <ng-container *ngIf="dialogPayment.delete">
+        <h1>
+            <span class="font-bold-700 font-montserrat">
+                Excluir pagamento
+            </span>
+        </h1>
+        <app-view-payment-delete [payment]="dialogPayment.payment" (action)="closeDialog($event)"></app-view-payment-delete>
+    </ng-container>
+</div>

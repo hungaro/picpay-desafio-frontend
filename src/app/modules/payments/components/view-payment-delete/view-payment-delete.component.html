@@ -1,0 +1,23 @@
+<div class="width-delete">
+    <h3 class="font-size-16 color-black font-bold-400">Usuário: {{payment.name}}</h3>
+    <h3 class="font-size-16 color-black font-bold-400">Data: {{payment.date | date:'shortDate'}}</h3>
+    <h3 class="font-size-16 color-black font-bold-400">Valor: {{payment.value | currency}}</h3>
+
+    <div class="w-100">
+        <button
+            mat-flat-button
+            class="width-button me-3 mt-2 bg-light-gray"
+            (click)="cancel()">
+            {{txtBtnCancel}}
+        </button>
+
+        <button
+            mat-flat-button
+            class="width-button ms-3 mt-2"
+            [disabled]="disableBtnSave"
+            (click)="deletePayment()"
+            color="primary">
+            {{txtBtnSave}}
+        </button>
+    </div>
+</div>

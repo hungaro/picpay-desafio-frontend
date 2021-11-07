@@ -1,0 +1,65 @@
+<form [formGroup]="paymentForm"(ngSubmit)="save()" autocomplete="off" >
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="m-2">
+                <mat-form-field appearance="outline" class="width-form">
+                    <mat-label>Usuário*</mat-label>
+                    <input matInput formControlName="userName">
+                    <mat-error *ngIf="paymentForm.get('userName')?.errors?.required">Usuário é obrigatório</mat-error>
+                    <mat-error *ngIf="paymentForm.get('userName')?.errors?.userNotExist">Usuário não existe</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="m-2">
+                <mat-form-field appearance="outline" class="width-form">
+                    <mat-label>Valor*</mat-label>
+                    <input matInput formControlName="value" type="number">
+                    <mat-error *ngIf="paymentForm.get('value')?.errors?.required">Valor é obrigatório</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="m-2">
+                <mat-form-field appearance="outline" class="width-form">
+                    <mat-label>Data*</mat-label>
+                    <input matInput [matDatepicker]="picker" formControlName="date" (focus)="picker.open()">
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="paymentForm.get('date')?.errors?.required">Data é obrigatória</mat-error>
+                </mat-form-field>
+            </div>
+        </div>
+
+        <div class="col-sm-6">
+            <div class="m-2">
+                <mat-form-field appearance="outline" class="width-form">
+                    <mat-label>Título</mat-label>
+                    <input matInput formControlName="title">
+                </mat-form-field>
+            </div>
+
+            <div class="width-form m-2 mt-3">
+                <button
+                    mat-flat-button
+                    class="width-button me-3 mt-2 bg-light-gray"
+                    type="button"
+                    (click)="cancel()">
+                    {{txtBtnCancel}}
+                </button>
+    
+                <button
+                    mat-flat-button
+                    class="width-button ms-3 mt-2"
+                    [disabled]="disableBtnSave"
+                    color="primary">
+                    {{txtBtnSave}}
+                </button>
+            </div>
+        </div>
+    </div>
+
+</form>

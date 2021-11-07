@@ -1,1 +1,19 @@
-<router-outlet></router-outlet>
+<div class="size bg-gray">
+    
+    <ng-container *ngIf="user$ | async as user">
+        <ng-container *ngIf="(user | json) != '{}' && verifyRouter.url !== '/login'">
+            <div class="app-toolbar">
+                <app-toolbar></app-toolbar>
+
+                <ng-container *ngIf="loading">
+                    <mat-progress-bar mode="indeterminate" color=primary></mat-progress-bar>
+                </ng-container>
+
+            </div>
+        </ng-container>
+    </ng-container>
+
+    <router-outlet></router-outlet>
+</div>
+
+

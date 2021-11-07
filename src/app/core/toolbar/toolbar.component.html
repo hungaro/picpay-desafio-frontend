@@ -1,10 +1,10 @@
-<mat-toolbar color="accent" style="height: 80px;">
-    <h1 class="float-left">
+<mat-toolbar color="accent" class="size-toolbar">
+    <h1 class="float-left m-3 cursor-pointer" [routerLink]="['']">
         <span class="font-bold-800 font-montserrat">Pay</span>
         <span class="font-bold-300 font-montserrat">Friends</span>
     </h1>
    <span class="spacer"></span>
-   <img src="./assets/images/avatar.png"  class="img-avatar cursor-pointer" [matMenuTriggerFor]="menu">
+   <img src="./assets/images/avatar.png"  class="img-avatar cursor-pointer m-3" [matMenuTriggerFor]="menu">
    <mat-menu #menu="matMenu">
     <button mat-menu-item (click)="logout()">
         <mat-icon class="bs-dark">exit_to_app</mat-icon>

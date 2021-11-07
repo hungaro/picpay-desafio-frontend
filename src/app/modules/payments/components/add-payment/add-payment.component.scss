@@ -1,0 +1,11 @@
+.btn-add {
+    float: right!important;
+}
+
+@media (max-width: 700px) {
+    .btn-add {
+        float:initial !important;
+        text-align:center!important;
+        margin-top: 2rem;
+    }
+}

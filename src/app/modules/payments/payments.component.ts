@@ -1,4 +1,6 @@
+import { Ipayment } from './../../shared/models/ipayment';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-payments',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaymentsComponent implements OnInit {
 
-  constructor() { }
+  public payments!: Ipayment[];
+
+  constructor(
+    private activatedRoute: ActivatedRoute
+  ) { }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe((params) => {
+      this.payments = this.activatedRoute.snapshot.data['payments'];
+    })
   }
-
 }

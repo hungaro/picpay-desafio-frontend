@@ -1,0 +1,15 @@
+.size {
+    min-height: 100vh;
+    margin: 0;
+}
+
+.app-toolbar {
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+::ng-deep .mat-progress-bar {
+    height: 6px !important;
+}
