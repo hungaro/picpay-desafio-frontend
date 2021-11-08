@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 import { TaskService } from '@services/task.service';
 
 import { Task } from '@models/task.model';
+import { SearchFilter } from './components/search-filter/search-filter.component';
 
 @Component({
   selector: 'app-home',
@@ -22,11 +23,15 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   displayedColumns: string[];
 
+  filters: SearchFilter;
+
   isLoadingTasks: boolean;
 
   isLoadingTaskDelete: { [key: number]: boolean };
 
   isLoadingTaskUpdate: { [key: number]: boolean };
+
+  nameFilter: string;
 
   hasError: boolean;
 
@@ -63,6 +68,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
         this.sort.direction,
         this.paginator.pageIndex,
         this.paginator.pageSize,
+        this.filters,
       )
       .pipe(
         catchError(() => {
@@ -131,6 +137,24 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
           this.toastrService.error('Erro ao deletar pagamento.');
         },
       );
+  }
+
+  filter(filters: SearchFilter): void {
+    this.filters = filters;
+
+    this.isLoadingTasks = true;
+
+    this.retrieveTasks()
+      .pipe(
+        takeUntil(this.unsubscribeAll$),
+        finalize(() => {
+          this.isLoadingTasks = false;
+        }),
+      )
+      .subscribe((response: HttpResponse<Task[]>) => {
+        this.dataSource = response?.body;
+        this.tasksLength = +response.headers.get('X-Total-Count');
+      });
   }
 
   private sortChange(): void {

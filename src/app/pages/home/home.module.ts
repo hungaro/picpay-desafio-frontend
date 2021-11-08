@@ -7,11 +7,12 @@ import { SharedModule } from '@shared/shared.module';
 import { TaskService } from '@services/task.service';
 
 import { HomeComponent } from './home.component';
+import { SearchFilterComponent } from './components/search-filter/search-filter.component';
 
 import { HomeRoutingModule } from './home-routing.module';
 
 @NgModule({
-  declarations: [HomeComponent],
+  declarations: [HomeComponent, SearchFilterComponent],
   imports: [CommonModule, FormsModule, SharedModule, HomeRoutingModule],
   exports: [HomeComponent],
   providers: [TaskService],

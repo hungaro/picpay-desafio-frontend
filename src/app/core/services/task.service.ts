@@ -6,6 +6,8 @@ import { Observable } from 'rxjs';
 
 import { environment } from '@environments/environment';
 
+import { SearchFilter } from '@pages/home/components/search-filter/search-filter.component';
+
 import { Task } from '@models/task.model';
 
 @Injectable()
@@ -21,12 +23,19 @@ export class TaskService {
     sortDirection: SortDirection,
     pageIndex: number,
     pageSize: number,
+    filters: SearchFilter,
   ): Observable<HttpResponse<Task[]>> {
     let params = new HttpParams();
     params = params.append('_sort', sortActive);
     params = params.append('_order', sortDirection);
     params = params.append('_page', pageIndex + 1);
     params = params.append('_limit', pageSize);
+
+    Object.keys(filters ?? {}).forEach((filterName: string) => {
+      if (filters[filterName]) {
+        params = params.append(filterName, filters[filterName]);
+      }
+    });
 
     return this.http.get<Task[]>(this.url, {
       params,
