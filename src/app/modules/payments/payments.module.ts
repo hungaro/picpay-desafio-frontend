@@ -11,9 +11,12 @@ import { DialogPaymentComponent } from './components/dialog-payment/dialog-payme
 import { ViewPaymentDeleteComponent } from './components/view-payment-delete/view-payment-delete.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+<<<<<<< HEAD
 import { TablePaymentsComponent } from './components/table-payments/table-payments.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+=======
+>>>>>>> be5a8eadca8bd35f557dc345274781a172642520
 
 @NgModule({
   declarations: [
@@ -21,8 +24,12 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     AddPaymentComponent,
     FormPaymentComponent,
     DialogPaymentComponent,
+<<<<<<< HEAD
     ViewPaymentDeleteComponent,
     TablePaymentsComponent
+=======
+    ViewPaymentDeleteComponent
+>>>>>>> be5a8eadca8bd35f557dc345274781a172642520
   ],
   imports: [
     CommonModule,
@@ -30,9 +37,13 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     SharedModule,
     MatDialogModule,
     MatDatepickerModule,
+<<<<<<< HEAD
     MatNativeDateModule,
     MatTableModule,
     MatCheckboxModule
+=======
+    MatNativeDateModule
+>>>>>>> be5a8eadca8bd35f557dc345274781a172642520
   ]
 })
 export class PaymentsModule { }

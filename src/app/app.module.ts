@@ -10,8 +10,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import localePt from '@angular/common/locales/pt';
 import { ToolbarModule } from './core/toolbar/toolbar.module';
+<<<<<<< HEAD
 import {MatProgressBarModule} from '@angular/material/progress-bar'
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
+=======
+>>>>>>> be5a8eadca8bd35f557dc345274781a172642520
 
 registerLocaleData(localePt, 'pt');
 
@@ -26,8 +29,12 @@ registerLocaleData(localePt, 'pt');
     BrowserAnimationsModule,
     HttpClientModule,
     MatSnackBarModule,
+<<<<<<< HEAD
     ToolbarModule,
     MatProgressBarModule
+=======
+    ToolbarModule
+>>>>>>> be5a8eadca8bd35f557dc345274781a172642520
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

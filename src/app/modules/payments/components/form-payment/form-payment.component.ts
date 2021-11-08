@@ -1,8 +1,15 @@
+<<<<<<< HEAD
 import { TextsButton } from 'src/app/shared/enums/texts-button';
+=======
+>>>>>>> be5a8eadca8bd35f557dc345274781a172642520
 import { MessagesSnackbar } from 'src/app/shared/enums/messages-snackbar';
 import { SnackbarService } from './../../../../core/services/snackbar/snackbar.service';
 import { TaskService } from './../../../../core/services/task/task.service';
 import { Ipayment } from './../../../../shared/models/ipayment';
+<<<<<<< HEAD
+=======
+import { TextsButton } from './../../../../shared/enums/texts-button';
+>>>>>>> be5a8eadca8bd35f557dc345274781a172642520
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
@@ -45,6 +52,7 @@ export class FormPaymentComponent implements OnInit {
 
   save(): void {
     if(this.paymentForm.valid) {
+<<<<<<< HEAD
 
       this.disableBtnSave = true;
       this.txtBtnSave = TextsButton.saving;
@@ -70,12 +78,24 @@ export class FormPaymentComponent implements OnInit {
           this.snackbar.openError(MessagesSnackbar.server_error);
         })
       }
+=======
+      this.taskService.post(this.createPayment()).subscribe((payment: Ipayment) => {
+        this.snackbar.openSuccess(MessagesSnackbar.successfully_added);
+        this.action.emit(true);
+      },
+      error => {
+        this.snackbar.openError(MessagesSnackbar.server_error);
+      })
+>>>>>>> be5a8eadca8bd35f557dc345274781a172642520
     }
   }
 
   createPayment(): Ipayment {
     const payment: Ipayment = {
+<<<<<<< HEAD
       id: this.payment?.id ?? null,
+=======
+>>>>>>> be5a8eadca8bd35f557dc345274781a172642520
       name: this.paymentForm?.get('userName')?.value,
       username: this.payment?.username ?? this.paymentForm?.get('userName')?.value, 
       title: this.paymentForm?.get('title')?.value,
