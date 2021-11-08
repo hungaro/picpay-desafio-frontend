@@ -26,9 +26,9 @@
       mat-table
       [dataSource]="dataSource"
       matSort
-      matSortActive="user"
+      matSortActive="name"
       matSortDisableClear
-      matSortDirection="asc"
+      matSortDirection="desc"
       [style.visibility]="isLoadingTasks ? 'hidden' : 'visible'"
     >
       <!-- User Column -->
@@ -104,9 +104,24 @@
             <button mat-icon-button aria-label="Task edit button">
               <mat-icon>edit</mat-icon>
             </button>
-            <button mat-icon-button aria-label="Task remove button">
-              <mat-icon>delete</mat-icon>
-            </button>
+            <ng-container *ngIf="isLoadingTaskDelete[row.id]; else TaskDeleteButtonTemplate">
+              <div fxLayout fxLayoutAlign="center center">
+                <mat-progress-spinner
+                  color="warn"
+                  mode="indeterminate"
+                  [diameter]="20"
+                ></mat-progress-spinner>
+              </div>
+            </ng-container>
+            <ng-template #TaskDeleteButtonTemplate>
+              <button
+                mat-icon-button
+                aria-label="Task remove button"
+                (click)="deletePayment(row.id)"
+              >
+                <mat-icon>delete</mat-icon>
+              </button>
+            </ng-template>
           </div>
         </td>
       </ng-container>

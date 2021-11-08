@@ -24,6 +24,8 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   isLoadingTasks: boolean;
 
+  isLoadingTaskDelete: { [key: number]: boolean };
+
   isLoadingTaskUpdate: { [key: number]: boolean };
 
   hasError: boolean;
@@ -54,9 +56,14 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     this.unsubscribeAll$.complete();
   }
 
-  retrieveTasks(sort: MatSort, paginator: MatPaginator): Observable<HttpResponse<Task[]>> {
+  retrieveTasks(): Observable<HttpResponse<Task[]>> {
     return this.taskService
-      .retrieveTasks(sort.active, sort.direction, paginator.pageIndex, paginator.pageSize)
+      .retrieveTasks(
+        this.sort.active,
+        this.sort.direction,
+        this.paginator.pageIndex,
+        this.paginator.pageSize,
+      )
       .pipe(
         catchError(() => {
           this.toastrService.error('Erro ao buscar pagamentos');
@@ -91,6 +98,41 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       );
   }
 
+  deletePayment(id: number): void {
+    this.isLoadingTaskDelete[id] = true;
+
+    this.taskService
+      .deleteTask(id)
+      .pipe(
+        takeUntil(this.unsubscribeAll$),
+        finalize(() => {
+          this.isLoadingTaskDelete[id] = false;
+        }),
+      )
+      .subscribe(
+        () => {
+          this.toastrService.success('Pagamento deletado com sucesso.');
+
+          this.isLoadingTasks = true;
+
+          this.retrieveTasks()
+            .pipe(
+              takeUntil(this.unsubscribeAll$),
+              finalize(() => {
+                this.isLoadingTasks = false;
+              }),
+            )
+            .subscribe((response: HttpResponse<Task[]>) => {
+              this.dataSource = response?.body;
+              this.tasksLength = +response.headers.get('X-Total-Count');
+            });
+        },
+        () => {
+          this.toastrService.error('Erro ao deletar pagamento.');
+        },
+      );
+  }
+
   private sortChange(): void {
     this.sort.sortChange.subscribe(() => {
       this.paginator.pageIndex = 0;
@@ -106,7 +148,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
         startWith([] as Task[]),
         switchMap(() => {
           this.isLoadingTasks = true;
-          return this.retrieveTasks(this.sort, this.paginator);
+          return this.retrieveTasks();
         }),
         map((response) => {
           this.isLoadingTasks = false;
@@ -129,6 +171,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   private setDefaults(): void {
     this.displayedColumns = ['name', 'title', 'date', 'value', 'isPayed', 'actions'];
     this.isLoadingTasks = false;
+    this.isLoadingTaskDelete = {};
     this.isLoadingTaskUpdate = {};
     this.hasError = false;
 
