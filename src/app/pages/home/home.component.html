@@ -7,10 +7,19 @@
       <mat-icon class="icon" matSuffix> search </mat-icon>
     </mat-form-field>
   </div>
+
+  <ng-container *ngIf="isLoadingTasks">
+    <div class="my-16" fxLayout fxLayoutAlign="center center">
+      <mat-progress-spinner color="primary" mode="indeterminate" [diameter]="50">
+      </mat-progress-spinner>
+    </div>
+  </ng-container>
+
   <mat-paginator
     [length]="tasksLength"
     [pageSize]="10"
     aria-label="Select page of task search results"
+    [style.visibility]="isLoadingTasks ? 'hidden' : 'visible'"
   ></mat-paginator>
   <div class="table-container">
     <table
@@ -20,9 +29,10 @@
       matSortActive="user"
       matSortDisableClear
       matSortDirection="asc"
+      [style.visibility]="isLoadingTasks ? 'hidden' : 'visible'"
     >
       <!-- User Column -->
-      <ng-container matColumnDef="user">
+      <ng-container matColumnDef="name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Usuario</th>
         <td mat-cell *matCellDef="let row">
           <div class="user-container" fxLayout="column" fxLayoutAlign="start">
@@ -69,7 +79,20 @@
       <ng-container matColumnDef="isPayed">
         <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Pago</th>
         <td mat-cell *matCellDef="let row">
-          <mat-checkbox color="primary" [ngModel]="row.isPayed"></mat-checkbox>
+          <ng-container *ngIf="isLoadingTaskUpdate[row.id]; else IsPaidTemplate">
+            <mat-progress-spinner
+              color="primary"
+              mode="indeterminate"
+              [diameter]="20"
+            ></mat-progress-spinner>
+          </ng-container>
+          <ng-template #IsPaidTemplate>
+            <mat-checkbox
+              color="primary"
+              [(ngModel)]="row.isPayed"
+              (click)="updatePayment(row.id, row.isPayed)"
+            ></mat-checkbox>
+          </ng-template>
         </td>
       </ng-container>
 

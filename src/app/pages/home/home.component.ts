@@ -1,9 +1,12 @@
-import { AfterViewInit, Component, OnDestroy, ViewChild } from '@angular/core';
+import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, ViewChild } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 
-import { merge, of, Subject } from 'rxjs';
-import { catchError, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
+import { merge, Observable, of, Subject } from 'rxjs';
+import { catchError, finalize, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
+
+import { ToastrService } from 'ngx-toastr';
 
 import { TaskService } from '@services/task.service';
 
@@ -19,7 +22,9 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   displayedColumns: string[];
 
-  loading: boolean;
+  isLoadingTasks: boolean;
+
+  isLoadingTaskUpdate: { [key: number]: boolean };
 
   hasError: boolean;
 
@@ -31,46 +36,87 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  constructor(private taskService: TaskService) {
+  constructor(
+    private taskService: TaskService,
+    private toastrService: ToastrService,
+    private changeDetectorRef: ChangeDetectorRef,
+  ) {
     this.setDefaults();
   }
 
   ngAfterViewInit(): void {
+    this.setEventListeners();
+    this.changeDetectorRef.detectChanges();
+  }
+
+  ngOnDestroy(): void {
+    this.unsubscribeAll$.next();
+    this.unsubscribeAll$.complete();
+  }
+
+  retrieveTasks(sort: MatSort, paginator: MatPaginator): Observable<HttpResponse<Task[]>> {
+    return this.taskService
+      .retrieveTasks(sort.active, sort.direction, paginator.pageIndex, paginator.pageSize)
+      .pipe(
+        catchError(() => {
+          this.toastrService.error('Erro ao buscar pagamentos');
+          return of(null);
+        }),
+      );
+  }
+
+  updatePayment(id: number, isPaid: boolean): void {
+    this.isLoadingTaskUpdate[id] = true;
+
+    const index = this.dataSource.findIndex((data) => data.id === id);
+    const payment = this.dataSource[index];
+
+    this.taskService
+      .updateTask(id, { isPayed: !isPaid })
+      .pipe(
+        takeUntil(this.unsubscribeAll$),
+        finalize(() => {
+          this.isLoadingTaskUpdate[id] = false;
+        }),
+      )
+      .subscribe(
+        () => {
+          payment.isPayed = !isPaid;
+          this.toastrService.success('Pagamento atualizado com sucesso.');
+        },
+        () => {
+          payment.isPayed = isPaid;
+          this.toastrService.error('Erro ao atualizar pagamento.');
+        },
+      );
+  }
+
+  private sortChange(): void {
     this.sort.sortChange.subscribe(() => {
       this.paginator.pageIndex = 0;
     });
+  }
+
+  private setEventListeners(): void {
+    this.sortChange();
 
     merge(this.sort.sortChange, this.paginator.page)
       .pipe(
         takeUntil(this.unsubscribeAll$),
         startWith([] as Task[]),
         switchMap(() => {
-          let sortActive = this.sort.active;
-
-          if (this.sort.active === 'user') {
-            sortActive = 'name';
-          }
-
-          this.loading = true;
-
-          return this.taskService
-            .retrieveTasks(
-              sortActive,
-              this.sort.direction,
-              this.paginator.pageIndex,
-              this.paginator.pageSize,
-            )
-            .pipe(catchError(() => of(null)));
+          this.isLoadingTasks = true;
+          return this.retrieveTasks(this.sort, this.paginator);
         }),
         map((response) => {
-          this.loading = false;
+          this.isLoadingTasks = false;
           this.hasError = response === null;
 
           if (response === null) {
             return { body: [] };
           }
 
-          this.tasksLength = response.headers.get('X-Total-Count');
+          this.tasksLength = +response.headers.get('X-Total-Count');
 
           return response;
         }),
@@ -80,14 +126,10 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       });
   }
 
-  ngOnDestroy(): void {
-    this.unsubscribeAll$.next();
-    this.unsubscribeAll$.complete();
-  }
-
   private setDefaults(): void {
-    this.displayedColumns = ['user', 'title', 'date', 'value', 'isPayed', 'actions'];
-    this.loading = false;
+    this.displayedColumns = ['name', 'title', 'date', 'value', 'isPayed', 'actions'];
+    this.isLoadingTasks = false;
+    this.isLoadingTaskUpdate = {};
     this.hasError = false;
 
     this.unsubscribeAll$ = new Subject();
