@@ -3,15 +3,16 @@ import { HttpResponse } from '@angular/common/http';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 
-import { merge, Observable, of, Subject } from 'rxjs';
-import { catchError, finalize, map, startWith, switchMap, takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import { finalize, takeUntil } from 'rxjs/operators';
 
 import { ToastrService } from 'ngx-toastr';
 
 import { TaskService } from '@services/task.service';
 
 import { Task } from '@models/task.model';
-import { SearchFilter } from './components/search-filter/search-filter.component';
+
+import { SearchFilterComponent } from './components/search-filter/search-filter.component';
 
 @Component({
   selector: 'app-home',
@@ -23,17 +24,11 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   displayedColumns: string[];
 
-  filters: SearchFilter;
-
   isLoadingTasks: boolean;
 
   isLoadingTaskDelete: { [key: number]: boolean };
 
   isLoadingTaskUpdate: { [key: number]: boolean };
-
-  nameFilter: string;
-
-  hasError: boolean;
 
   tasksLength: number;
 
@@ -42,6 +37,8 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   @ViewChild(MatSort) sort: MatSort;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  @ViewChild('searchFilter') searchFilter: SearchFilterComponent;
 
   constructor(
     private taskService: TaskService,
@@ -52,7 +49,8 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit(): void {
-    this.setEventListeners();
+    this.sortChange();
+    this.retrieveTasks();
     this.changeDetectorRef.detectChanges();
   }
 
@@ -61,20 +59,31 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     this.unsubscribeAll$.complete();
   }
 
-  retrieveTasks(): Observable<HttpResponse<Task[]>> {
-    return this.taskService
+  retrieveTasks(): void {
+    this.isLoadingTasks = true;
+
+    this.taskService
       .retrieveTasks(
         this.sort.active,
         this.sort.direction,
         this.paginator.pageIndex,
         this.paginator.pageSize,
-        this.filters,
+        this.searchFilter.filters,
       )
       .pipe(
-        catchError(() => {
-          this.toastrService.error('Erro ao buscar pagamentos');
-          return of(null);
+        takeUntil(this.unsubscribeAll$),
+        finalize(() => {
+          this.isLoadingTasks = false;
         }),
+      )
+      .subscribe(
+        (response: HttpResponse<Task[]>) => {
+          this.dataSource = response?.body;
+          this.tasksLength = +response.headers.get('X-Total-Count');
+        },
+        () => {
+          this.toastrService.error('Erro ao buscar pagamentos');
+        },
       );
   }
 
@@ -118,43 +127,12 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       .subscribe(
         () => {
           this.toastrService.success('Pagamento deletado com sucesso.');
-
-          this.isLoadingTasks = true;
-
-          this.retrieveTasks()
-            .pipe(
-              takeUntil(this.unsubscribeAll$),
-              finalize(() => {
-                this.isLoadingTasks = false;
-              }),
-            )
-            .subscribe((response: HttpResponse<Task[]>) => {
-              this.dataSource = response?.body;
-              this.tasksLength = +response.headers.get('X-Total-Count');
-            });
+          this.retrieveTasks();
         },
         () => {
           this.toastrService.error('Erro ao deletar pagamento.');
         },
       );
-  }
-
-  filter(filters: SearchFilter): void {
-    this.filters = filters;
-
-    this.isLoadingTasks = true;
-
-    this.retrieveTasks()
-      .pipe(
-        takeUntil(this.unsubscribeAll$),
-        finalize(() => {
-          this.isLoadingTasks = false;
-        }),
-      )
-      .subscribe((response: HttpResponse<Task[]>) => {
-        this.dataSource = response?.body;
-        this.tasksLength = +response.headers.get('X-Total-Count');
-      });
   }
 
   private sortChange(): void {
@@ -163,41 +141,11 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  private setEventListeners(): void {
-    this.sortChange();
-
-    merge(this.sort.sortChange, this.paginator.page)
-      .pipe(
-        takeUntil(this.unsubscribeAll$),
-        startWith([] as Task[]),
-        switchMap(() => {
-          this.isLoadingTasks = true;
-          return this.retrieveTasks();
-        }),
-        map((response) => {
-          this.isLoadingTasks = false;
-          this.hasError = response === null;
-
-          if (response === null) {
-            return { body: [] };
-          }
-
-          this.tasksLength = +response.headers.get('X-Total-Count');
-
-          return response;
-        }),
-      )
-      .subscribe((response) => {
-        this.dataSource = response.body;
-      });
-  }
-
   private setDefaults(): void {
     this.displayedColumns = ['name', 'title', 'date', 'value', 'isPayed', 'actions'];
     this.isLoadingTasks = false;
     this.isLoadingTaskDelete = {};
     this.isLoadingTaskUpdate = {};
-    this.hasError = false;
 
     this.unsubscribeAll$ = new Subject();
   }

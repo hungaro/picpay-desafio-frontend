@@ -1,7 +1,6 @@
 <div class="table-wrapper mat-elevation-z3" fxLayout="column">
   <div class="mt-16 px-16" fxLayout fxLayoutAlign="start center">
-    <!-- Search -->
-    <app-search-filter (filtersChanged)="filter($event)"></app-search-filter>
+    <app-search-filter #searchFilter (filtersChanged)="retrieveTasks()"></app-search-filter>
   </div>
 
   <ng-container *ngIf="isLoadingTasks">
@@ -18,6 +17,7 @@
     aria-label="Select page of task search results"
     [style.visibility]="isLoadingTasks ? 'hidden' : 'visible'"
   ></mat-paginator>
+
   <div class="table-container">
     <table
       mat-table
