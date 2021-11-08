@@ -1,13 +1,9 @@
-<<<<<<< HEAD
 import { SnackbarService } from './../../../../core/services/snackbar/snackbar.service';
 import { TaskService } from './../../../../core/services/task/task.service';
 import { Ipayment } from './../../../../shared/models/ipayment';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { TextsButton } from 'src/app/shared/enums/texts-button';
 import { MessagesSnackbar } from 'src/app/shared/enums/messages-snackbar';
-=======
-import { Component, OnInit } from '@angular/core';
->>>>>>> be5a8eadca8bd35f557dc345274781a172642520
 
 @Component({
   selector: 'app-view-payment-delete',
@@ -16,7 +12,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewPaymentDeleteComponent implements OnInit {
 
-<<<<<<< HEAD
   @Input() payment!: Ipayment;
   @Output() action = new EventEmitter<boolean>();
   public txtBtnCancel: string = TextsButton.cancel;
@@ -27,14 +22,10 @@ export class ViewPaymentDeleteComponent implements OnInit {
     private taskService: TaskService,
     private snackbar: SnackbarService
   ) { }
-=======
-  constructor() { }
->>>>>>> be5a8eadca8bd35f557dc345274781a172642520
 
   ngOnInit(): void {
   }
 
-<<<<<<< HEAD
   cancel(): void {
     this.action.emit(false);
   }
@@ -53,6 +44,4 @@ export class ViewPaymentDeleteComponent implements OnInit {
       this.snackbar.openError(MessagesSnackbar.server_error);
     });
   }
-=======
->>>>>>> be5a8eadca8bd35f557dc345274781a172642520
 }

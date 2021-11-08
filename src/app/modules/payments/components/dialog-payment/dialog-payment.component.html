@@ -9,20 +9,12 @@
     </ng-container>
     
     <ng-container *ngIf="dialogPayment.edit">
-<<<<<<< HEAD
         <h1 class="ms-2">
-=======
-        <h1>
->>>>>>> be5a8eadca8bd35f557dc345274781a172642520
             <span class="font-bold-700 font-montserrat">
                 Editar pagamento
             </span>
         </h1>
-<<<<<<< HEAD
         <app-form-payment [payment]="dialogPayment.payment" (action)="closeDialog($event)"></app-form-payment>
-=======
-        <app-form-payment></app-form-payment>
->>>>>>> be5a8eadca8bd35f557dc345274781a172642520
     </ng-container>
     
     <ng-container *ngIf="dialogPayment.delete">
@@ -31,10 +23,6 @@
                 Excluir pagamento
             </span>
         </h1>
-<<<<<<< HEAD
         <app-view-payment-delete [payment]="dialogPayment.payment" (action)="closeDialog($event)"></app-view-payment-delete>
-=======
-        <app-view-payment-delete></app-view-payment-delete>
->>>>>>> be5a8eadca8bd35f557dc345274781a172642520
     </ng-container>
 </div>

@@ -1,7 +1,4 @@
-<<<<<<< HEAD
 import { RouterModule } from '@angular/router';
-=======
->>>>>>> be5a8eadca8bd35f557dc345274781a172642520
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ToolbarComponent } from './toolbar.component';
@@ -18,12 +15,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     CommonModule,
     SharedModule,
     MatToolbarModule,
-<<<<<<< HEAD
     MatMenuModule,
     RouterModule
-=======
-    MatMenuModule
->>>>>>> be5a8eadca8bd35f557dc345274781a172642520
   ],
   exports: [
     ToolbarComponent

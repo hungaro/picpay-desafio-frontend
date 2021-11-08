@@ -1,5 +1,4 @@
 <div class="size bg-gray">
-<<<<<<< HEAD
     
     <ng-container *ngIf="user$ | async as user">
         <ng-container *ngIf="(user | json) != '{}' && verifyRouter.url !== '/login'">
@@ -14,13 +13,6 @@
         </ng-container>
     </ng-container>
 
-=======
-    <ng-container *ngIf="user$ | async as user">
-        <ng-container *ngIf="(user | json) != '{}'">
-            <app-toolbar></app-toolbar>
-        </ng-container>
-    </ng-container>
->>>>>>> be5a8eadca8bd35f557dc345274781a172642520
     <router-outlet></router-outlet>
 </div>
 

@@ -1,4 +1,3 @@
-import { Ipayment } from './../../../../shared/models/ipayment';
 import { IdialogPayment } from './../../../../shared/models/idialog-payment';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
