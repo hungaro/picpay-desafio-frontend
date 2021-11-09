@@ -18,6 +18,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { PasswordComponent } from './components/password/password.component';
 import { AuthService } from './services/auth.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { PaymentsComponent } from './components/payments/payments.component';
 
 const imports = [
   BrowserModule,
@@ -43,7 +44,7 @@ const providers = [AuthService]
 
 @NgModule({
   declarations: [	
-    AppComponent, LoginComponent, EmailComponent, PasswordComponent
+    AppComponent, LoginComponent, EmailComponent, PasswordComponent, PaymentsComponent
    ],
   imports: [
     ...imports,

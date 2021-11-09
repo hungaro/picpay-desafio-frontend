@@ -33,18 +33,20 @@ export class LoginComponent {
           this.hasAccessByEmail = !!(auth.find(auth => auth.email === this.email))
           this.hasAccessByPwd = !!(auth.find(auth => auth.password === this.pwd))
 
-          if(!this.hasAccessByEmail || !this.hasAccessByPwd) {
-            this.openSnackBar('Email e/ou senha estão incorretos', 'Ok')
+          if(!this.hasAccessByEmail && !this.hasAccessByPwd) {
+            this.openSnackBar('Você não possui permissão de acesso', 'Ok')
             return
           }
 
           if(this.hasAccessByEmail && this.hasAccessByPwd){
+            this.snackBar.dismiss();
             sessionStorage.setItem('auth', JSON.stringify(auth));
             this.router.navigate(['/payments']);
             return;
           }
 
-          this.openSnackBar('Você não possui permissão de acesso', 'Ok')
+          
+          this.openSnackBar('Email e/ou senha estão incorretos', 'Ok')
         },
         error: (err) => {
           this.loading = false;
