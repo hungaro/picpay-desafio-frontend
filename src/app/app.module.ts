@@ -16,6 +16,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { PasswordComponent } from './components/password/password.component';
+import { AuthService } from './services/auth.service';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const imports = [
   BrowserModule,
@@ -33,10 +35,11 @@ const imports = [
   FormsModule,
   ReactiveFormsModule,
   MatInputModule,
-  MatIconModule
+  MatIconModule,
+  MatSnackBarModule
 ]
 
-const providers = []
+const providers = [AuthService]
 
 @NgModule({
   declarations: [	
@@ -46,7 +49,7 @@ const providers = []
     ...imports,
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [...providers],
   bootstrap: [AppComponent]
 })
 export class AppModule {

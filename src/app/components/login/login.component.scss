@@ -33,10 +33,35 @@
             font-weight: 600;
             border-radius: 4px;
             padding: 6px;
+            display: grid;
+            grid-auto-flow: column;
+            > p {
+                margin: 0 !important;
+            }
         }
     }
+}
+
+.grid-template {
+    grid-template-columns: 80%;
 }
 
 .image {
     background: url(../../../assets/svg/background_login.svg) no-repeat center center;
 }
+
+@keyframes spinner {
+    to {transform: rotate(360deg);}
+  }
+   
+  .spinner:before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    border-top-color: #000000;
+    animation: spinner .8s linear infinite;
+  }

@@ -6,14 +6,18 @@
         </div>
         <div class="login__fields">
             <div class="login__fields--email">
-                <app-email></app-email>
+                <app-email (value)="email = $event"></app-email>
             </div>
             <div class="login__fields--pwd">
-                <app-password></app-password>
+                <app-password (value)="pwd = $event"></app-password>
             </div>
         </div>
         <div class="login__button">
-            <button>{{'login.join' | translate}}</button>
+            <button (click)="onSubmit()" [class.grid-template]="loading">
+                <p>{{'login.join' | translate}}</p>
+                <span *ngIf="loading" class="spinner"></span>
+            </button>
+            
         </div>
     </div>
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -8,10 +8,23 @@ import { FormControl, Validators } from '@angular/forms';
 })
 export class PasswordComponent {
 
+  @Output('value') value$ = new EventEmitter<string>();
+
   constructor() { }
 
   pwdFormControl = new FormControl('', [Validators.required]);
 
   hide = true;
 
+  onTyping(): void {
+    if(this.isValid()){
+      this.value$.emit(this.pwdFormControl.value)
+    } else {
+      this.value$.emit(null)
+    }
+  }
+
+  isValid(): boolean {
+    return !this.pwdFormControl.invalid
+  }
 }

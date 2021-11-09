@@ -1,7 +1,7 @@
 <form class="email">
   <mat-form-field class="full-width" appearance="fill">
     <mat-label>{{'input.email' | translate}}</mat-label>
-    <input type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
+    <input (ngModelChange)="onTyping()" type="email" matInput [formControl]="emailFormControl" [errorStateMatcher]="matcher"
            placeholder="Ex. pat@example.com">
     <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
       {{'input.set-valid-email' | translate}}
