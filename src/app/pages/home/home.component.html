@@ -3,6 +3,8 @@
     <app-search-filter #searchFilter (filtersChanged)="retrieveTasks()"></app-search-filter>
   </div>
 
+  <app-paginator #paginator [length]="tasksLength" (pageChange)="retrieveTasks()"></app-paginator>
+
   <ng-container *ngIf="isLoadingTasks">
     <div class="my-16" fxLayout fxLayoutAlign="center center">
       <mat-progress-spinner color="primary" mode="indeterminate" [diameter]="50">
@@ -10,15 +12,7 @@
     </div>
   </ng-container>
 
-  <mat-paginator
-    [length]="tasksLength"
-    [pageSize]="10"
-    [pageSizeOptions]="[5, 10, 50]"
-    aria-label="Select page of task search results"
-    [style.visibility]="isLoadingTasks ? 'hidden' : 'visible'"
-  ></mat-paginator>
-
-  <div class="table-container">
+  <div class="table-container" [style.visibility]="isLoadingTasks ? 'hidden' : 'visible'">
     <table
       mat-table
       [dataSource]="dataSource"
@@ -26,7 +20,6 @@
       matSortActive="name"
       matSortDisableClear
       matSortDirection="desc"
-      [style.visibility]="isLoadingTasks ? 'hidden' : 'visible'"
     >
       <!-- User Column -->
       <ng-container matColumnDef="name">

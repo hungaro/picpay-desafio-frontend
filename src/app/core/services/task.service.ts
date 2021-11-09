@@ -21,14 +21,14 @@ export class TaskService {
   retrieveTasks(
     sortActive: string,
     sortDirection: SortDirection,
-    pageIndex: number,
+    page: number,
     pageSize: number,
     filters: SearchFilter,
   ): Observable<HttpResponse<Task[]>> {
     let params = new HttpParams();
     params = params.append('_sort', sortActive);
     params = params.append('_order', sortDirection);
-    params = params.append('_page', pageIndex + 1);
+    params = params.append('_page', page);
     params = params.append('_limit', pageSize);
 
     Object.keys(filters ?? {}).forEach((filterName: string) => {

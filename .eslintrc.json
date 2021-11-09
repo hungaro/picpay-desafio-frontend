@@ -33,6 +33,7 @@
           }
         ],
         "import/prefer-default-export": "off",
+        "no-restricted-syntax": "off",
         "prettier/prettier": [
           "error",
           {
@@ -60,7 +61,8 @@
         "plugin:prettier/recommended"
       ],
       "rules": {
-        "@typescript-eslint/dot-notation": "off"
+        "@typescript-eslint/dot-notation": "off",
+        "no-restricted-syntax": "off"
       }
     }
   ]

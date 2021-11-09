@@ -1,6 +1,8 @@
 <mat-form-field fxFlex fxFlex.gt-sm="0 1 40%" fxFlex.gt-md="0 1 35%" fxFlex.gt-lg="0 1 30%">
   <mat-label>Pesquisar por usuário</mat-label>
+
   <input matInput placeholder="Ex.: usuário" [(ngModel)]="filters.name" (keyup.enter)="filter()" />
+
   <button mat-icon-button matPrefix (click)="filter()">
     <mat-icon matPrefix> search </mat-icon>
   </button>

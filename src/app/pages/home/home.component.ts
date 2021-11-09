@@ -1,12 +1,13 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, ViewChild } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { MatSort } from '@angular/material/sort';
-import { MatPaginator } from '@angular/material/paginator';
 
 import { Subject } from 'rxjs';
 import { finalize, takeUntil } from 'rxjs/operators';
 
 import { ToastrService } from 'ngx-toastr';
+
+import { PaginatorComponent } from '@shared/components/paginator/paginator.component';
 
 import { TaskService } from '@services/task.service';
 
@@ -36,7 +37,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild(MatSort) sort: MatSort;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild('paginator') paginator: PaginatorComponent;
 
   @ViewChild('searchFilter') searchFilter: SearchFilterComponent;
 
@@ -66,7 +67,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       .retrieveTasks(
         this.sort.active,
         this.sort.direction,
-        this.paginator.pageIndex,
+        this.paginator.page,
         this.paginator.pageSize,
         this.searchFilter.filters,
       )
@@ -137,7 +138,8 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   private sortChange(): void {
     this.sort.sortChange.subscribe(() => {
-      this.paginator.pageIndex = 0;
+      this.paginator.page = 1;
+      this.retrieveTasks();
     });
   }
 
