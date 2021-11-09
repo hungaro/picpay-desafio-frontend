@@ -9,6 +9,10 @@
   src: url(assets/font/Montserrat/Montserrat-Thin.ttf) format("opentype");
 }
 
+p {
+  margin: 0;
+}
+
 html,
 body {
   font-family: sans-serif;
