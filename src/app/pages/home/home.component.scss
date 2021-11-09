@@ -1,12 +1,17 @@
 @import '~src/scss/abstracts/colors';
 
-.table-wrapper {
+section {
   position: relative;
   height: calc(100% - 60px);
 
   @media screen and (max-width: 700px) {
     height: inherit;
   }
+}
+
+.table-wrapper {
+  width: inherit;
+  height: inherit;
 }
 
 .mat-table {

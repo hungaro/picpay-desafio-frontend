@@ -18,6 +18,7 @@ import { Task } from '@models/task.model';
 
 import { SearchFilterComponent } from './components/search-filter/search-filter.component';
 import { PaymentDeleteDialogComponent } from './components/dialogs/payment-delete-dialog/payment-delete-dialog.component';
+import { PaymentCreateUpdateDialogComponent } from './components/dialogs/payment-create-update-dialog/payment-create-update-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -141,6 +142,30 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
           this.toastrService.error('Erro ao deletar pagamento.');
         },
       );
+  }
+
+  openPaymentCreateUpdateDialog(payment?: Task): void {
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.autoFocus = true;
+    dialogConfig.width = '550px';
+    dialogConfig.disableClose = true;
+    dialogConfig.data = {
+      data: payment,
+      actions: {
+        no: 'CANCELAR',
+      },
+    };
+
+    this.dialog
+      .open(PaymentCreateUpdateDialogComponent, dialogConfig)
+      .afterClosed()
+      .pipe(takeUntil(this.unsubscribeAll$))
+      .subscribe(() => {
+        /* if (response) {
+          this.deletePayment(paymentId);
+        } */
+      });
   }
 
   openPaymentDeleteDialog(paymentId: number, payment: Task): void {
