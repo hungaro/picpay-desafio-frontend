@@ -9,6 +9,14 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { translations } from './i18n/pt';
 import { RouterModule } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { EmailComponent } from './components/email/email.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { PasswordComponent } from './components/password/password.component';
+
 const imports = [
   BrowserModule,
   AppRoutingModule,
@@ -20,17 +28,23 @@ const imports = [
       useFactory: HttpLoaderFactory,
       deps: [HttpClient]
     }
-  })
+  }),
+  MatFormFieldModule,
+  FormsModule,
+  ReactiveFormsModule,
+  MatInputModule,
+  MatIconModule
 ]
 
 const providers = []
 
 @NgModule({
   declarations: [	
-    AppComponent, LoginComponent
+    AppComponent, LoginComponent, EmailComponent, PasswordComponent
    ],
   imports: [
-    ...imports
+    ...imports,
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

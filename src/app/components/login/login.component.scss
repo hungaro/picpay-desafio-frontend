@@ -12,6 +12,8 @@
     justify-content: center;
     align-items: center;
     grid-template-columns: 44%;
+    padding: 70px;
+    grid-template-rows: 35% 22% 5%;
     &__logo-title {
         display: grid;
         gap: 20px;
@@ -22,18 +24,16 @@
         }
     }
 
-    &__fields {
-        &--email {
-
-        }
-
-        &--pwd {
-
-        }
-    }
-
     &__button {
-        
+        > button {
+            width: 100%;
+            background-color: #007DFE;
+            border: 1px solid #007DFE;
+            color: #fff;
+            font-weight: 600;
+            border-radius: 4px;
+            padding: 6px;
+        }
     }
 }
 
