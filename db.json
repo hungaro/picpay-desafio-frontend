@@ -871,16 +871,6 @@
       "isPayed": false
     },
     {
-      "id": 89,
-      "name": "Viviyan Foulks",
-      "username": "vfoulks2g",
-      "title": "Electrical Engineer",
-      "value": 362.99,
-      "date": "2020-07-17T22:17:35Z",
-      "image": "https://robohash.org/etrerumeum.png?size=150x150&set=set1",
-      "isPayed": true
-    },
-    {
       "id": 90,
       "name": "Randie Coghlin",
       "username": "rcoghlin2h",

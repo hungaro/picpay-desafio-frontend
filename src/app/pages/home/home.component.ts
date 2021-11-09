@@ -1,5 +1,8 @@
 import { AfterViewInit, ChangeDetectorRef, Component, OnDestroy, ViewChild } from '@angular/core';
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { HttpResponse } from '@angular/common/http';
+
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatSort } from '@angular/material/sort';
 
 import { Subject } from 'rxjs';
@@ -14,6 +17,7 @@ import { TaskService } from '@services/task.service';
 import { Task } from '@models/task.model';
 
 import { SearchFilterComponent } from './components/search-filter/search-filter.component';
+import { PaymentDeleteDialogComponent } from './components/dialogs/payment-delete-dialog/payment-delete-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -45,6 +49,9 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     private taskService: TaskService,
     private toastrService: ToastrService,
     private changeDetectorRef: ChangeDetectorRef,
+    private dialog: MatDialog,
+    private datePipe: DatePipe,
+    private currencyPipe: CurrencyPipe,
   ) {
     this.setDefaults();
   }
@@ -134,6 +141,33 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
           this.toastrService.error('Erro ao deletar pagamento.');
         },
       );
+  }
+
+  openPaymentDeleteDialog(paymentId: number, payment: Task): void {
+    const dialogConfig = new MatDialogConfig();
+
+    const user = `Usuário: ${payment.name}`;
+    const date = `Data: ${this.datePipe.transform(payment.date, 'dd/MM/yyyy')}`;
+    const value = `Valor: ${this.currencyPipe.transform(payment.value)}`;
+
+    dialogConfig.data = {
+      message: 'Certeza que deseja excluir pagamento?',
+      data: `${user}</br>${date}</br>${value}`,
+      actions: {
+        no: 'CANCELAR',
+        yes: `EXCLUIR`,
+      },
+    };
+
+    this.dialog
+      .open(PaymentDeleteDialogComponent, dialogConfig)
+      .afterClosed()
+      .pipe(takeUntil(this.unsubscribeAll$))
+      .subscribe((response) => {
+        if (response) {
+          this.deletePayment(paymentId);
+        }
+      });
   }
 
   private sortChange(): void {

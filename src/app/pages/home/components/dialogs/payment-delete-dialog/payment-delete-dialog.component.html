@@ -1,0 +1,11 @@
+<mat-dialog-content>
+  <h2>{{ data?.message }}</h2>
+  <p class="my-16" [innerHtml]="data?.data"></p>
+</mat-dialog-content>
+
+<mat-dialog-actions fxLayout fxLayoutAlign="end center" fxLayoutGap="10px">
+  <button mat-flat-button mat-dialog-close>{{ data?.actions?.no || 'No' }}</button>
+  <button mat-flat-button color="primary" (click)="confirm()">
+    {{ data?.actions?.yes || 'Yes' }}
+  </button>
+</mat-dialog-actions>
