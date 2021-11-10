@@ -2,7 +2,11 @@ import { APP_BASE_HREF, CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { MockComponent } from 'ng-mocks';
+
 import { CoreModule } from '@core/core.module';
+
+import { LoaderComponent } from '@shared/components/loader/loader.component';
 
 import { AppComponent } from './app.component';
 
@@ -12,7 +16,7 @@ describe('AppComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [AppComponent],
+      declarations: [AppComponent, MockComponent(LoaderComponent)],
       imports: [CommonModule, CoreModule, RouterModule.forRoot([])],
       providers: [{ provide: APP_BASE_HREF, useValue: '/' }],
     }).compileComponents();
