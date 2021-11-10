@@ -261,7 +261,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   }
 
   private setDefaults(): void {
-    this.displayedColumns = ['name', 'title', 'date', 'value', 'isPayed', 'actions'];
+    this.displayedColumns = ['image', 'name', 'title', 'date', 'value', 'isPayed', 'actions'];
     this.isLoadingPayments = false;
     this.isLoadingPaymentCreate = false;
     this.isLoadingPaymentDelete = {};
