@@ -67,6 +67,7 @@
       <mat-label>Valor</mat-label>
       <input
         matInput
+        currencyMask
         placeholder="Ex.: R$ 700,00"
         [(ngModel)]="filters.value"
         [disabled]="!!filters.q"
@@ -91,7 +92,7 @@
     </mat-form-field>
 
     <footer class="mt-8" fxLayout fxLayoutAlign="flex-end center" fxLayoutGap="16px">
-      <button type="button" mat-raised-button (click)="clearFilters()">Limpar filtros</button>
+      <button type="button" mat-raised-button (click)="clearFilters(true)">Limpar filtros</button>
       <button type="button" mat-raised-button color="primary" (click)="filter()">Pesquisar</button>
     </footer>
   </div>

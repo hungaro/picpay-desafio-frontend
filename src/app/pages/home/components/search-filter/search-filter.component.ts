@@ -26,7 +26,7 @@ export class SearchFilterComponent {
     this.setDefaults();
   }
 
-  clearFilters(): void {
+  clearFilters(refresh = false): void {
     this.filters = {
       q: '',
       name: '',
@@ -35,6 +35,10 @@ export class SearchFilterComponent {
       value: '',
       isPaid: '',
     };
+
+    if (refresh) {
+      this.filter();
+    }
   }
 
   close(): void {
@@ -55,7 +59,7 @@ export class SearchFilterComponent {
       name,
     });
 
-    this.close();
+    // this.close();
   }
 
   hasSomeSecondaryFilterFilled(): boolean {

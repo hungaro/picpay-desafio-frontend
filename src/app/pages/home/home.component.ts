@@ -16,6 +16,8 @@ import { TaskService } from '@services/task.service';
 
 import { Task } from '@models/task.model';
 
+import { Utils } from '@utils/utils';
+
 import { SearchFilterComponent } from './components/search-filter/search-filter.component';
 import { PaymentDeleteDialogComponent } from './components/dialogs/payment-delete-dialog/payment-delete-dialog.component';
 import { PaymentCreateUpdateDialogComponent } from './components/dialogs/payment-create-update-dialog/payment-create-update-dialog.component';
@@ -32,7 +34,11 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   isLoadingTasks: boolean;
 
+  isLoadingTaskCreate: boolean;
+
   isLoadingTaskDelete: { [key: number]: boolean };
+
+  isLoadingTaskUpdateStatus: { [key: number]: boolean };
 
   isLoadingTaskUpdate: { [key: number]: boolean };
 
@@ -96,8 +102,56 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       );
   }
 
-  updatePayment(id: number, isPaid: boolean): void {
-    this.isLoadingTaskUpdate[id] = true;
+  createPayment(payment: Task): void {
+    this.isLoadingTaskCreate = true;
+
+    this.taskService
+      .createTask(Utils.omit(payment, 'id'))
+      .pipe(
+        takeUntil(this.unsubscribeAll$),
+        finalize(() => {
+          this.isLoadingTaskCreate = false;
+        }),
+      )
+      .subscribe(
+        () => {
+          this.toastrService.success('Pagamento adicionado com sucesso.');
+          this.retrieveTasks();
+        },
+        () => {
+          this.toastrService.error('Erro ao adicionar pagamento.');
+        },
+      );
+  }
+
+  updatePayment(payment: Task): void {
+    const { id: paymentId } = payment;
+
+    this.isLoadingTaskUpdate[paymentId] = true;
+
+    const index = this.dataSource.findIndex((data) => data.id === paymentId);
+
+    this.taskService
+      .updateAllTask(paymentId, Utils.omit(payment, 'id'))
+      .pipe(
+        takeUntil(this.unsubscribeAll$),
+        finalize(() => {
+          this.isLoadingTaskUpdate[paymentId] = false;
+        }),
+      )
+      .subscribe(
+        (paymentReponse: Task) => {
+          this.dataSource[index] = paymentReponse;
+          this.toastrService.success('Pagamento atualizado com sucesso.');
+        },
+        () => {
+          this.toastrService.error('Erro ao atualizar pagamento.');
+        },
+      );
+  }
+
+  updatePaymentStatus(id: number, isPaid: boolean): void {
+    this.isLoadingTaskUpdateStatus[id] = true;
 
     const index = this.dataSource.findIndex((data) => data.id === id);
     const payment = this.dataSource[index];
@@ -107,7 +161,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       .pipe(
         takeUntil(this.unsubscribeAll$),
         finalize(() => {
-          this.isLoadingTaskUpdate[id] = false;
+          this.isLoadingTaskUpdateStatus[id] = false;
         }),
       )
       .subscribe(
@@ -135,11 +189,11 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       )
       .subscribe(
         () => {
-          this.toastrService.success('Pagamento deletado com sucesso.');
+          this.toastrService.success('Pagamento excluído com sucesso.');
           this.retrieveTasks();
         },
         () => {
-          this.toastrService.error('Erro ao deletar pagamento.');
+          this.toastrService.error('Erro ao excluir pagamento.');
         },
       );
   }
@@ -161,10 +215,14 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       .open(PaymentCreateUpdateDialogComponent, dialogConfig)
       .afterClosed()
       .pipe(takeUntil(this.unsubscribeAll$))
-      .subscribe(() => {
-        /* if (response) {
-          this.deletePayment(paymentId);
-        } */
+      .subscribe((paymentData?: Task) => {
+        if (paymentData) {
+          if (payment) {
+            this.updatePayment(paymentData);
+          } else {
+            this.createPayment(paymentData);
+          }
+        }
       });
   }
 
@@ -205,8 +263,10 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   private setDefaults(): void {
     this.displayedColumns = ['name', 'title', 'date', 'value', 'isPayed', 'actions'];
     this.isLoadingTasks = false;
+    this.isLoadingTaskCreate = false;
     this.isLoadingTaskDelete = {};
     this.isLoadingTaskUpdate = {};
+    this.isLoadingTaskUpdateStatus = {};
 
     this.unsubscribeAll$ = new Subject();
   }

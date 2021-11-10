@@ -4,6 +4,10 @@ import { SortDirection } from '@angular/material/sort';
 
 import { Observable } from 'rxjs';
 
+import { format } from 'date-fns';
+
+import { Utils } from '@core/utils/utils';
+
 import { environment } from '@environments/environment';
 
 import { SearchFilter } from '@pages/home/components/search-filter/search-filter.component';
@@ -32,8 +36,12 @@ export class TaskService {
     params = params.append('_limit', pageSize);
 
     Object.keys(filters ?? {}).forEach((filterName: string) => {
-      if (filters[filterName]) {
-        params = params.append(filterName, filters[filterName]);
+      const filterValue = filters[filterName];
+
+      if (filterName === 'date' && filterValue) {
+        params = params.append('q', format(new Date(filterValue), 'yyyy-MM-dd'));
+      } else if (filterValue) {
+        params = params.append(filterName, filterValue);
       }
     });
 
@@ -48,7 +56,7 @@ export class TaskService {
   }
 
   createTask(task: Omit<Task, 'id'>): Observable<Task> {
-    return this.http.post<Task>(this.url, task);
+    return this.http.post<Task>(this.url, Utils.generatePaymentData(task));
   }
 
   deleteTask(taskId: number): Observable<{}> {
@@ -56,7 +64,7 @@ export class TaskService {
   }
 
   updateAllTask(taskId: number, data: Omit<Task, 'id'>): Observable<Task> {
-    return this.http.put<Task>(`${this.url}/${taskId}`, data);
+    return this.http.put<Task>(`${this.url}/${taskId}`, Utils.generatePaymentData(data));
   }
 
   updateTask(taskId: number, data: Omit<Partial<Task>, 'id'>): Observable<Task> {

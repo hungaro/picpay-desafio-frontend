@@ -4,6 +4,7 @@
       type="submit"
       mat-raised-button
       color="primary"
+      [class.loading]="isLoadingTaskCreate"
       (click)="openPaymentCreateUpdateDialog()"
     >
       ADICIONAR PAGAMENTO
@@ -80,7 +81,7 @@
         <ng-container matColumnDef="isPayed">
           <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Pago</th>
           <td mat-cell *matCellDef="let row">
-            <ng-container *ngIf="isLoadingTaskUpdate[row.id]; else IsPaidTemplate">
+            <ng-container *ngIf="isLoadingTaskUpdateStatus[row.id]; else IsPaidTemplate">
               <mat-progress-spinner
                 color="primary"
                 mode="indeterminate"
@@ -91,7 +92,7 @@
               <mat-checkbox
                 color="primary"
                 [(ngModel)]="row.isPayed"
-                (click)="updatePayment(row.id, row.isPayed)"
+                (click)="updatePaymentStatus(row.id, row.isPayed)"
               ></mat-checkbox>
             </ng-template>
           </td>
@@ -102,13 +103,25 @@
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let row">
             <div class="actions-container" fxLayout fxLayoutAlign="end">
-              <button
-                mat-icon-button
-                aria-label="Task edit button"
-                (click)="openPaymentCreateUpdateDialog(row)"
-              >
-                <mat-icon>edit</mat-icon>
-              </button>
+              <ng-container *ngIf="isLoadingTaskUpdate[row.id]; else TaskUpdateButtonTemplate">
+                <div fxLayout fxLayoutAlign="center center">
+                  <mat-progress-spinner
+                    color="primary"
+                    mode="indeterminate"
+                    [diameter]="20"
+                  ></mat-progress-spinner>
+                </div>
+              </ng-container>
+              <ng-template #TaskUpdateButtonTemplate>
+                <button
+                  mat-icon-button
+                  aria-label="Task edit button"
+                  (click)="openPaymentCreateUpdateDialog(row)"
+                >
+                  <mat-icon>edit</mat-icon>
+                </button>
+              </ng-template>
+
               <ng-container *ngIf="isLoadingTaskDelete[row.id]; else TaskDeleteButtonTemplate">
                 <div fxLayout fxLayoutAlign="center center">
                   <mat-progress-spinner

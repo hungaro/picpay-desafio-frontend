@@ -2,7 +2,7 @@
   <h2>{{ data?.message ?? message }}</h2>
 
   <form [formGroup]="paymentForm">
-    <div fxLayout="column" fxLayout.gt-sm fxLayoutGap="16px">
+    <div fxLayout="column" fxLayout.gt-sm fxLayoutGap="0" fxLayoutGap.gt-sm="16px">
       <mat-form-field fxFlex fxFlex.gt-sm="0 1 50%">
         <mat-label>Usuário</mat-label>
         <input matInput placeholder="usuario" formControlName="user" required />
@@ -13,7 +13,7 @@
 
       <mat-form-field fxFlex fxFlex.gt-sm="0 1 50%">
         <mat-label>Valor</mat-label>
-        <input matInput placeholder="700" formControlName="value" required />
+        <input matInput currencyMask placeholder="700" formControlName="value" required />
         <mat-error *ngIf="displayMessage.value">
           <p [innerHtml]="displayMessage.value"></p>
         </mat-error>

@@ -5,9 +5,10 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { fromEvent, merge, Observable } from 'rxjs';
 
-import { DisplayMessage, GenericFormValidator } from '@core/utils/generic-form-validator';
+import { DisplayMessage, GenericFormValidator } from '@utils/generic-form-validator';
 
 import { Task } from '@models/task.model';
+import { format } from 'date-fns';
 
 interface DialogActions {
   no: string;
@@ -62,8 +63,24 @@ export class PaymentCreateUpdateDialogComponent implements AfterViewInit {
   }
 
   confirm(): void {
-    if (this.paymentForm.dirty && this.paymentForm.valid) {
-      this.dialogRef.close(true);
+    if (this.paymentForm.valid) {
+      const payment = {} as Task;
+
+      for (const controlName of Object.keys(this.paymentForm.controls)) {
+        const controlValue = this.paymentForm.controls[controlName].value;
+
+        if (controlName === 'user') {
+          payment.name = controlValue;
+        } else if (controlName === 'isPaid') {
+          payment.isPayed = controlValue;
+        } else if (controlName === 'date') {
+          payment.date = format(new Date(controlValue), 'yyyy-MM-dd');
+        } else {
+          payment[controlName] = controlValue;
+        }
+      }
+
+      this.dialogRef.close(payment);
     }
   }
 

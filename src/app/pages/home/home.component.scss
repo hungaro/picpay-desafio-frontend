@@ -63,10 +63,24 @@ section {
       background: lighten($color: $accent-color, $amount: 77);
     }
 
-    &:hover {
+    .actions-container {
+      button {
+        visibility: visible;
+      }
+    }
+
+    @media screen and (min-width: 700px) {
       .actions-container {
         button {
-          visibility: visible;
+          visibility: hidden;
+        }
+      }
+
+      &:hover {
+        .actions-container {
+          button {
+            visibility: visible;
+          }
         }
       }
     }
