@@ -5,12 +5,16 @@ import { AuthenticationService } from '@services/authentication.service';
 
 import { Account } from '@models/account.model';
 
+import { MENU_ITEMS } from './menu-items.constant';
+
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  menuItems = MENU_ITEMS;
+
   user: Account;
 
   constructor(private authenticationService: AuthenticationService, private router: Router) {}
