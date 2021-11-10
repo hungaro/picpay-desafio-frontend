@@ -26,4 +26,30 @@ export class Utils {
       username,
     };
   }
+
+  static isEmptyList(value: any): boolean {
+    return typeof value === 'object' && Array.isArray(value) && value.length === 0;
+  }
+
+  static isEmptyObject(value: any): boolean {
+    return typeof value === 'object' && Object.keys(value).length === 0;
+  }
+
+  static isUndefined(value: any): boolean {
+    return value === undefined;
+  }
+
+  static isNull(value: any): boolean {
+    return value === null;
+  }
+
+  static isEmpty(value: any): boolean {
+    return (
+      value === '' ||
+      this.isNull(value) ||
+      this.isUndefined(value) ||
+      this.isEmptyList(value) ||
+      this.isEmptyObject(value)
+    );
+  }
 }
