@@ -1,0 +1,6 @@
+<mat-form-field appearance="outline" class="search">
+    <mat-label>Pesquisar por usuário</mat-label>
+    <input type="search" matInput (keyup)="returnSearch($event)"
+        [value]="value"  autocomplete="off">
+    <mat-icon class="material-icons-outlined" matSuffix >search</mat-icon>
+    </mat-form-field>

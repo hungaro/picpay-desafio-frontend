@@ -13,6 +13,7 @@ export class PaymentsComponent implements OnInit {
   public limitSelect!: number;
   public currentPage!: number;
   public totalPayments: number;
+  public search!: string;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -27,9 +28,10 @@ export class PaymentsComponent implements OnInit {
     this.activatedRoute.params.subscribe((params) => {
       this.limitSelect =  this.activatedRoute.snapshot.queryParams.limit > 0? Number(this.activatedRoute.snapshot.queryParams.limit) : 5;
       this.currentPage = this.activatedRoute.snapshot.queryParams.page > 0? Number(this.activatedRoute.snapshot.queryParams.page) : 1;
+      this.search = this.activatedRoute.snapshot.queryParams.search ?? '';
       this.payments = this.activatedRoute.snapshot.data['payments'].body;
-      this.totalPayments = this.activatedRoute.snapshot.data['payments'].headers.get('x-total-count');
-    })
+      this.totalPayments = this.activatedRoute.snapshot.data['payments'].headers.get('x-total-count') > 0? Number(this.activatedRoute.snapshot.data['payments'].headers.get('x-total-count')) : 1;
+    });
   }
 
   receiveLimit(value: number): void {
@@ -43,9 +45,21 @@ export class PaymentsComponent implements OnInit {
     this.changePage(true);
   }
 
+  receiveSearch(event: string): void {
+    this.search = event;
+    this.currentPage = 0;
+    this.changePage(true);
+  }
+
   changePage(action: boolean): void{
     if(action) {
-      this.router.navigate([], { queryParams: { limit: this.limitSelect, page: this.currentPage } })
+      this.router.navigate([], { 
+          queryParams: { 
+            limit: this.limitSelect, 
+            page: this.currentPage, 
+            search: this.search 
+          } 
+        })
         .finally(() => {
           this.receivePayment();
       });

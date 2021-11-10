@@ -1,9 +1,13 @@
+.pagination {
+  min-width: 130px;
+}
+
 .pagination a {
-    color: black;
-    float: left;
-    padding: 5px 10px;
-    text-decoration: none;
-    margin-top: 2%;
+  color: black;
+  float: left;
+  padding: 5px 10px;
+  text-decoration: none;
+  margin-top: 3%;
   }
   
   .pagination a.active {

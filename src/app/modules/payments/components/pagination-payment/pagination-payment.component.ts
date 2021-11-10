@@ -24,21 +24,27 @@ export class PaginationPaymentComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes.limit) {
+    if(changes.limit || changes.totalPayments) {
       this.createPages(this.currentPage)
     }
   }
 
   createPages(page: number): void {
-    if(page < 1 || page > this.pager?.totalPages) {
+    if(this.verifyPage(page)) {
       return;
-  } 
+    } 
 
     this.pager = this.pagerService.getPager(this.totalPayments, page, this.limit);
   }
 
   setPage(page: number) {
     this.createPages(page);
+
+    if(!this.verifyPage(page))
     this.pageEmit.emit(page);
+  }
+
+  verifyPage(page: number): boolean {
+    return page < 1 || page > this.pager?.totalPages;
   }
 }

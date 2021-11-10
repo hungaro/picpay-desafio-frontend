@@ -17,8 +17,11 @@ export class TaskService {
     private http: HttpClient
   ) { }
 
-  get(limit: number, page: number): Observable<HttpResponse<Ipayment[]>> {
-    return this.http.get<Ipayment[]>(`${this.url_api}?_limit=${limit}&_page=${page}`, {observe: 'response'});
+  get(limit: number, page: number,search: string): Observable<HttpResponse<Ipayment[]>> {
+    return this.http.get<Ipayment[]>(
+      `${this.url_api}?_limit=${limit}&_page=${page}&name_like=${search}`, 
+      {observe: 'response'}
+    );
   }
 
   post(payment: Ipayment): Observable<Ipayment> {

@@ -18,6 +18,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCardModule } from '@angular/material/card';
 import { SelectLimitComponent } from './components/select-limit/select-limit.component';
 import { PaginationPaymentComponent } from './components/pagination-payment/pagination-payment.component';
+import { SearchUserComponent } from './components/search-user/search-user.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { PaginationPaymentComponent } from './components/pagination-payment/pagi
     TablePaymentsComponent,
     ViewPaymentDeleteComponent,
     SelectLimitComponent,
-    PaginationPaymentComponent
+    PaginationPaymentComponent,
+    SearchUserComponent
   ],
   imports: [
     CommonModule,

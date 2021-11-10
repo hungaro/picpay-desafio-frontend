@@ -21,9 +21,8 @@ export class TasksForTableResolver implements Resolve<HttpResponse<Ipayment[]>> 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<HttpResponse<Ipayment[]>>  {
     const limit: number = route.queryParams.limit ?? 5;
     const page: number = route.queryParams.page ?? 1;
+    const search: string = route.queryParams.search;
 
-    console.log(route.queryParamMap)
-
-    return this.taskService.get(limit, page);
+    return this.taskService.get(limit, page, search);
   }
 }

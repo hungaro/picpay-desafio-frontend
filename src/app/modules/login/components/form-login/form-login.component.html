@@ -14,11 +14,11 @@
         <form [formGroup]="loginForm"(ngSubmit)="login()" autocomplete="off">
             <div class="mt-2">
                 <mat-form-field appearance="outline" class="w-100">
-                <mat-label> E-mail </mat-label>
-                <input matInput formControlName="email">
-                <mat-icon class="material-icons-outlined" matSuffix >mail_outline</mat-icon>
-                <mat-error *ngIf="loginForm.get('email')?.errors?.required">E-mail é obrigatório</mat-error>
-                <mat-error *ngIf="loginForm.get('email')?.errors?.email">Insira um e-mail válido </mat-error>
+                    <mat-label> E-mail </mat-label>
+                    <input matInput formControlName="email">
+                    <mat-icon class="material-icons-outlined" matSuffix >mail_outline</mat-icon>
+                    <mat-error *ngIf="loginForm.get('email')?.errors?.required">E-mail é obrigatório</mat-error>
+                    <mat-error *ngIf="loginForm.get('email')?.errors?.email">Insira um e-mail válido </mat-error>
                 </mat-form-field>
             </div>
     

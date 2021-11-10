@@ -8,7 +8,7 @@
       "value": 25.91,
       "date": "2021-05-25T14:51:59Z",
       "image": "https://robohash.org/cupiditatehicquaerat.png?size=150x150&set=set1",
-      "isPayed": true
+      "isPayed": false
     },
     {
       "id": 14,
@@ -18,7 +18,7 @@
       "value": 128.15,
       "date": "2020-08-09T21:10:44Z",
       "image": "https://robohash.org/enimmolestiaeperspiciatis.png?size=150x150&set=set1",
-      "isPayed": true
+      "isPayed": false
     },
     {
       "id": 15,
@@ -68,7 +68,7 @@
       "value": 487.82,
       "date": "2020-06-25T02:31:47Z",
       "image": "https://robohash.org/quolaboriosameum.png?size=150x150&set=set1",
-      "isPayed": false
+      "isPayed": true
     },
     {
       "id": 21,
@@ -88,7 +88,7 @@
       "value": 105.78,
       "date": "2020-08-24T22:09:07Z",
       "image": "https://robohash.org/doloremquedoloresprovident.png?size=150x150&set=set1",
-      "isPayed": false
+      "isPayed": true
     },
     {
       "id": 23,
@@ -501,16 +501,6 @@
       "isPayed": true
     },
     {
-      "id": 65,
-      "name": "Brynne Spondley",
-      "username": "bspondley1s",
-      "title": "Senior Developer",
-      "value": 348.09,
-      "date": "2020-09-16T19:10:57Z",
-      "image": "https://robohash.org/quinullaasperiores.png?size=150x150&set=set1",
-      "isPayed": false
-    },
-    {
       "id": 66,
       "name": "Desmund Payn",
       "username": "dpayn1t",
@@ -549,16 +539,6 @@
       "date": "2020-10-04T08:24:58Z",
       "image": "https://robohash.org/fugaquamest.png?size=150x150&set=set1",
       "isPayed": false
-    },
-    {
-      "id": 70,
-      "name": "Mauricio Waith",
-      "username": "mwaith1x",
-      "title": "Operator",
-      "value": 81.61,
-      "date": "2021-03-18T23:21:23Z",
-      "image": "https://robohash.org/ealaboriosameum.png?size=150x150&set=set1",
-      "isPayed": true
     },
     {
       "id": 71,
@@ -1328,16 +1308,6 @@
       "value": 492.43,
       "date": "2020-03-19T22:02:42Z",
       "image": "https://robohash.org/saepeconsequaturat.png?size=150x150&set=set1",
-      "isPayed": false
-    },
-    {
-      "id": 148,
-      "name": "Analise Vedenisov",
-      "username": "avedenisov43",
-      "title": "Director of Sales",
-      "value": 110.94,
-      "date": "2021-07-07T00:54:51Z",
-      "image": "https://robohash.org/voluptatumpossimusaut.png?size=150x150&set=set1",
       "isPayed": false
     },
     {

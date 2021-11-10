@@ -63,6 +63,14 @@
         <ng-content #filter></ng-content>
       </th>
     </ng-container>
+
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell text-center" colspan="9999">
+        <span class="font-montserrat font-size-16">
+          Não há dados a serem exibidos
+        </span>
+      </td>
+    </tr>
   
     <tr mat-header-row *matHeaderRowDef="['header-row-filter']"></tr>
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
