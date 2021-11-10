@@ -1,0 +1,8 @@
+<ng-container *ngIf="src">
+  <ng-container *ngIf="!loadedImage; else ImageTemplate">
+    <span class="spinner"></span>
+  </ng-container>
+
+  <ng-template #ImageTemplate></ng-template>
+  <img *ngIf="row?.image" width="50px" height="auto" [src]="src" alt="Image payment" />
+</ng-container>
