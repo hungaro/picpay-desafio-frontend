@@ -10,15 +10,15 @@ import { SharedModule } from '@shared/shared.module';
 
 import { PaymentService } from '@services/payment.service';
 
-import { PaymentCreateUpdateDialogComponent } from './payment-create-update-dialog.component';
+import { PaymentDeleteDialogComponent } from './payment-delete-dialog.component';
 
-describe('PaymentCreateUpdateDialogComponent', () => {
-  let component: PaymentCreateUpdateDialogComponent;
-  let fixture: ComponentFixture<PaymentCreateUpdateDialogComponent>;
+describe('PaymentDeleteDialogComponent', () => {
+  let component: PaymentDeleteDialogComponent;
+  let fixture: ComponentFixture<PaymentDeleteDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [PaymentCreateUpdateDialogComponent],
+      declarations: [PaymentDeleteDialogComponent],
       imports: [
         CommonModule,
         HttpClientModule,
@@ -45,13 +45,13 @@ describe('PaymentCreateUpdateDialogComponent', () => {
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PaymentCreateUpdateDialogComponent);
+    fixture = TestBed.createComponent(PaymentDeleteDialogComponent);
     component = fixture.componentInstance;
 
     fixture.detectChanges();
   });
 
-  it('should create payment create update dialog component', () => {
+  it('should create payment delete dialog component', () => {
     expect(component).toBeTruthy();
   });
 });
