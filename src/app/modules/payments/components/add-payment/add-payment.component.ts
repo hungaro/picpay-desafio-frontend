@@ -1,5 +1,6 @@
+import { Router } from '@angular/router';
 import { DialogPaymentComponent } from './../dialog-payment/dialog-payment.component';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -9,8 +10,11 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class AddPaymentComponent implements OnInit {
 
+  @Output() action = new EventEmitter<boolean>();
+
   constructor(
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -25,9 +29,8 @@ export class AddPaymentComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result) {
-        
-      }
+      if(result)
+      this.action.emit(result);
     });
   }
 }

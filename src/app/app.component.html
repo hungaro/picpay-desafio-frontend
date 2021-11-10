@@ -2,14 +2,13 @@
     
     <ng-container *ngIf="user$ | async as user">
         <ng-container *ngIf="(user | json) != '{}' && verifyRouter.url !== '/login'">
-            <div class="app-toolbar">
+            <div class="toolbar-position">
                 <app-toolbar></app-toolbar>
-
-                <ng-container *ngIf="loading">
-                    <mat-progress-bar mode="indeterminate" color=primary></mat-progress-bar>
-                </ng-container>
-
             </div>
+
+            <ng-container *ngIf="loading">
+                <mat-progress-bar mode="indeterminate" color=primary class="progress-position"></mat-progress-bar>
+            </ng-container>
         </ng-container>
     </ng-container>
 

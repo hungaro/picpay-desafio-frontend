@@ -1,0 +1,10 @@
+<div class="pagination">
+    <a [ngClass]="{disabled:pager.currentPage === 1}" class="cursor-pointer" (click)="setPage(pager.currentPage - 1)">&lt;</a>
+
+    <ng-container *ngFor="let page of pager.pages">
+        <a [ngClass]="{'active': (page) === pager.currentPage}" class="cursor-pointer" (click)="setPage(page)">{{page}}</a>
+    </ng-container>
+    
+    <a [ngClass]="{disabled:pager.currentPage === pager.totalPages}" class="cursor-pointer" (click)="setPage(pager.currentPage + 1)">&gt;</a>
+  </div>
+

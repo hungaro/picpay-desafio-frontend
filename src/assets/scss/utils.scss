@@ -9,6 +9,10 @@
   cursor: pointer;
 }
 
+.spacer {
+    flex: 1 1 auto;
+}
+
 // snackbar
 .snackbar-success {
     background-color: var(--green) !important;

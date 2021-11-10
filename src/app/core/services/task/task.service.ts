@@ -1,5 +1,5 @@
 import { Ipayment } from './../../../shared/models/ipayment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -17,8 +17,8 @@ export class TaskService {
     private http: HttpClient
   ) { }
 
-  get(): Observable<Ipayment[]> {
-    return this.http.get<Ipayment[]>(`${this.url_api}`)
+  get(limit: number, page: number): Observable<HttpResponse<Ipayment[]>> {
+    return this.http.get<Ipayment[]>(`${this.url_api}?_limit=${limit}&_page=${page}`, {observe: 'response'});
   }
 
   post(payment: Ipayment): Observable<Ipayment> {

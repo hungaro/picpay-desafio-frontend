@@ -9,7 +9,8 @@ const routes: Routes = [
     component: PaymentsComponent,
     resolve: {
       payments: TasksForTableResolver
-    }
+    },
+    runGuardsAndResolvers:'always'
   },
   {path: '', pathMatch: 'full', redirectTo: 'login'}
 ];

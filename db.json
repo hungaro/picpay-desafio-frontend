@@ -1,76 +1,6 @@
 {
   "tasks": [
     {
-      "id": 5,
-      "name": "Anthea Pundy",
-      "username": "apundy4",
-      "title": "Software Engineer III",
-      "value": 177.19,
-      "date": "2021-01-01T14:09:51.000Z",
-      "image": "https://robohash.org/quiaautomnis.png?size=150x150&set=set1",
-      "isPayed": true
-    },
-    {
-      "id": 7,
-      "name": "Lonna Bonney",
-      "username": "lbonney6",
-      "title": "Assistant Media Planner",
-      "value": 285.86,
-      "date": "2020-10-02T23:04:57Z",
-      "image": "https://robohash.org/estquisquamquaerat.png?size=150x150&set=set1",
-      "isPayed": false
-    },
-    {
-      "id": 8,
-      "name": "Gregorio Deex",
-      "username": "gdeex7",
-      "title": "Marketing Assistant",
-      "value": 354.56,
-      "date": "2020-09-12T05:18:50Z",
-      "image": "https://robohash.org/asinthic.png?size=150x150&set=set1",
-      "isPayed": true
-    },
-    {
-      "id": 9,
-      "name": "Sibelle Domenico",
-      "username": "sdomenico8",
-      "title": "Assistant Manager",
-      "value": 175.59,
-      "date": "2021-05-12T05:17:48Z",
-      "image": "https://robohash.org/quismaximefuga.png?size=150x150&set=set1",
-      "isPayed": true
-    },
-    {
-      "id": 10,
-      "name": "Arlen Letchford",
-      "username": "aletchford9",
-      "title": "Mechanical Systems Engineer",
-      "value": 423.64,
-      "date": "2020-06-04T18:45:29Z",
-      "image": "https://robohash.org/possimusautemnecessitatibus.png?size=150x150&set=set1",
-      "isPayed": false
-    },
-    {
-      "id": 11,
-      "name": "Lonnard MacCaghan",
-      "username": "lmaccaghana",
-      "title": "Account Representative II",
-      "value": 427.95,
-      "date": "2020-09-12T13:20:55Z",
-      "image": "https://robohash.org/omniseasapiente.png?size=150x150&set=set1",
-      "isPayed": true
-    },
-    {
-      "id": 12,
-      "name": "Rossy Laviss",
-      "username": "rlavissb",
-      "title": "Automation Specialist II",
-      "value": 458.73,
-      "date": "2021-01-28T12:01:18Z",
-      "image": "https://robohash.org/doloremconsecteturdelectus.png?size=150x150&set=set1",
-      "isPayed": true
-    },
-    {
       "id": 13,
       "name": "Deck Balaisot",
       "username": "dbalaisotc",
@@ -118,16 +48,6 @@
       "value": 397.36,
       "date": "2021-03-17T08:44:02Z",
       "image": "https://robohash.org/oditquaeratet.png?size=150x150&set=set1",
-      "isPayed": true
-    },
-    {
-      "id": 18,
-      "name": "Maynord Davidde",
-      "username": "mdaviddeh",
-      "title": "Accounting Assistant III",
-      "value": 86.23,
-      "date": "2020-10-22T04:24:29Z",
-      "image": "https://robohash.org/ametperferendisoccaecati.png?size=150x150&set=set1",
       "isPayed": true
     },
     {
@@ -198,7 +118,7 @@
       "value": 458.97,
       "date": "2021-01-01T04:57:27Z",
       "image": "https://robohash.org/quaeratetdoloremque.png?size=150x150&set=set1",
-      "isPayed": false
+      "isPayed": true
     },
     {
       "id": 26,
@@ -229,16 +149,6 @@
       "date": "2020-03-14T14:49:39Z",
       "image": "https://robohash.org/autettempora.png?size=150x150&set=set1",
       "isPayed": true
-    },
-    {
-      "id": 29,
-      "name": "Mirelle Malin",
-      "username": "mmalins",
-      "title": "Assistant Professor",
-      "value": 67.6,
-      "date": "2020-08-12T09:45:38Z",
-      "image": "https://robohash.org/cumquesimiliquemollitia.png?size=150x150&set=set1",
-      "isPayed": false
     },
     {
       "id": 30,
@@ -1651,42 +1561,22 @@
       "isPayed": true
     },
     {
-      "name": "Henrique",
-      "username": "Henrique",
-      "title": "teste add 1",
-      "value": 127.12,
-      "date": "2021-11-08T03:00:00.000Z",
-      "image": null,
-      "isPayed": false,
-      "id": 171
-    },
-    {
-      "name": "Henrique",
-      "username": "Henrique",
-      "title": "teste add 2",
-      "value": 1233.23,
-      "date": "2021-11-19T03:00:00.000Z",
-      "image": null,
-      "isPayed": true,
-      "id": 172
-    },
-    {
-      "id": 173,
-      "name": "Henrique",
-      "username": "Henrique",
-      "title": "teste loading",
-      "value": 123.45,
-      "date": "2021-11-12T03:00:00.000Z",
+      "id": 171,
+      "name": "teste",
+      "username": "teste",
+      "title": "Hoje",
+      "value": 1234,
+      "date": "2021-11-09T03:00:00.000Z",
       "image": null,
       "isPayed": false
     },
     {
-      "id": 174,
-      "name": "Henrique",
-      "username": "Henrique",
-      "title": "qqqq",
-      "value": 123,
-      "date": "2021-11-04T03:00:00.000Z",
+      "id": 172,
+      "name": "teste run resolver",
+      "username": "teste run resolver",
+      "title": "teste",
+      "value": 1222,
+      "date": "2021-11-10T03:00:00.000Z",
       "image": null,
       "isPayed": false
     }

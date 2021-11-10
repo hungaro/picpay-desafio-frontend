@@ -6,9 +6,21 @@
     </h1>
 
     <div class="w-100">
-        <app-add-payment></app-add-payment>
+        <app-add-payment (action)="changePage($event)"></app-add-payment>
     </div>
 
-    <app-table-payments [payments]="payments"></app-table-payments>
-    <br>
+    <app-table-payments [payments]="payments" (action)="changePage($event)">
+        <div class="mt-3 float-end row" filter>
+            <div class="col-sm">
+                <app-select-limit (limitEmit)="receiveLimit($event)" [limitSelect]="limitSelect"></app-select-limit>
+            </div>
+            <div class="col-sm">
+                <app-pagination-payment 
+                    (pageEmit)="receivePage($event)" 
+                    [limit]="limitSelect" 
+                    [totalPayments]="totalPayments"
+                    [currentPage]="currentPage"></app-pagination-payment>
+            </div>
+        </div>
+    </app-table-payments>
 </div>

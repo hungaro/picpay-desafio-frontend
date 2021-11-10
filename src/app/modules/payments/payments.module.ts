@@ -14,6 +14,10 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { TablePaymentsComponent } from './components/table-payments/table-payments.component';
 import { MatTableModule } from '@angular/material/table';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatSelectModule } from '@angular/material/select';
+import { MatCardModule } from '@angular/material/card';
+import { SelectLimitComponent } from './components/select-limit/select-limit.component';
+import { PaginationPaymentComponent } from './components/pagination-payment/pagination-payment.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     DialogPaymentComponent,
     ViewPaymentDeleteComponent,
     TablePaymentsComponent,
-    ViewPaymentDeleteComponent
+    ViewPaymentDeleteComponent,
+    SelectLimitComponent,
+    PaginationPaymentComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +40,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatNativeDateModule,
     MatTableModule,
     MatCheckboxModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSelectModule,
+    MatCardModule
   ]
 })
 export class PaymentsModule { }

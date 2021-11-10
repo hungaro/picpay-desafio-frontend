@@ -2,22 +2,28 @@ import { TaskService } from './../../services/task/task.service';
 import { Ipayment } from './../../../shared/models/ipayment';
 import { Injectable } from '@angular/core';
 import {
-  Router, Resolve,
+  Resolve,
   RouterStateSnapshot,
   ActivatedRouteSnapshot
 } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
+import { HttpResponse } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TasksForTableResolver implements Resolve<Ipayment[]> {
+export class TasksForTableResolver implements Resolve<HttpResponse<Ipayment[]>> {
 
   constructor(
     private taskService: TaskService
   ) {}
 
-  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Ipayment[]> {
-    return this.taskService.get();
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<HttpResponse<Ipayment[]>>  {
+    const limit: number = route.queryParams.limit ?? 5;
+    const page: number = route.queryParams.page ?? 1;
+
+    console.log(route.queryParamMap)
+
+    return this.taskService.get(limit, page);
   }
 }
