@@ -58,7 +58,7 @@ export class LoginComponent implements AfterViewInit, OnDestroy {
   }
 
   login(): void {
-    if (this.loginForm.dirty && this.loginForm.valid) {
+    if (this.loginForm.valid) {
       const { email, password } = this.loginForm.controls;
 
       this.loading = true;
