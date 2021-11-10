@@ -10,6 +10,8 @@ import { AngularMaterialModule } from './angular-material.module';
 
 import { ComponentsModule } from './components/components.module';
 
+import { PipesModule } from './pipes/pipes.module';
+
 export const customCurrencyMaskConfig = {
   align: 'left',
   allowNegative: true,
@@ -32,6 +34,7 @@ export const customCurrencyMaskConfig = {
     NgxCurrencyModule.forRoot(customCurrencyMaskConfig),
     AngularMaterialModule,
     ComponentsModule,
+    PipesModule,
   ],
   exports: [
     FlexLayoutModule,
@@ -39,6 +42,7 @@ export const customCurrencyMaskConfig = {
     ToastrModule,
     AngularMaterialModule,
     ComponentsModule,
+    PipesModule,
   ],
 })
 export class SharedModule {}
