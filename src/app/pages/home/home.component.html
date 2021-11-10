@@ -4,7 +4,8 @@
       type="submit"
       mat-raised-button
       color="primary"
-      [class.loading]="isLoadingTaskCreate"
+      [class.spinner]="isLoadingPaymentCreate"
+      [disabled]="isLoadingPaymentCreate"
       (click)="openPaymentCreateUpdateDialog()"
     >
       ADICIONAR PAGAMENTO
@@ -12,19 +13,23 @@
   </div>
   <div class="table-wrapper mat-elevation-z3" fxLayout="column">
     <div class="mt-16 px-16" fxLayout fxLayoutAlign="start center">
-      <app-search-filter #searchFilter (filtersChanged)="retrieveTasks()"></app-search-filter>
+      <app-search-filter #searchFilter (filtersChanged)="retrievePayments()"></app-search-filter>
     </div>
 
-    <app-paginator #paginator [length]="tasksLength" (pageChange)="retrieveTasks()"></app-paginator>
+    <app-paginator
+      #paginator
+      [length]="paymentsLength"
+      (pageChange)="retrievePayments()"
+    ></app-paginator>
 
-    <ng-container *ngIf="isLoadingTasks">
+    <ng-container *ngIf="isLoadingPayments">
       <div class="my-16" fxLayout fxLayoutAlign="center center">
         <mat-progress-spinner color="primary" mode="indeterminate" [diameter]="50">
         </mat-progress-spinner>
       </div>
     </ng-container>
 
-    <div class="table-container" [style.visibility]="isLoadingTasks ? 'hidden' : 'visible'">
+    <div class="table-container" [style.visibility]="isLoadingPayments ? 'hidden' : 'visible'">
       <table
         mat-table
         [dataSource]="dataSource"
@@ -81,7 +86,7 @@
         <ng-container matColumnDef="isPayed">
           <th mat-header-cell *matHeaderCellDef mat-sort-header disableClear>Pago</th>
           <td mat-cell *matCellDef="let row">
-            <ng-container *ngIf="isLoadingTaskUpdateStatus[row.id]; else IsPaidTemplate">
+            <ng-container *ngIf="isLoadingPaymentUpdateStatus[row.id]; else IsPaidTemplate">
               <mat-progress-spinner
                 color="primary"
                 mode="indeterminate"
@@ -103,7 +108,9 @@
           <th mat-header-cell *matHeaderCellDef></th>
           <td mat-cell *matCellDef="let row">
             <div class="actions-container" fxLayout fxLayoutAlign="end">
-              <ng-container *ngIf="isLoadingTaskUpdate[row.id]; else TaskUpdateButtonTemplate">
+              <ng-container
+                *ngIf="isLoadingPaymentUpdate[row.id]; else PaymentUpdateButtonTemplate"
+              >
                 <div fxLayout fxLayoutAlign="center center">
                   <mat-progress-spinner
                     color="primary"
@@ -112,17 +119,19 @@
                   ></mat-progress-spinner>
                 </div>
               </ng-container>
-              <ng-template #TaskUpdateButtonTemplate>
+              <ng-template #PaymentUpdateButtonTemplate>
                 <button
                   mat-icon-button
-                  aria-label="Task edit button"
+                  aria-label="Payment edit button"
                   (click)="openPaymentCreateUpdateDialog(row)"
                 >
                   <mat-icon>edit</mat-icon>
                 </button>
               </ng-template>
 
-              <ng-container *ngIf="isLoadingTaskDelete[row.id]; else TaskDeleteButtonTemplate">
+              <ng-container
+                *ngIf="isLoadingPaymentDelete[row.id]; else PaymentDeleteButtonTemplate"
+              >
                 <div fxLayout fxLayoutAlign="center center">
                   <mat-progress-spinner
                     color="warn"
@@ -131,10 +140,10 @@
                   ></mat-progress-spinner>
                 </div>
               </ng-container>
-              <ng-template #TaskDeleteButtonTemplate>
+              <ng-template #PaymentDeleteButtonTemplate>
                 <button
                   mat-icon-button
-                  aria-label="Task remove button"
+                  aria-label="Payment remove button"
                   (click)="openPaymentDeleteDialog(row.id, row)"
                 >
                   <mat-icon>delete</mat-icon>

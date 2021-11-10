@@ -12,9 +12,9 @@ import { ToastrService } from 'ngx-toastr';
 
 import { PaginatorComponent } from '@shared/components/paginator/paginator.component';
 
-import { TaskService } from '@services/task.service';
+import { PaymentService } from '@services/payment.service';
 
-import { Task } from '@models/task.model';
+import { Payment } from '@models/payment.model';
 
 import { Utils } from '@utils/utils';
 
@@ -28,21 +28,21 @@ import { PaymentCreateUpdateDialogComponent } from './components/dialogs/payment
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements AfterViewInit, OnDestroy {
-  dataSource: Task[];
+  dataSource: Payment[];
 
   displayedColumns: string[];
 
-  isLoadingTasks: boolean;
+  isLoadingPayments: boolean;
 
-  isLoadingTaskCreate: boolean;
+  isLoadingPaymentCreate: boolean;
 
-  isLoadingTaskDelete: { [key: number]: boolean };
+  isLoadingPaymentDelete: { [key: number]: boolean };
 
-  isLoadingTaskUpdateStatus: { [key: number]: boolean };
+  isLoadingPaymentUpdateStatus: { [key: number]: boolean };
 
-  isLoadingTaskUpdate: { [key: number]: boolean };
+  isLoadingPaymentUpdate: { [key: number]: boolean };
 
-  tasksLength: number;
+  paymentsLength: number;
 
   private unsubscribeAll$: Subject<any>;
 
@@ -53,7 +53,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   @ViewChild('searchFilter') searchFilter: SearchFilterComponent;
 
   constructor(
-    private taskService: TaskService,
+    private paymentService: PaymentService,
     private toastrService: ToastrService,
     private changeDetectorRef: ChangeDetectorRef,
     private dialog: MatDialog,
@@ -65,7 +65,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit(): void {
     this.sortChange();
-    this.retrieveTasks();
+    this.retrievePayments();
     this.changeDetectorRef.detectChanges();
   }
 
@@ -74,11 +74,11 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
     this.unsubscribeAll$.complete();
   }
 
-  retrieveTasks(): void {
-    this.isLoadingTasks = true;
+  retrievePayments(): void {
+    this.isLoadingPayments = true;
 
-    this.taskService
-      .retrieveTasks(
+    this.paymentService
+      .retrievePayments(
         this.sort.active,
         this.sort.direction,
         this.paginator.page,
@@ -88,13 +88,13 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       .pipe(
         takeUntil(this.unsubscribeAll$),
         finalize(() => {
-          this.isLoadingTasks = false;
+          this.isLoadingPayments = false;
         }),
       )
       .subscribe(
-        (response: HttpResponse<Task[]>) => {
+        (response: HttpResponse<Payment[]>) => {
           this.dataSource = response?.body;
-          this.tasksLength = +response.headers.get('X-Total-Count');
+          this.paymentsLength = +response.headers.get('X-Total-Count');
         },
         () => {
           this.toastrService.error('Erro ao buscar pagamentos');
@@ -102,21 +102,21 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       );
   }
 
-  createPayment(payment: Task): void {
-    this.isLoadingTaskCreate = true;
+  createPayment(payment: Payment): void {
+    this.isLoadingPaymentCreate = true;
 
-    this.taskService
-      .createTask(Utils.omit(payment, 'id'))
+    this.paymentService
+      .createPayment(Utils.omit(payment, 'id'))
       .pipe(
         takeUntil(this.unsubscribeAll$),
         finalize(() => {
-          this.isLoadingTaskCreate = false;
+          this.isLoadingPaymentCreate = false;
         }),
       )
       .subscribe(
         () => {
           this.toastrService.success('Pagamento adicionado com sucesso.');
-          this.retrieveTasks();
+          this.retrievePayments();
         },
         () => {
           this.toastrService.error('Erro ao adicionar pagamento.');
@@ -124,23 +124,23 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       );
   }
 
-  updatePayment(payment: Task): void {
+  updatePayment(payment: Payment): void {
     const { id: paymentId } = payment;
 
-    this.isLoadingTaskUpdate[paymentId] = true;
+    this.isLoadingPaymentUpdate[paymentId] = true;
 
     const index = this.dataSource.findIndex((data) => data.id === paymentId);
 
-    this.taskService
-      .updateAllTask(paymentId, Utils.omit(payment, 'id'))
+    this.paymentService
+      .updateAllPayment(paymentId, Utils.omit(payment, 'id'))
       .pipe(
         takeUntil(this.unsubscribeAll$),
         finalize(() => {
-          this.isLoadingTaskUpdate[paymentId] = false;
+          this.isLoadingPaymentUpdate[paymentId] = false;
         }),
       )
       .subscribe(
-        (paymentReponse: Task) => {
+        (paymentReponse: Payment) => {
           this.dataSource[index] = paymentReponse;
           this.toastrService.success('Pagamento atualizado com sucesso.');
         },
@@ -151,17 +151,17 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   }
 
   updatePaymentStatus(id: number, isPaid: boolean): void {
-    this.isLoadingTaskUpdateStatus[id] = true;
+    this.isLoadingPaymentUpdateStatus[id] = true;
 
     const index = this.dataSource.findIndex((data) => data.id === id);
     const payment = this.dataSource[index];
 
-    this.taskService
-      .updateTask(id, { isPayed: !isPaid })
+    this.paymentService
+      .updatePayment(id, { isPayed: !isPaid })
       .pipe(
         takeUntil(this.unsubscribeAll$),
         finalize(() => {
-          this.isLoadingTaskUpdateStatus[id] = false;
+          this.isLoadingPaymentUpdateStatus[id] = false;
         }),
       )
       .subscribe(
@@ -177,20 +177,20 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   }
 
   deletePayment(id: number): void {
-    this.isLoadingTaskDelete[id] = true;
+    this.isLoadingPaymentDelete[id] = true;
 
-    this.taskService
-      .deleteTask(id)
+    this.paymentService
+      .deletePayment(id)
       .pipe(
         takeUntil(this.unsubscribeAll$),
         finalize(() => {
-          this.isLoadingTaskDelete[id] = false;
+          this.isLoadingPaymentDelete[id] = false;
         }),
       )
       .subscribe(
         () => {
           this.toastrService.success('Pagamento excluído com sucesso.');
-          this.retrieveTasks();
+          this.retrievePayments();
         },
         () => {
           this.toastrService.error('Erro ao excluir pagamento.');
@@ -198,7 +198,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       );
   }
 
-  openPaymentCreateUpdateDialog(payment?: Task): void {
+  openPaymentCreateUpdateDialog(payment?: Payment): void {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.autoFocus = true;
@@ -215,7 +215,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       .open(PaymentCreateUpdateDialogComponent, dialogConfig)
       .afterClosed()
       .pipe(takeUntil(this.unsubscribeAll$))
-      .subscribe((paymentData?: Task) => {
+      .subscribe((paymentData?: Payment) => {
         if (paymentData) {
           if (payment) {
             this.updatePayment(paymentData);
@@ -226,7 +226,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       });
   }
 
-  openPaymentDeleteDialog(paymentId: number, payment: Task): void {
+  openPaymentDeleteDialog(paymentId: number, payment: Payment): void {
     const dialogConfig = new MatDialogConfig();
 
     const user = `Usuário: ${payment.name}`;
@@ -256,17 +256,17 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
   private sortChange(): void {
     this.sort.sortChange.subscribe(() => {
       this.paginator.page = 1;
-      this.retrieveTasks();
+      this.retrievePayments();
     });
   }
 
   private setDefaults(): void {
     this.displayedColumns = ['name', 'title', 'date', 'value', 'isPayed', 'actions'];
-    this.isLoadingTasks = false;
-    this.isLoadingTaskCreate = false;
-    this.isLoadingTaskDelete = {};
-    this.isLoadingTaskUpdate = {};
-    this.isLoadingTaskUpdateStatus = {};
+    this.isLoadingPayments = false;
+    this.isLoadingPaymentCreate = false;
+    this.isLoadingPaymentDelete = {};
+    this.isLoadingPaymentUpdate = {};
+    this.isLoadingPaymentUpdateStatus = {};
 
     this.unsubscribeAll$ = new Subject();
   }

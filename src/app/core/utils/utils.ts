@@ -1,4 +1,4 @@
-import { Task } from '@models/task.model';
+import { Payment } from '@models/payment.model';
 
 export class Utils {
   static omit(obj: any, field: string): any {
@@ -18,7 +18,7 @@ export class Utils {
     }, {});
   }
 
-  static generatePaymentData(payment: Partial<Task>): Partial<Task> {
+  static generatePaymentData(payment: Partial<Payment>): Partial<Payment> {
     const username = (payment?.name?.split(' ')[0] ?? '').toLowerCase();
 
     return {

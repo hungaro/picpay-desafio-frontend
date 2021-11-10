@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 
@@ -6,12 +6,12 @@ import { throwError } from 'rxjs';
 
 import { environment } from '@environments/environment';
 
-import { Task } from '@models/task.model';
+import { Payment } from '@models/payment.model';
 
-import { TaskService } from './task.service';
+import { PaymentService } from './payment.service';
 
-describe('AccountService', () => {
-  let service: TaskService;
+describe('PaymentService', () => {
+  let service: PaymentService;
   let httpClient: HttpClient;
   let httpMock: HttpTestingController;
 
@@ -20,14 +20,14 @@ describe('AccountService', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [TaskService],
+      providers: [PaymentService],
     }).compileComponents();
   });
 
   beforeEach(() => {
     httpClient = TestBed.inject(HttpClient);
     httpMock = TestBed.inject(HttpTestingController);
-    service = TestBed.inject(TaskService);
+    service = TestBed.inject(PaymentService);
   });
 
   afterEach(() => {
@@ -38,46 +38,57 @@ describe('AccountService', () => {
     httpMock.expectNone({});
   });
 
-  describe('retrieveTasks', () => {
-    const RESPONSE_MOCK: Task[] = [
-      {
-        id: 1,
-        name: 'Pennie Dumphries',
-        username: 'pdumphries0',
-        title: 'Dental Hygienist',
-        value: 19.96,
-        date: '2020-07-21T05:53:20Z',
-        image: 'https://robohash.org/asperioresprovidentconsequuntur.png?size=150x150&set=set1',
-        isPayed: true,
-      },
-      {
-        id: 2,
-        name: 'Foster Orthmann',
-        username: 'forthmann1',
-        title: 'Professor',
-        value: 207.36,
-        date: '2021-01-28T14:01:29Z',
-        image: 'https://robohash.org/quasetqui.png?size=150x150&set=set1',
-        isPayed: true,
-      },
-      {
-        id: 3,
-        name: 'Crissie Summerill',
-        username: 'csummerill2',
-        title: 'VP Product Management',
-        value: 464.54,
-        date: '2020-02-09T18:20:32Z',
-        image: 'https://robohash.org/natusinciduntsapiente.png?size=150x150&set=set1',
-        isPayed: false,
-      },
-    ];
+  describe('retrievePayments', () => {
+    const RESPONSE_MOCK: HttpResponse<Payment[]> = {
+      body: [
+        {
+          id: 1,
+          name: 'Pennie Dumphries',
+          username: 'pdumphries0',
+          title: 'Dental Hygienist',
+          value: 19.96,
+          date: '2020-07-21T05:53:20Z',
+          image: 'https://robohash.org/asperioresprovidentconsequuntur.png?size=150x150&set=set1',
+          isPayed: true,
+        },
+        {
+          id: 2,
+          name: 'Foster Orthmann',
+          username: 'forthmann1',
+          title: 'Professor',
+          value: 207.36,
+          date: '2021-01-28T14:01:29Z',
+          image: 'https://robohash.org/quasetqui.png?size=150x150&set=set1',
+          isPayed: true,
+        },
+        {
+          id: 3,
+          name: 'Crissie Summerill',
+          username: 'csummerill2',
+          title: 'VP Product Management',
+          value: 464.54,
+          date: '2020-02-09T18:20:32Z',
+          image: 'https://robohash.org/natusinciduntsapiente.png?size=150x150&set=set1',
+          isPayed: false,
+        },
+      ],
+      headers: null,
+      status: 201,
+      statusText: '',
+      ok: true,
+      type: null,
+      url: '',
+      clone: jest.fn(),
+    };
 
-    it('should retrieve tasks', () => {
-      const url = `${environment.baseUrl}${environment.endpoints.task}`;
+    it('should retrieve payments', () => {
+      const url = `${environment.baseUrl}${environment.endpoints.payments}`;
 
-      service.retrieveTasks().subscribe((response: Task[]) => {
-        expect(response).toEqual(RESPONSE_MOCK);
-      });
+      service
+        .retrievePayments('name', 'desc', 1, 10, null)
+        .subscribe((response: HttpResponse<Payment[]>) => {
+          expect(response).toEqual(RESPONSE_MOCK);
+        });
 
       const requestMock = httpMock.expectOne((req) => {
         return req.method === 'GET' && req.url === url;
@@ -91,7 +102,7 @@ describe('AccountService', () => {
 
       jest.spyOn(httpClient, 'get').mockReturnValue(throwError(RESPONSE_ERROR_MOCK));
 
-      service.retrieveTasks().subscribe(
+      service.retrievePayments('name', 'desc', 1, 10, null).subscribe(
         () => {},
         (error) => {
           responseError = error;
@@ -102,8 +113,8 @@ describe('AccountService', () => {
     });
   });
 
-  describe('retrieveTask', () => {
-    const RESPONSE_MOCK: Task = {
+  describe('retrievePayment', () => {
+    const RESPONSE_MOCK: Payment = {
       id: 1,
       name: 'Pennie Dumphries',
       username: 'pdumphries0',
@@ -114,12 +125,12 @@ describe('AccountService', () => {
       isPayed: true,
     };
 
-    const TASK_ID = 1;
+    const PAYMENT_ID = 1;
 
-    it('should retrieve task', () => {
-      const url = `${environment.baseUrl}${environment.endpoints.task}/${TASK_ID}`;
+    it('should retrieve payment', () => {
+      const url = `${environment.baseUrl}${environment.endpoints.payments}/${PAYMENT_ID}`;
 
-      service.retrieveTask(TASK_ID).subscribe((response: Task) => {
+      service.retrievePayment(PAYMENT_ID).subscribe((response: Payment) => {
         expect(response).toEqual(RESPONSE_MOCK);
       });
 
@@ -135,7 +146,7 @@ describe('AccountService', () => {
 
       jest.spyOn(httpClient, 'get').mockReturnValue(throwError(RESPONSE_ERROR_MOCK));
 
-      service.retrieveTasks().subscribe(
+      service.retrievePayment(PAYMENT_ID).subscribe(
         () => {},
         (error) => {
           responseError = error;
@@ -146,8 +157,8 @@ describe('AccountService', () => {
     });
   });
 
-  describe('createTask', () => {
-    const REQUEST_MOCK: Omit<Task, 'id'> = {
+  describe('createPayment', () => {
+    const REQUEST_MOCK: Omit<Payment, 'id'> = {
       name: 'Pennie Dumphries',
       username: 'pdumphries0',
       title: 'Dental Hygienist',
@@ -157,7 +168,7 @@ describe('AccountService', () => {
       isPayed: true,
     };
 
-    const RESPONSE_MOCK: Task = {
+    const RESPONSE_MOCK: Payment = {
       id: 1,
       name: 'Pennie Dumphries',
       username: 'pdumphries0',
@@ -168,15 +179,15 @@ describe('AccountService', () => {
       isPayed: true,
     };
 
-    it('should create task', () => {
-      const url = `${environment.baseUrl}${environment.endpoints.task}`;
+    it('should create payment', () => {
+      const url = `${environment.baseUrl}${environment.endpoints.payments}`;
 
-      service.createTask(REQUEST_MOCK).subscribe((response: Task) => {
+      service.createPayment(REQUEST_MOCK).subscribe((response: Payment) => {
         expect(response).toEqual(RESPONSE_MOCK);
       });
 
       const requestMock = httpMock.expectOne((req) => {
-        return req.method === 'POST' && req.url === url && req.body === REQUEST_MOCK;
+        return req.method === 'POST' && req.url === url;
       });
 
       requestMock.flush(RESPONSE_MOCK);
@@ -185,9 +196,9 @@ describe('AccountService', () => {
     it('should throw error when service return error', () => {
       let responseError;
 
-      jest.spyOn(httpClient, 'get').mockReturnValue(throwError(RESPONSE_ERROR_MOCK));
+      jest.spyOn(httpClient, 'post').mockReturnValue(throwError(RESPONSE_ERROR_MOCK));
 
-      service.retrieveTasks().subscribe(
+      service.createPayment(REQUEST_MOCK).subscribe(
         () => {},
         (error) => {
           responseError = error;
@@ -198,15 +209,15 @@ describe('AccountService', () => {
     });
   });
 
-  describe('deleteTask', () => {
+  describe('deletePayment', () => {
     const RESPONSE_MOCK = {};
 
-    const TASK_ID = 1;
+    const PAYMENT_ID = 1;
 
-    it('should delete task', () => {
-      const url = `${environment.baseUrl}${environment.endpoints.task}/${TASK_ID}`;
+    it('should delete payment', () => {
+      const url = `${environment.baseUrl}${environment.endpoints.payments}/${PAYMENT_ID}`;
 
-      service.deleteTask(TASK_ID).subscribe((response: {}) => {
+      service.deletePayment(PAYMENT_ID).subscribe((response: {}) => {
         expect(response).toEqual(RESPONSE_MOCK);
       });
 
@@ -220,9 +231,9 @@ describe('AccountService', () => {
     it('should throw error when service return error', () => {
       let responseError;
 
-      jest.spyOn(httpClient, 'get').mockReturnValue(throwError(RESPONSE_ERROR_MOCK));
+      jest.spyOn(httpClient, 'delete').mockReturnValue(throwError(RESPONSE_ERROR_MOCK));
 
-      service.retrieveTasks().subscribe(
+      service.deletePayment(PAYMENT_ID).subscribe(
         () => {},
         (error) => {
           responseError = error;
@@ -233,8 +244,8 @@ describe('AccountService', () => {
     });
   });
 
-  describe('updateAllTask', () => {
-    const REQUEST_MOCK: Omit<Task, 'id'> = {
+  describe('updateAllPayment', () => {
+    const REQUEST_MOCK: Omit<Payment, 'id'> = {
       name: 'Pennie Dumphries',
       username: 'pdumphries0',
       title: 'Dental Hygienist',
@@ -244,7 +255,7 @@ describe('AccountService', () => {
       isPayed: true,
     };
 
-    const RESPONSE_MOCK: Task = {
+    const RESPONSE_MOCK: Payment = {
       id: 1,
       name: 'Pennie Dumphries',
       username: 'pdumphries0',
@@ -255,17 +266,17 @@ describe('AccountService', () => {
       isPayed: true,
     };
 
-    const TASK_ID = 1;
+    const PAYMENT_ID = 1;
 
-    it('should update all task', () => {
-      const url = `${environment.baseUrl}${environment.endpoints.task}/${TASK_ID}`;
+    it('should update all payment', () => {
+      const url = `${environment.baseUrl}${environment.endpoints.payments}/${PAYMENT_ID}`;
 
-      service.updateAllTask(TASK_ID, REQUEST_MOCK).subscribe((response: Task) => {
+      service.updateAllPayment(PAYMENT_ID, REQUEST_MOCK).subscribe((response: Payment) => {
         expect(response).toEqual(RESPONSE_MOCK);
       });
 
       const requestMock = httpMock.expectOne((req) => {
-        return req.method === 'PUT' && req.urlWithParams === url && req.body === REQUEST_MOCK;
+        return req.method === 'PUT' && req.urlWithParams === url;
       });
 
       requestMock.flush(RESPONSE_MOCK);
@@ -274,9 +285,9 @@ describe('AccountService', () => {
     it('should throw error when service return error', () => {
       let responseError;
 
-      jest.spyOn(httpClient, 'get').mockReturnValue(throwError(RESPONSE_ERROR_MOCK));
+      jest.spyOn(httpClient, 'put').mockReturnValue(throwError(RESPONSE_ERROR_MOCK));
 
-      service.retrieveTasks().subscribe(
+      service.updateAllPayment(PAYMENT_ID, REQUEST_MOCK).subscribe(
         () => {},
         (error) => {
           responseError = error;
@@ -287,13 +298,13 @@ describe('AccountService', () => {
     });
   });
 
-  describe('updateTask', () => {
-    const REQUEST_MOCK: Omit<Partial<Task>, 'id'> = {
+  describe('updatePayment', () => {
+    const REQUEST_MOCK: Omit<Partial<Payment>, 'id'> = {
       name: 'Pennie Dumphries',
       value: 19.96,
     };
 
-    const RESPONSE_MOCK: Task = {
+    const RESPONSE_MOCK: Payment = {
       id: 1,
       name: 'Pennie Dumphries',
       username: 'pdumphries0',
@@ -304,12 +315,12 @@ describe('AccountService', () => {
       isPayed: true,
     };
 
-    const TASK_ID = 1;
+    const PAYMENT_ID = 1;
 
-    it('should update task', () => {
-      const url = `${environment.baseUrl}${environment.endpoints.task}/${TASK_ID}`;
+    it('should update payment', () => {
+      const url = `${environment.baseUrl}${environment.endpoints.payments}/${PAYMENT_ID}`;
 
-      service.updateTask(TASK_ID, REQUEST_MOCK).subscribe((response: Task) => {
+      service.updatePayment(PAYMENT_ID, REQUEST_MOCK).subscribe((response: Payment) => {
         expect(response).toEqual(RESPONSE_MOCK);
       });
 
@@ -323,9 +334,9 @@ describe('AccountService', () => {
     it('should throw error when service return error', () => {
       let responseError;
 
-      jest.spyOn(httpClient, 'get').mockReturnValue(throwError(RESPONSE_ERROR_MOCK));
+      jest.spyOn(httpClient, 'patch').mockReturnValue(throwError(RESPONSE_ERROR_MOCK));
 
-      service.retrieveTasks().subscribe(
+      service.updatePayment(PAYMENT_ID, REQUEST_MOCK).subscribe(
         () => {},
         (error) => {
           responseError = error;

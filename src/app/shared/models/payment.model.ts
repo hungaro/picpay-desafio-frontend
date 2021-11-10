@@ -1,4 +1,4 @@
-export class Task {
+export class Payment {
   id: number;
 
   name: string;
@@ -15,7 +15,7 @@ export class Task {
 
   isPayed: boolean;
 
-  constructor({ id, name, username, title, value, date, image, isPayed }: Task) {
+  constructor({ id, name, username, title, value, date, image, isPayed }: Payment) {
     this.id = id;
     this.name = name;
     this.username = username;

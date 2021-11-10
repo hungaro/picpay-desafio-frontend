@@ -5,10 +5,11 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 import { fromEvent, merge, Observable } from 'rxjs';
 
+import { format } from 'date-fns';
+
 import { DisplayMessage, GenericFormValidator } from '@utils/generic-form-validator';
 
-import { Task } from '@models/task.model';
-import { format } from 'date-fns';
+import { Payment } from '@models/payment.model';
 
 interface DialogActions {
   no: string;
@@ -17,7 +18,7 @@ interface DialogActions {
 
 interface DialogData {
   message?: string;
-  data: Task;
+  data: Payment;
   actions?: DialogActions;
 }
 
@@ -29,7 +30,7 @@ interface DialogData {
 export class PaymentCreateUpdateDialogComponent implements AfterViewInit {
   @ViewChildren(FormControlName, { read: ElementRef }) formInputElements: ElementRef[];
 
-  paymentData: Task;
+  paymentData: Payment;
 
   paymentForm: FormGroup;
 
@@ -64,7 +65,7 @@ export class PaymentCreateUpdateDialogComponent implements AfterViewInit {
 
   confirm(): void {
     if (this.paymentForm.valid) {
-      const payment = {} as Task;
+      const payment = {} as Payment;
 
       for (const controlName of Object.keys(this.paymentForm.controls)) {
         const controlValue = this.paymentForm.controls[controlName].value;

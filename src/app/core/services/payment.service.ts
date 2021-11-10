@@ -12,23 +12,23 @@ import { environment } from '@environments/environment';
 
 import { SearchFilter } from '@pages/home/components/search-filter/search-filter.component';
 
-import { Task } from '@models/task.model';
+import { Payment } from '@models/payment.model';
 
 @Injectable()
-export class TaskService {
+export class PaymentService {
   private url: string;
 
   constructor(private readonly http: HttpClient) {
-    this.url = `${environment.baseUrl}${environment.endpoints.task}`;
+    this.url = `${environment.baseUrl}${environment.endpoints.payments}`;
   }
 
-  retrieveTasks(
+  retrievePayments(
     sortActive: string,
     sortDirection: SortDirection,
     page: number,
     pageSize: number,
     filters: SearchFilter,
-  ): Observable<HttpResponse<Task[]>> {
+  ): Observable<HttpResponse<Payment[]>> {
     let params = new HttpParams();
     params = params.append('_sort', sortActive);
     params = params.append('_order', sortDirection);
@@ -45,29 +45,29 @@ export class TaskService {
       }
     });
 
-    return this.http.get<Task[]>(this.url, {
+    return this.http.get<Payment[]>(this.url, {
       params,
       observe: 'response',
     });
   }
 
-  retrieveTask(taskId: number): Observable<Task> {
-    return this.http.get<Task>(`${this.url}/${taskId}`);
+  retrievePayment(paymentId: number): Observable<Payment> {
+    return this.http.get<Payment>(`${this.url}/${paymentId}`);
   }
 
-  createTask(task: Omit<Task, 'id'>): Observable<Task> {
-    return this.http.post<Task>(this.url, Utils.generatePaymentData(task));
+  createPayment(payment: Omit<Payment, 'id'>): Observable<Payment> {
+    return this.http.post<Payment>(this.url, Utils.generatePaymentData(payment));
   }
 
-  deleteTask(taskId: number): Observable<{}> {
-    return this.http.delete<{}>(`${this.url}/${taskId}`);
+  deletePayment(paymentId: number): Observable<{}> {
+    return this.http.delete<{}>(`${this.url}/${paymentId}`);
   }
 
-  updateAllTask(taskId: number, data: Omit<Task, 'id'>): Observable<Task> {
-    return this.http.put<Task>(`${this.url}/${taskId}`, Utils.generatePaymentData(data));
+  updateAllPayment(paymentId: number, payment: Omit<Payment, 'id'>): Observable<Payment> {
+    return this.http.put<Payment>(`${this.url}/${paymentId}`, Utils.generatePaymentData(payment));
   }
 
-  updateTask(taskId: number, data: Omit<Partial<Task>, 'id'>): Observable<Task> {
-    return this.http.patch<Task>(`${this.url}/${taskId}`, data);
+  updatePayment(paymentId: number, payment: Omit<Partial<Payment>, 'id'>): Observable<Payment> {
+    return this.http.patch<Payment>(`${this.url}/${paymentId}`, payment);
   }
 }

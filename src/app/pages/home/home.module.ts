@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SharedModule } from '@shared/shared.module';
 
-import { TaskService } from '@services/task.service';
+import { PaymentService } from '@services/payment.service';
 
 import { HomeComponent } from './home.component';
 
@@ -24,6 +24,6 @@ const COMPONENTS = [
   declarations: [HomeComponent, ...COMPONENTS],
   imports: [CommonModule, FormsModule, ReactiveFormsModule, SharedModule, HomeRoutingModule],
   exports: [HomeComponent],
-  providers: [TaskService, DatePipe, CurrencyPipe],
+  providers: [PaymentService, DatePipe, CurrencyPipe],
 })
 export class HomeModule {}
