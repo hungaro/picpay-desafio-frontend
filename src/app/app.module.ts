@@ -19,6 +19,14 @@ import { PasswordComponent } from './components/password/password.component';
 import { AuthService } from './services/auth.service';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { PaymentsComponent } from './components/payments/payments.component';
+import { PaymentTableComponent } from './components/payment-table/payment-table.component';
+import { MatTableModule } from '@angular/material/table';
+import { MatSortModule } from '@angular/material/sort';
+import { PaymentService } from './services/payment.service';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDialogModule } from '@angular/material/dialog';
+import { AddModalComponent } from './components/payments/add-modal/add-modal.component';
+import { RemoveModalComponent } from './components/payments/remove-modal/remove-modal.component';
 
 const imports = [
   BrowserModule,
@@ -37,14 +45,21 @@ const imports = [
   ReactiveFormsModule,
   MatInputModule,
   MatIconModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatTableModule,
+  MatSortModule,
+  MatCheckboxModule,
+  MatDialogModule
 ]
 
-const providers = [AuthService]
+const providers = [AuthService, PaymentService]
+
+const modals = [AddModalComponent, RemoveModalComponent]
 
 @NgModule({
   declarations: [	
-    AppComponent, LoginComponent, EmailComponent, PasswordComponent, PaymentsComponent
+    AppComponent, LoginComponent, EmailComponent, PasswordComponent, PaymentsComponent, PaymentTableComponent,
+    ...modals
    ],
   imports: [
     ...imports,

@@ -1,0 +1,77 @@
+.add-modal {
+    &__title {
+        > p {
+            font-size: 18px;
+            font-weight: 600;
+            color: #000;
+        }
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: repeat(2, 50%);
+        column-gap: 10px;
+        ::ng-deep .mat-form-field-flex {
+            background-color: transparent !important;
+        }
+
+        
+        &--user {
+            ::ng-deep .mat-form-field {
+                width: 100% !important;
+            } 
+        }
+
+        &--value {
+            ::ng-deep .mat-form-field {
+                width: 95% !important;
+            }
+        }
+
+        &--date {
+            ::ng-deep .mat-form-field {
+                width: 100% !important;
+            } 
+        }
+
+        &--title {
+            ::ng-deep .mat-form-field {
+                width: 95% !important;
+            }
+        }
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: space-between;
+        > .btns {
+            display: flex;
+            justify-content: space-between;
+            width: 15vw;
+        }
+
+        &--cancel {
+            background-color: #F5F5F5;
+            border: 1px solid #F5F5F5;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        &--save {
+            background-color: #007DFE;
+            border: 1px solid #007DFE;
+            padding: 5px 10px;
+            color: #fff;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        &--msg {
+            > p {
+                color: red;
+            }
+        }
+    }
+}

@@ -1,0 +1,53 @@
+.payments {
+    display: grid;
+    grid-template-rows: 90px 6vh 5vh;
+    gap: 50px;
+    background-color: #F2F2F2;
+    &__header {
+        background-color: #002D69;
+        width: 100%;
+        height: 90px;
+        display: flex;
+        justify-content: space-between;
+        padding: 20px;
+        &--image {
+            display: grid;
+            align-items: center;
+        }
+    
+        &--account {
+            display: grid;
+            align-items: center;
+        }
+    }
+
+    &__title {
+        > p {
+            font-weight: 600;
+            font-size: 36px;
+            line-height: 44px;
+            margin: 0px 5vw;
+        }
+    }
+
+    &__add {
+        display: flex;
+        justify-content: flex-end;
+        padding: 0px 40px;
+        > button {
+            background-color: #007DFE;
+            border: 1px solid #007DFE;
+            border-radius: 4px;
+            color: #fff;
+            font-weight: 600;
+            font-size: 14px;
+        }
+    }
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 6px;
+    margin: 0px 40px;
+    padding: 20px 0px;
+}

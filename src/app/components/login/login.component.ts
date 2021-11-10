@@ -40,7 +40,7 @@ export class LoginComponent {
 
           if(this.hasAccessByEmail && this.hasAccessByPwd){
             this.snackBar.dismiss();
-            sessionStorage.setItem('auth', JSON.stringify(auth));
+            sessionStorage.setItem('auth', JSON.stringify(auth.find(auth => auth.password === this.pwd)));
             this.router.navigate(['/payments']);
             return;
           }

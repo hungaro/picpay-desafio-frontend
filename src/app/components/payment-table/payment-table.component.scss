@@ -1,0 +1,67 @@
+table {
+  width: 100%;
+  tr:nth-child(even){
+    background-color: #F5F8FA;
+  }
+  tr:nth-child(odd){
+    background-color: white;
+  }
+}
+  
+::ng-deep .mat-sort-header-content {
+  color: #000;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.no-payment {
+  text-align: center;
+}
+
+::ng-deep .cdk-cell {
+  border: none !important;
+}
+
+::ng-deep .mat-header-cell {
+  border-bottom-width: 2px !important;
+}
+
+.cell {
+  padding: 18px 0px;
+  line-height: 2;
+  &__name {
+    font-weight: 600;
+    color: #000;
+    @extend .font-family-lato
+  }
+
+  &___username {
+    color: #69788C;
+  }
+}
+
+p {
+  margin: 0 !important;
+}
+
+.font-family-lato {
+  font-family: Lato, sans-serif !important;
+}
+
+::ng-deep .mat-checkbox-background {
+  background-color: #007DFE !important;
+}
+
+.icon-edit {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+  background: url(../../../assets/svg/edit.svg) no-repeat;
+}
+
+.icon-remove {
+  width: 24px;
+  height: 23px;
+  cursor: pointer;
+  background: url(../../../assets/svg/remove.svg) no-repeat;
+}

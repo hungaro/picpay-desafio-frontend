@@ -1,0 +1,22 @@
+<div class="payments">
+    <div class="payments__header">
+        <div class="payments__header--image">
+            <img src="../../../assets/svg/pay-friends.svg"/>
+        </div>
+        <div class="payments__header--account">
+            <img src="../../../assets/images/user.png"/>
+        </div>
+    </div>
+
+    <div class="payments__title">
+        <p>{{'payments.title' | translate}}</p>
+    </div>
+
+
+    <div class="payments__add">
+        <button (click)="add()">{{'payments.add-toUpperCase' | translate}}</button>
+    </div>
+    <div class="card">
+        <payment-table (remove)="remove($event)" (edit)="edit($event)" [paymentList]="paymentList"></payment-table>
+    </div>
+</div>

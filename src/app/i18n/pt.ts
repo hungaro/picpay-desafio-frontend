@@ -12,5 +12,18 @@ export const translations = {
         'pwd': 'Senha',
         'email-is': "Email é",
         'pwd-is': "Senha é",
+    },
+    payments: {
+        title: 'Meus Pagamentos',
+        'add-toUpperCase': 'ADICIONAR PAGAMENTO',
+        add: 'Adicionar pagamento',
+        table: {
+            user: 'Usuário',
+            title: 'Título',
+            date: 'Data',
+            value: 'Valor',
+            payed: 'Pago',
+            'no-payments': 'Nenhum pagamento realizado'
+        }
     }
 }
