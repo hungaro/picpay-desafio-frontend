@@ -39,3 +39,9 @@
     }
   }
 }
+
+button.mat-menu-item {
+  &:last-child {
+    border-top: 1px solid $light-grey;
+  }
+}

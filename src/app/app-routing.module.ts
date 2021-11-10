@@ -27,6 +27,13 @@ const ROUTES: Routes = [
           title: 'Meus pagamentos',
         },
       },
+      {
+        path: 'profile',
+        loadChildren: () => import('@pages/profile/profile.module').then((m) => m.ProfileModule),
+        data: {
+          title: 'Perfil',
+        },
+      },
     ],
   },
   {
