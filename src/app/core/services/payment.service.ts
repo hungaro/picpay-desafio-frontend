@@ -36,12 +36,21 @@ export class PaymentService {
     params = params.append('_limit', pageSize);
 
     Object.keys(filters ?? {}).forEach((filterName: string) => {
-      const filterValue = filters[filterName];
+      let name = filterName;
+      let value = filters[filterName];
 
-      if (filterName === 'date' && filterValue) {
-        params = params.append('q', format(new Date(filterValue), 'yyyy-MM-dd'));
-      } else if (filterValue) {
-        params = params.append(filterName, filterValue);
+      if (value !== undefined && value !== null && value !== '') {
+        if (name === 'date') {
+          name = 'q';
+          value = format(new Date(value), 'yyyy-MM-dd');
+        }
+
+        if (name === 'isPaid') {
+          name = 'isPayed';
+          value = Boolean(value);
+        }
+
+        params = params.append(name, value);
       }
     });
 

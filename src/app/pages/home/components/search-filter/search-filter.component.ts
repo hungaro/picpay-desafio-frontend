@@ -46,7 +46,7 @@ export class SearchFilterComponent {
   }
 
   filter(): void {
-    const { q, title, date, value, isPaid: isPayed, name } = this.filters;
+    const { q, title, date, value, isPaid, name } = this.filters;
 
     this.filtersChanged.emit({
       q,
@@ -55,7 +55,7 @@ export class SearchFilterComponent {
       title,
       date,
       value,
-      isPayed,
+      isPaid,
       name,
     });
 

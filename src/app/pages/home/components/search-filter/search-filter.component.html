@@ -86,8 +86,8 @@
       <mat-label>Pago</mat-label>
       <mat-select [(value)]="filters.isPaid" [disabled]="!!filters.q">
         <mat-option value="">(Vazio)</mat-option>
-        <mat-option value="true">Pago</mat-option>
-        <mat-option value="false">Não pago</mat-option>
+        <mat-option [value]="true">Pago</mat-option>
+        <mat-option [value]="false">Não pago</mat-option>
       </mat-select>
     </mat-form-field>
 
