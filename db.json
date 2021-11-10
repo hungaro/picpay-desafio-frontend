@@ -1727,24 +1727,6 @@
       "id": 175
     },
     {
-      "name": "katy",
-      "value": 100,
-      "date": "2021-11-11",
-      "title": "",
-      "isPayed": false,
-      "username": "katy",
-      "id": 176
-    },
-    {
-      "name": "aaaa",
-      "value": 0.05,
-      "date": "2021-11-10",
-      "title": "aaaa",
-      "isPayed": false,
-      "username": "aaaa",
-      "id": 177
-    },
-    {
       "name": "GGG",
       "value": 100,
       "date": "2021-11-11",
@@ -1752,6 +1734,15 @@
       "isPayed": false,
       "username": "ggg",
       "id": 178
+    },
+    {
+      "name": "Zsazsa Pentecu",
+      "value": 100,
+      "date": "2021-11-10",
+      "title": "tensius",
+      "isPayed": true,
+      "username": "zsazsa",
+      "id": 179
     }
   ],
   "account": [

@@ -75,7 +75,11 @@ export class LoginComponent implements AfterViewInit, OnDestroy {
           if (account) {
             this.loginForm.reset();
             this.loginForm.clearValidators();
-            this.router.navigate([this.returnUrl]);
+            this.router.navigate([this.returnUrl], {
+              state: {
+                from: 'login',
+              },
+            });
           } else {
             this.loginForm.get('email')?.setErrors({
               serverError: true,

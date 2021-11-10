@@ -9,9 +9,11 @@ import { AuthGuard } from '@guards/auth.guard';
 
 import { LayoutsModule } from '@layouts/layouts.module';
 
+import { LoaderService } from '@services/loader.service';
+
 @NgModule({
   imports: [RouterModule, LayoutsModule],
   exports: [LayoutsModule],
-  providers: [AccountService, AuthenticationService, PaymentService, AuthGuard],
+  providers: [AccountService, AuthenticationService, PaymentService, AuthGuard, LoaderService],
 })
 export class CoreModule {}
