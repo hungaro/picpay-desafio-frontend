@@ -7,7 +7,7 @@ import {
   ActivatedRouteSnapshot
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { HttpResponse } from '@angular/common/http';
+import { HttpResponse, HttpParams } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -19,10 +19,22 @@ export class TasksForTableResolver implements Resolve<HttpResponse<Ipayment[]>> 
   ) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<HttpResponse<Ipayment[]>>  {
-    const limit: number = route.queryParams.limit ?? 5;
-    const page: number = route.queryParams.page ?? 1;
-    const search: string = route.queryParams.search;
 
-    return this.taskService.get(limit, page, search);
+    const search: string = route.queryParams.search ?? '';
+
+    return this.taskService.get(this.createQueryParams(route));
+  }
+
+  createQueryParams(route: ActivatedRouteSnapshot): HttpParams {
+
+    let params = new HttpParams();
+    params = params.set('_limit', route.queryParams.limit ?? 5);
+    params = params.set('_page', route.queryParams.page ?? 1);
+    
+    if(route.queryParams.search) {
+      params = params.set('name_like', route.queryParams.search);
+    }
+
+    return params;
   }
 }

@@ -1,22 +1,22 @@
 .pagination {
-  min-width: 130px;
+  min-width: 140px;
 }
 
 .pagination a {
   color: black;
   float: left;
-  padding: 5px 10px;
+  padding: 4px 12px;
   text-decoration: none;
-  margin-top: 3%;
-  }
+  margin-top: 0.65em;
+}
   
-  .pagination a.active {
-    background-color: var(--light-blue);
-    color: white;
-    border-radius: 5px;
-  }
-  
-  .pagination a:hover:not(.active) {
-    background-color: #ddd;
-    border-radius: 5px;
-  }
+.pagination a.active {
+  background-color: var(--light-blue);
+  color: white;
+  border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
+  border-radius: 5px;
+}

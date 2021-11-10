@@ -1,0 +1,70 @@
+<div class="container">
+
+    <h1 class="ms-2">
+        <span class="font-bold-700 font-montserrat">
+            Filtros avançados
+        </span>
+    </h1>
+
+    <form [formGroup]="filterForm"(ngSubmit)="returnParameters()" autocomplete="off" >
+        <div class="row">
+    
+            <div class="col-sm-6">
+                <div class="m-2">
+                    <mat-form-field appearance="outline" class="width-form">
+                        <mat-label>Valor</mat-label>
+                        <input matInput formControlName="value" type="number">
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="m-2">
+                    <mat-form-field appearance="outline" class="width-form">
+                        <mat-label>Valor</mat-label>
+                        <input matInput formControlName="value" type="number">
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="m-2">
+                    <mat-form-field appearance="outline" class="width-form">
+                        <mat-label>Data</mat-label>
+                        <input matInput [matDatepicker]="picker" formControlName="date" (focus)="picker.open()">
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                </div>
+            </div>
+    
+            <div class="col-sm-6">
+                <div class="m-2">
+                    <mat-form-field appearance="outline" class="width-form">
+                        <mat-label>Título</mat-label>
+                        <input matInput formControlName="title">
+                    </mat-form-field>
+                </div>
+            
+                <div class="width-form m-2 mt-3">
+                    <button
+                        mat-flat-button
+                        class="width-button me-3 mt-2 bg-light-gray"
+                        type="button"
+                        (click)="cancel()">
+                        {{txtBtnCancel}}
+                    </button>
+            
+                    <button
+                        mat-flat-button
+                        class="width-button ms-3 mt-2"
+                        color="primary">
+                        {{txtBtnFilter}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    
+    </form>
+</div>

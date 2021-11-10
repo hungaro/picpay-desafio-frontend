@@ -1,6 +1,7 @@
 import { Ipayment } from './../../shared/models/ipayment';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-payments',
@@ -45,24 +46,33 @@ export class PaymentsComponent implements OnInit {
     this.changePage(true);
   }
 
-  receiveSearch(event: string): void {
-    this.search = event;
-    this.currentPage = 0;
+  receiveSearch(value: string): void {
+    this.search = value;
+    this.currentPage = 1;
     this.changePage(true);
   }
 
   changePage(action: boolean): void{
     if(action) {
       this.router.navigate([], { 
-          queryParams: { 
-            limit: this.limitSelect, 
-            page: this.currentPage, 
-            search: this.search 
-          } 
+          queryParams: this.createQueryParams()
         })
         .finally(() => {
           this.receivePayment();
       });
     }
+  }
+
+  createQueryParams(): Object {
+    let params: Object = new Object();
+
+    params["limit"] = this.limitSelect;
+    params["page"] = this.currentPage;
+    
+    if(this.search) {
+      params["search"] = this.search;
+    }
+
+    return params;
   }
 }

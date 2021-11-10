@@ -19,6 +19,8 @@ import { MatCardModule } from '@angular/material/card';
 import { SelectLimitComponent } from './components/select-limit/select-limit.component';
 import { PaginationPaymentComponent } from './components/pagination-payment/pagination-payment.component';
 import { SearchUserComponent } from './components/search-user/search-user.component';
+import { AdvancedFiltersComponent } from './components/advanced-filters/advanced-filters.component';
+import { BtnFilterComponent } from './components/btn-filter/btn-filter.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { SearchUserComponent } from './components/search-user/search-user.compon
     ViewPaymentDeleteComponent,
     SelectLimitComponent,
     PaginationPaymentComponent,
-    SearchUserComponent
+    SearchUserComponent,
+    AdvancedFiltersComponent,
+    BtnFilterComponent
   ],
   imports: [
     CommonModule,

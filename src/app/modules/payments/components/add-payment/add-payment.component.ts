@@ -13,8 +13,7 @@ export class AddPaymentComponent implements OnInit {
   @Output() action = new EventEmitter<boolean>();
 
   constructor(
-    private dialog: MatDialog,
-    private router: Router
+    private dialog: MatDialog
   ) { }
 
   ngOnInit(): void {

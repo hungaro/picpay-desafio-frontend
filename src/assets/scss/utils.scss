@@ -13,6 +13,24 @@
     flex: 1 1 auto;
 }
 
+.width-form {
+    width: 326px !important;
+}
+
+.width-button {
+    width: 45%;
+}
+
+@media (max-width: 1000px) {
+    .width-form {
+        width: 100% !important;
+    }
+
+    .width-button {
+        width: 100%;
+    }
+}
+
 // snackbar
 .snackbar-success {
     background-color: var(--green) !important;
