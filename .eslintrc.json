@@ -63,7 +63,8 @@
       ],
       "rules": {
         "@typescript-eslint/dot-notation": "off",
-        "no-restricted-syntax": "off"
+        "no-restricted-syntax": "off",
+        "class-methods-use-this": "off"
       }
     }
   ]
