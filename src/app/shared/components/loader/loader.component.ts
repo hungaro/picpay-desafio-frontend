@@ -44,7 +44,7 @@ export class LoaderComponent implements OnInit {
 
           setTimeout(() => {
             this.loaderService.hide();
-          }, 1000);
+          }, 1500);
         }
       });
   }
