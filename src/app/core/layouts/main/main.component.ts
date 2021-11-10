@@ -18,7 +18,7 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.activatedRoute.firstChild.data.subscribe((data) => {
+    this.activatedRoute.firstChild?.data.subscribe((data) => {
       this.pageTitle = data?.title;
     });
   }
