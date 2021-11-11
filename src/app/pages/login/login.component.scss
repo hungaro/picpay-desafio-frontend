@@ -1,0 +1,15 @@
+@import '../../../assets/styles/forms';
+@import '../../../assets/styles/colors';
+
+.form{
+    margin-right: 100px;
+    width: 325px;
+    display: flex;
+    flex-direction: column;
+}
+@media(max-width: 1024px){
+    .form{
+        width: 100%;
+        margin-right: 0;
+    }
+}
