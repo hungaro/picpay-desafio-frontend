@@ -42,9 +42,10 @@ export class LoaderComponent implements OnInit {
             return;
           }
 
+          // Fake timeout
           setTimeout(() => {
             this.loaderService.hide();
-          }, 1500);
+          }, 3000);
         }
       });
   }

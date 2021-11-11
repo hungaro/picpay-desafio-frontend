@@ -124,9 +124,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       );
   }
 
-  updatePayment(payment: Payment): void {
-    const { id: paymentId } = payment;
-
+  updatePayment(paymentId: number, payment: Payment): void {
     this.isLoadingPaymentUpdate[paymentId] = true;
 
     const index = this.dataSource.findIndex((data) => data.id === paymentId);
@@ -218,7 +216,7 @@ export class HomeComponent implements AfterViewInit, OnDestroy {
       .subscribe((paymentData?: Payment) => {
         if (paymentData) {
           if (payment) {
-            this.updatePayment(paymentData);
+            this.updatePayment(payment.id, paymentData);
           } else {
             this.createPayment(paymentData);
           }

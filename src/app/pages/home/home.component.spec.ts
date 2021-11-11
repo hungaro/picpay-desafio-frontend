@@ -193,7 +193,7 @@ describe('HomeComponent', () => {
     const paymentData = Utils.omit({ ...payment }, 'id');
 
     component.ngAfterViewInit();
-    component.updatePayment(paymentData);
+    component.updatePayment(payment.id, paymentData);
 
     updatePaymentService.mock.results[0].value.subscribe((response: Payment) => {
       expect(response).toEqual(payment);
