@@ -19,7 +19,8 @@ export const translations = {
         add: 'Adicionar pagamento',
         'search-by-user': 'Pesquisar por usuário',
         'filter-button': 'Filtrar',
-        'show': 'Exibir',
+        show: 'Exibir',
+        page: 'Página',
         table: {
             user: 'Usuário',
             title: 'Título',
