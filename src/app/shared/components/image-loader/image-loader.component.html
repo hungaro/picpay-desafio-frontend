@@ -9,7 +9,7 @@
 
   <ng-template #ImageTemplate>
     <ng-container *ngIf="loadedImage">
-      <img width="50px" height="auto" [src]="src" alt="Image payment" />
+      <img [width]="width" height="auto" [src]="src" alt="Image payment" />
     </ng-container>
     <ng-container *ngIf="hasImageLoadingError">
       <button

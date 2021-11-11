@@ -10,6 +10,8 @@ import { Utils } from '@core/utils/utils';
 export class ImageLoaderComponent implements OnInit {
   @Input() src: string;
 
+  @Input() width: number;
+
   id: string;
 
   loadingImage: boolean;
@@ -20,6 +22,7 @@ export class ImageLoaderComponent implements OnInit {
 
   ngOnInit(): void {
     this.id = Utils.generateUUID();
+    this.width = this.width ?? 50;
     this.loadImage();
   }
 

@@ -31,7 +31,7 @@ const ROUTES: Routes = [
         path: 'profile',
         loadChildren: () => import('@pages/profile/profile.module').then((m) => m.ProfileModule),
         data: {
-          title: 'Perfil',
+          layout: 'full',
         },
       },
     ],

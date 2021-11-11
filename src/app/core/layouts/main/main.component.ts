@@ -3,12 +3,18 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 
 import { Subject } from 'rxjs';
 
+type Layouts = 'full' | 'spacing';
+
 @Component({
   selector: 'app-main-layout',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
 })
 export class MainComponent implements OnInit, OnDestroy {
+  layout: Layouts;
+
+  loadedContent: boolean;
+
   pageTitle: string;
 
   private unsubscribeAll: Subject<any>;
@@ -20,16 +26,20 @@ export class MainComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.setPageTitle();
+        this.setPageData();
       }
     });
 
-    this.setPageTitle();
+    this.setPageData();
   }
 
-  setPageTitle(): void {
+  setPageData(): void {
+    this.loadedContent = false;
+
     this.activatedRoute.firstChild?.data.subscribe((data) => {
+      this.layout = data?.layout ?? 'spacing';
       this.pageTitle = data?.title;
+      this.loadedContent = true;
     });
   }
 
