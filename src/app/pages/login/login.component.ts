@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { fromEvent, merge, Observable, Subject } from 'rxjs';
 import { finalize, takeUntil } from 'rxjs/operators';
 
+import { ToastrService } from 'ngx-toastr';
+
 import { DisplayMessage, GenericFormValidator } from '@utils/generic-form-validator';
 
 import { AuthenticationService } from '@services/authentication.service';
@@ -38,6 +40,7 @@ export class LoginComponent implements AfterViewInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private formBuilder: FormBuilder,
+    private toastrService: ToastrService,
   ) {
     this.setDefaults();
   }
@@ -71,23 +74,28 @@ export class LoginComponent implements AfterViewInit, OnDestroy {
             this.loading = false;
           }),
         )
-        .subscribe((account: Account) => {
-          if (account) {
-            this.loginForm.reset();
-            this.loginForm.clearValidators();
-            this.router.navigate([this.returnUrl], {
-              state: {
-                from: 'login',
-              },
-            });
-          } else {
-            this.loginForm.get('email')?.setErrors({
-              serverError: true,
-            });
+        .subscribe(
+          (account: Account) => {
+            if (account) {
+              this.loginForm.reset();
+              this.loginForm.clearValidators();
+              this.router.navigate([this.returnUrl], {
+                state: {
+                  from: 'login',
+                },
+              });
+            } else {
+              this.loginForm.get('email')?.setErrors({
+                serverError: true,
+              });
 
-            this.displayMessage = this.genericFormValidator.processMessages(this.loginForm);
-          }
-        });
+              this.displayMessage = this.genericFormValidator.processMessages(this.loginForm);
+            }
+          },
+          () => {
+            this.toastrService.error('Tente novamente.', 'Erro ao tentar fazer login.');
+          },
+        );
     }
   }
 

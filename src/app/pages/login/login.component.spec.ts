@@ -7,6 +7,8 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Subject } from 'rxjs';
 
+import { ToastrService } from 'ngx-toastr';
+
 import { SharedModule } from '@shared/shared.module';
 
 import { AccountService } from '@services/account.service';
@@ -23,6 +25,7 @@ describe('LoginComponent', () => {
     let route: ActivatedRoute;
     let router: Router;
     let formBuilder: FormBuilder;
+    let toastrService: ToastrService;
 
     const VALIDATION_MESSAGES_MOCK: ValidationMessages = {
       email: {
@@ -58,8 +61,15 @@ describe('LoginComponent', () => {
       route = TestBed.inject(ActivatedRoute);
       router = TestBed.inject(Router);
       formBuilder = TestBed.inject(FormBuilder);
+      toastrService = TestBed.inject(ToastrService);
 
-      component = new LoginComponent(authenticationService, route, router, formBuilder);
+      component = new LoginComponent(
+        authenticationService,
+        route,
+        router,
+        formBuilder,
+        toastrService,
+      );
     });
 
     it('should set default configurations', () => {
