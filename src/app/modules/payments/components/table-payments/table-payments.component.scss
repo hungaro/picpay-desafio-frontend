@@ -1,3 +1,5 @@
+@import '/src/assets/scss/font.scss';
+
 .container-table {
     max-height: 60vh;
     overflow: auto;
@@ -8,7 +10,6 @@
 table {
     border-collapse: separate;
 }
-  
 
 th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
     border-bottom-width: 2px;
@@ -19,6 +20,18 @@ th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
 td.mat-cell {
     border-bottom-style: none;
     height: 80px;
+}
+
+.header {
+    @extend .font-lato, .font-bold-700, .font-size-16
+}
+
+.cell {
+    @extend .font-size-16, .color-mat-cell-black, .font-bold-400;
+}
+
+.min-cell {
+    @extend .font-size-14, .color-mat-cell-gray, .font-bold-300;
 }
 
 .mat-row:nth-child(even){

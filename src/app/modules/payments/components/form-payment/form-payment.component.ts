@@ -5,6 +5,7 @@ import { TaskService } from './../../../../core/services/task/task.service';
 import { Ipayment } from './../../../../shared/models/ipayment';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-form-payment',
@@ -17,6 +18,7 @@ export class FormPaymentComponent implements OnInit {
   public txtBtnCancel: string = TextsButton.cancel;
   public txtBtnSave: string = TextsButton.save;
   public disableBtnSave!: boolean;
+  public pipe = new TitleCasePipe();
   @Input() payment!: Ipayment;
   @Output() action = new EventEmitter<boolean>();
 
@@ -75,9 +77,9 @@ export class FormPaymentComponent implements OnInit {
   createPayment(): Ipayment {
     const payment: Ipayment = {
       id: this.payment?.id ?? null,
-      name: this.paymentForm?.get('userName')?.value,
+      name: this.pipe.transform(this.paymentForm?.get('userName')?.value),
       username: this.payment?.username ?? this.paymentForm?.get('userName')?.value, 
-      title: this.paymentForm?.get('title')?.value,
+      title: this.pipe.transform(this.paymentForm?.get('title')?.value),
       value: this.paymentForm?.get('value')?.value,
       date: new Date(this.paymentForm?.get('date')?.value).toISOString(),
       image: this.payment?.image ?? null, 

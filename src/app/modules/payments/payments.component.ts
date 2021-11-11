@@ -1,3 +1,4 @@
+import { Sort } from '@angular/material/sort';
 import { IdialogFilter } from './../../shared/models/idialog-filter';
 import { Ipayment } from './../../shared/models/ipayment';
 import { Component, OnInit } from '@angular/core';
@@ -17,6 +18,7 @@ export class PaymentsComponent implements OnInit {
   public totalPayments: number;
   public search!: string;
   public filters!: IdialogFilter;
+  public sort!: Sort;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -66,6 +68,12 @@ export class PaymentsComponent implements OnInit {
     this.changePage(true);
   }
 
+  receiveSort(sort: Sort): void {
+    this.sort = sort;
+    this.currentPage = 1;
+    this.changePage(true);
+  }
+
   changePage(action: boolean): void{
     if(action) {
       this.router.navigate([], { 
@@ -87,20 +95,25 @@ export class PaymentsComponent implements OnInit {
       params["search"] = this.search;
     }
 
-    if(this.filters.title) {
-      params["title"] = this.filters.title;
+    if(this.filters?.title) {
+      params["title"] = this.filters?.title;
     }
     
-    if(this.filters.value) {
-      params["value"] = this.filters.value;
+    if(this.filters?.value) {
+      params["value"] = this.filters?.value;
     }
 
-    if(this.filters.date) {
-      params["date"] = this.filters.date;
+    if(this.filters?.date) {
+      params["date"] = this.filters?.date;
     }
 
-    if(this.filters.payed) {
-      params["payed"] = this.filters.payed;
+    if(this.filters?.payed) {
+      params["payed"] = this.filters?.payed;
+    }
+
+    if(this.sort?.direction) {
+      params["sort"] = this.sort?.active;
+      params["order"] = this.sort?.direction;
     }
 
     return params;

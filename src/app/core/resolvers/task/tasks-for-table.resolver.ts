@@ -50,6 +50,12 @@ export class TasksForTableResolver implements Resolve<HttpResponse<Ipayment[]>> 
     if(route.queryParams.payed) {
       params = params.set('isPayed', route.queryParams.payed);
     }
+
+    if(route.queryParams.sort && route.queryParams.order) {
+      params = params.set('_sort', route.queryParams.sort);
+      params = params.set('_order', route.queryParams.order);
+
+    }
     
     return params;
   }

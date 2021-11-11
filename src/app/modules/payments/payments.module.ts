@@ -21,6 +21,7 @@ import { PaginationPaymentComponent } from './components/pagination-payment/pagi
 import { SearchUserComponent } from './components/search-user/search-user.component';
 import { AdvancedFiltersComponent } from './components/advanced-filters/advanced-filters.component';
 import { BtnFilterComponent } from './components/btn-filter/btn-filter.component';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -48,7 +49,8 @@ import { BtnFilterComponent } from './components/btn-filter/btn-filter.component
     MatCheckboxModule,
     MatNativeDateModule,
     MatSelectModule,
-    MatCardModule
+    MatCardModule,
+    MatSortModule
   ]
 })
 export class PaymentsModule { }

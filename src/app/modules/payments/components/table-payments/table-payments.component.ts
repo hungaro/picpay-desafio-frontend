@@ -2,10 +2,10 @@ import { MessagesSnackbar } from 'src/app/shared/enums/messages-snackbar';
 import { SnackbarService } from './../../../../core/services/snackbar/snackbar.service';
 import { TaskService } from './../../../../core/services/task/task.service';
 import { Ipayment } from './../../../../shared/models/ipayment';
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { DialogPaymentComponent } from '../dialog-payment/dialog-payment.component';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Sort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-table-payments',
@@ -16,17 +16,23 @@ export class TablePaymentsComponent implements OnInit {
 
   @Input() payments!: Ipayment[];
   @Output() action = new EventEmitter<boolean>();
-  public displayedColumns: string[] = ['Usuário', 'Título', 'Data', 'Valor', 'Pago', 'Ação'];
+  @Output() sort = new EventEmitter<Sort>();
+  public displayedColumns: string[] = ['name', 'title', 'date', 'value', 'Pago', 'Ação'];
   public disableCheck!: boolean; 
 
   constructor(
     private dialog: MatDialog,
     private taskService: TaskService,
     private snackbar: SnackbarService,
-    private router: Router
   ) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+
+  }
+
+  announceSortChange(sortState: Sort) {
+    this.sort.emit(sortState);
+  }
 
   openDialog(edit: boolean, del: boolean, payment: Ipayment): void {
     const dialogRef = this.dialog.open(DialogPaymentComponent, {
