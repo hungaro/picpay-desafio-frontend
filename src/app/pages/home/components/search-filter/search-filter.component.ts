@@ -64,7 +64,7 @@ export class SearchFilterComponent {
 
   hasSomeSecondaryFilterFilled(): boolean {
     const { title, date, value, isPaid, name } = this.filters;
-    return !!title || !!date || !!value || !!isPaid || !!name;
+    return !!title || !!date || !!value || isPaid !== '' || !!name;
   }
 
   private setDefaults(): void {
