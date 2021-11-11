@@ -1,0 +1,56 @@
+@import './colors';
+
+.ipt-item{
+    margin: 16px 0;
+    position: relative;
+    label, input, .button__default{
+        font: 400 16px/24px 'Roboto', sans-serif;
+    }
+    label{
+        position: absolute;
+        top: -16px;
+        padding: 4px;
+        left: 16px;
+        color: rgba(0, 0, 0, 0.6);
+        background-color: $secondary-gray;
+    }
+}
+input[type=text], input[type=email], input[type=password], select, textarea{
+    padding: 15px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 54px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+    background-color: transparent;
+    font-weight: 600;
+    color: $primary-gray;
+}
+
+.button__default{
+    background-color: $primary-blue;
+    color: $default-white;
+    text-transform: uppercase;
+    border: 1px solid $primary-blue;
+    border-radius: 4px;
+    width: 100%;
+    height: 36px;
+    transition: all 0.25s ease-in-out;
+    cursor: pointer;
+    font-weight: 500;
+
+    &:hover{
+        background-color: $secondary-blue;
+        border-color: $secondary-blue;
+    }
+    &--cancel{
+        background-color: $tertiary-gray;
+        border-color: $tertiary-gray;
+        color: $primary-gray;
+        &:hover{
+            background-color: $primary-gray;
+            border-color: $primary-gray;
+            color: $tertiary-gray;
+        }
+    }
+}
