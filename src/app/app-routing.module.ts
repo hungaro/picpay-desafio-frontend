@@ -10,6 +10,11 @@ const routes: Routes = [
     canLoad: [LoginGuard]
   },
   {
+    path: 'not-found',
+    loadChildren:() => import('./modules/not-found/not-found.module').then((m) => m.NotFoundModule),
+    canLoad: [PaymentsGuard]
+  },
+  {
     path: 'payments',
     loadChildren:() => import('./modules/payments/payments.module').then((m) => m.PaymentsModule),
     canLoad: [PaymentsGuard]
@@ -18,6 +23,11 @@ const routes: Routes = [
     path: '',
     pathMatch: 'full',
     redirectTo: 'login'
+  },
+  {
+    path: '**',
+    redirectTo: 'not-found',
+    pathMatch: 'full'
   }
 ];
 

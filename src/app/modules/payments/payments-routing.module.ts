@@ -12,7 +12,11 @@ const routes: Routes = [
     },
     runGuardsAndResolvers:'always'
   },
-  {path: '', pathMatch: 'full', redirectTo: 'login'}
+  {
+    path: '', 
+    pathMatch: 'full', 
+    redirectTo: ''
+  }
 ];
 
 @NgModule({

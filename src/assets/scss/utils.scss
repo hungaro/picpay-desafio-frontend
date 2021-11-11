@@ -1,5 +1,12 @@
-.text-vetical-center {
+.text-vertical-center {
     height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.text-vertical-center-80 {
+    height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
