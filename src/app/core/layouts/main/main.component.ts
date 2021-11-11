@@ -13,8 +13,6 @@ type Layouts = 'full' | 'spacing';
 export class MainComponent implements OnInit, OnDestroy {
   layout: Layouts;
 
-  loadedContent: boolean;
-
   pageTitle: string;
 
   private unsubscribeAll: Subject<any>;
@@ -34,12 +32,9 @@ export class MainComponent implements OnInit, OnDestroy {
   }
 
   setPageData(): void {
-    this.loadedContent = false;
-
     this.activatedRoute.firstChild?.data.subscribe((data) => {
       this.layout = data?.layout ?? 'spacing';
       this.pageTitle = data?.title;
-      this.loadedContent = true;
     });
   }
 

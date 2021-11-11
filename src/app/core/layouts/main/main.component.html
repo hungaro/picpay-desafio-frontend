@@ -1,8 +1,5 @@
 <app-header></app-header>
-<main
-  *ngIf="loadedContent"
-  [ngClass]="{ 'layout-full': layout === 'full', 'layout-spacing': layout === 'spacing' }"
->
+<main [ngClass]="{ 'layout-full': layout === 'full', 'layout-spacing': layout === 'spacing' }">
   <header *ngIf="pageTitle" class="my-16">
     <h1>{{ pageTitle }}</h1>
   </header>
