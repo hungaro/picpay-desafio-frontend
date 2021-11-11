@@ -1,0 +1,55 @@
+@import '../../../assets/styles/colors';
+
+
+main{
+    background-color: $secondary-gray;
+}
+.login, .container, section{
+    height: 100vh;
+}
+
+.container{
+    display: flex;
+    section{
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 16px;
+    }
+    #formLogin{
+        width: 40%;
+        justify-content: flex-end;    }
+    #image{
+        width: 60%;
+        background-color: $default-white;     
+        img{
+            width: 100%;
+            max-width: 495px;
+        }   
+    }
+}
+@media(max-width: 1024px){
+    .container{
+        #formLogin{
+            width: 50%;
+            justify-content: center;    
+        }
+        #image{
+            width: 50%;  
+        }
+    }
+}
+@media(max-width: 767px){
+    .container{
+        #formLogin{
+            width: 100%;
+            justify-content: center;    
+        }
+        #image{
+            display: none;
+        }
+    }
+}
+
+
