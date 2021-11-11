@@ -7,17 +7,9 @@
 
 .login {
     background-color: #F2F2F2;
-    display: grid;
-    grid-auto-flow: row;
-    justify-content: center;
-    align-items: center;
-    grid-template-columns: 80%;
-    padding: 30% 0px 30% 0px;
-    grid-template-rows: 19% 28% 10%;
-    &__logo-title {
-        display: grid;
-        gap: 20px;
-        > p {
+    padding: 130px;
+    &__logo {
+        &--welcome-back {
             font-weight: 600;
             font-size: 30px;
             line-height: 37px;
