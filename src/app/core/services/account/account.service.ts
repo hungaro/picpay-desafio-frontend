@@ -27,7 +27,6 @@ export class AccountService {
   put(user: Iuser): Observable<Iuser> {
     return this.http.put<Iuser>(`${this.url_api}/${user.id}`, user).pipe(
       map((users: Iuser) => {
-        console.log(users? true : false)
         if(users) {
           this.userService.saveUser(users);
           return users;

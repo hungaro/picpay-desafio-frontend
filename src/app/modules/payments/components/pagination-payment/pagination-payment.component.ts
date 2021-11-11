@@ -24,7 +24,7 @@ export class PaginationPaymentComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if(changes.limit || changes.totalPayments) {
+    if(changes.limit || changes.totalPayments || changes.currentPage.currentValue == 1) {
       this.createPages(this.currentPage)
     }
   }

@@ -4,10 +4,12 @@ import { Injectable } from '@angular/core';
 import {
   Resolve,
   RouterStateSnapshot,
-  ActivatedRouteSnapshot
+  ActivatedRouteSnapshot,
+  Router
 } from '@angular/router';
-import { Observable } from 'rxjs';
+import { EMPTY, Observable } from 'rxjs';
 import { HttpResponse, HttpParams } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -15,14 +17,19 @@ import { HttpResponse, HttpParams } from '@angular/common/http';
 export class TasksForTableResolver implements Resolve<HttpResponse<Ipayment[]>> {
 
   constructor(
-    private taskService: TaskService
+    private taskService: TaskService,
+    private router: Router
   ) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<HttpResponse<Ipayment[]>>  {
 
     const search: string = route.queryParams.search ?? '';
 
-    return this.taskService.get(this.createQueryParams(route));
+    return this.taskService.get(this.createQueryParams(route))
+      .pipe(catchError(err => {
+        this.router.navigate(["/not-found"]);
+        return EMPTY;
+      }));
   }
 
   createQueryParams(route: ActivatedRouteSnapshot): HttpParams {
