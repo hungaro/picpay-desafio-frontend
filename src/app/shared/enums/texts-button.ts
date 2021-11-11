@@ -4,7 +4,7 @@ export enum TextsButton {
     cancel = 'CANCELAR',
     save = 'SALVAR',
     filter = 'FILTRAR',
-
+    
     // solicit
     accessing = 'ACESSANDO...',
     saving = 'SALVANDO...',

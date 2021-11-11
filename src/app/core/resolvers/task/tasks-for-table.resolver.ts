@@ -35,6 +35,22 @@ export class TasksForTableResolver implements Resolve<HttpResponse<Ipayment[]>> 
       params = params.set('name_like', route.queryParams.search);
     }
 
+    if(route.queryParams.title) {
+      params = params.set('title_like', route.queryParams.title);
+    }
+  
+    if(route.queryParams.value) {
+      params = params.set('value', route.queryParams.value);
+    }
+
+    if(route.queryParams.date) {
+      params = params.set('date_like', route.queryParams.date);
+    }
+
+    if(route.queryParams.payed) {
+      params = params.set('isPayed', route.queryParams.payed);
+    }
+    
     return params;
   }
 }

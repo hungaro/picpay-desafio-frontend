@@ -1,3 +1,4 @@
+import { IdialogFilter } from './../../shared/models/idialog-filter';
 import { Ipayment } from './../../shared/models/ipayment';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -15,6 +16,7 @@ export class PaymentsComponent implements OnInit {
   public currentPage!: number;
   public totalPayments: number;
   public search!: string;
+  public filters!: IdialogFilter;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -32,6 +34,12 @@ export class PaymentsComponent implements OnInit {
       this.search = this.activatedRoute.snapshot.queryParams.search ?? '';
       this.payments = this.activatedRoute.snapshot.data['payments'].body;
       this.totalPayments = this.activatedRoute.snapshot.data['payments'].headers.get('x-total-count') > 0? Number(this.activatedRoute.snapshot.data['payments'].headers.get('x-total-count')) : 1;
+      this.filters = {
+        date: this.activatedRoute.snapshot.queryParams.date ?? '',
+        title: this.activatedRoute.snapshot.queryParams.title ?? '',
+        value: this.activatedRoute.snapshot.queryParams.value ?? '',
+        payed: this.activatedRoute.snapshot.queryParams.payed ?? '',
+      }
     });
   }
 
@@ -48,6 +56,12 @@ export class PaymentsComponent implements OnInit {
 
   receiveSearch(value: string): void {
     this.search = value;
+    this.currentPage = 1;
+    this.changePage(true);
+  }
+
+  receiveFilters(value: IdialogFilter): void {
+    this.filters = value;
     this.currentPage = 1;
     this.changePage(true);
   }
@@ -71,6 +85,22 @@ export class PaymentsComponent implements OnInit {
     
     if(this.search) {
       params["search"] = this.search;
+    }
+
+    if(this.filters.title) {
+      params["title"] = this.filters.title;
+    }
+    
+    if(this.filters.value) {
+      params["value"] = this.filters.value;
+    }
+
+    if(this.filters.date) {
+      params["date"] = this.filters.date;
+    }
+
+    if(this.filters.payed) {
+      params["payed"] = this.filters.payed;
     }
 
     return params;

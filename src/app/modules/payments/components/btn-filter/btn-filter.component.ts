@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { IdialogFilter } from './../../../../shared/models/idialog-filter';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { AdvancedFiltersComponent } from '../advanced-filters/advanced-filters.component';
 
@@ -9,23 +10,27 @@ import { AdvancedFiltersComponent } from '../advanced-filters/advanced-filters.c
 })
 export class BtnFilterComponent implements OnInit {
 
+  @Output() returnFilter = new EventEmitter<IdialogFilter>();
+  @Input() filters!: IdialogFilter;
+
   constructor(
     private dialog: MatDialog
   ) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   openDialogFilter(): void {
     const dialogRef = this.dialog.open(AdvancedFiltersComponent, {
       data: {
-        // add: true
+        filters: this.filters
       },
       autoFocus: false
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result) {}
+      if(result) {
+        this.returnFilter.emit(result)
+      }
     });
   }
 }

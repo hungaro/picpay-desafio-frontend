@@ -14,7 +14,7 @@
             <app-search-user (OnTyping)="receiveSearch($event)" [value]="search"></app-search-user>
         </div>
         <div class="mt-3 float-start">
-            <app-btn-filter></app-btn-filter>
+            <app-btn-filter (returnFilter)="receiveFilters($event)" [filters]="filters"></app-btn-filter>
         </div>
         <div class="mt-3 float-end row" filter>
             <div class="col-sm">

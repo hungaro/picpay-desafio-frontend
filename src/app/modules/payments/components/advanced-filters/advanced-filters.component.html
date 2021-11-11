@@ -21,9 +21,13 @@
             <div class="col-sm-6">
                 <div class="m-2">
                     <mat-form-field appearance="outline" class="width-form">
-                        <mat-label>Valor</mat-label>
-                        <input matInput formControlName="value" type="number">
-                    </mat-form-field>
+                        <mat-label>Pago</mat-label>
+                        <mat-select formControlName="payed">
+                          <mat-option value="">--</mat-option>
+                          <mat-option value="true">Sim</mat-option>
+                          <mat-option value="false">Não</mat-option>
+                        </mat-select>
+                    </mat-form-field>                      
                 </div>
             </div>
         </div>
@@ -46,25 +50,40 @@
                         <input matInput formControlName="title">
                     </mat-form-field>
                 </div>
-            
-                <div class="width-form m-2 mt-3">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="width-form m-2 mt-3">       
                     <button
                         mat-flat-button
-                        class="width-button me-3 mt-2 bg-light-gray"
+                        class="width-button me-3 mt-2"
+                        type="button"
+                        color="warn"
+                        (click)="clean()">
+                        {{txtBtnClean}}
+                    </button>
+
+                    <button
+                        mat-flat-button
+                        class="width-button ms-3 mt-2 bg-light-gray"
                         type="button"
                         (click)="cancel()">
                         {{txtBtnCancel}}
                     </button>
-            
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="width-form m-2 mt-3 float-end">
                     <button
                         mat-flat-button
-                        class="width-button ms-3 mt-2"
+                        class="w-100 mt-2"
                         color="primary">
                         {{txtBtnFilter}}
                     </button>
                 </div>
             </div>
         </div>
-    
     </form>
 </div>
