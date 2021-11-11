@@ -11,6 +11,7 @@ import { AuthenticationService } from '@services/authentication.service';
 import { Account } from '@models/account.model';
 
 import { BehaviorSubject } from 'rxjs';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header.component';
 
 describe('HeaderComponent', () => {
@@ -46,7 +47,13 @@ describe('HeaderComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [HeaderComponent],
-      imports: [CommonModule, HttpClientTestingModule, RouterModule.forRoot([]), SharedModule],
+      imports: [
+        CommonModule,
+        HttpClientTestingModule,
+        NoopAnimationsModule,
+        RouterModule.forRoot([]),
+        SharedModule,
+      ],
       providers: [
         AccountService,
         { provide: AuthenticationService, useClass: AuthenticationServiceMock },
@@ -98,25 +105,14 @@ describe('HeaderComponent', () => {
     expect(profileImage.alt).toBe('User photo');
   });
 
-  it.skip('should have logout icon', () => {
-    const compiled = fixture.debugElement.nativeElement;
-    const logoutIcon = compiled.querySelector('mat-icon');
-
-    expect(logoutIcon).toBeTruthy();
-    expect(logoutIcon.textContent).toContain('logout');
-  });
-
-  it.skip('should logout user', () => {
+  it('should logout user', () => {
     const logout = jest.spyOn(component, 'logout');
     const routerNavigate = jest.spyOn(router, 'navigate').mockReturnValue(null);
     const currentUserValue = jest
       .spyOn(authenticationService, 'currentUserValue', 'get')
       .mockReturnValue(null);
 
-    const compiled = fixture.debugElement.nativeElement;
-    const logoutIcon = compiled.querySelector('mat-icon');
-
-    logoutIcon.click();
+    component.logout();
 
     expect(logout).toHaveBeenCalled();
     expect(currentUserValue.mock.results).toHaveLength(0);

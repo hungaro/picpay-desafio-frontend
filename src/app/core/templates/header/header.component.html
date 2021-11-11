@@ -36,7 +36,7 @@
       [routerLink]="item.route"
       (click)="item.label === 'Sair' ? logout() : ''"
     >
-      <mat-icon class="font-size-16">{{ item.icon }}</mat-icon>
+      <mat-icon class="font-size-16 icon-{{ item.icon }}">{{ item.icon }}</mat-icon>
       <span class="font-size-10">{{ item.label }}</span>
     </button>
   </mat-menu>
