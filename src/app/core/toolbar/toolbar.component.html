@@ -1,16 +1,40 @@
 <mat-toolbar color="accent" class="size-toolbar">
-    <h1 class="float-left m-3 cursor-pointer" [routerLink]="['']">
+    <h1 class="float-left m-3 cursor-pointer" [routerLink]="['payments']">
         <span class="font-bold-800 font-montserrat">Pay</span>
         <span class="font-bold-300 font-montserrat">Friends</span>
     </h1>
    <span class="spacer"></span>
-   <img src="./assets/images/avatar.png"  class="img-avatar cursor-pointer m-3" [matMenuTriggerFor]="menu">
-   <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="logout()">
-        <mat-icon class="bs-dark">exit_to_app</mat-icon>
-        <span>Desconectar</span>
-      </button>
+   <img src="./assets/images/avatar.png" class="img-avatar-45 cursor-pointer m-3" [matMenuTriggerFor]="menu">
+   <mat-menu #menu="matMenu" class="mat-elevation-z1">
+       <div class="m-3 text-center">
+            <img src="./assets/images/avatar.svg"  class="img-avatar-90">
+            <h5 class="mt-3">
+                <span class="font-montserrat font-bold-700">
+                    @{{user.name | titlecase}}
+                </span>
+            </h5>
+       </div>
+       <div class="m-3">
+           <mat-divider></mat-divider>
+        </div>
+        <button mat-menu-item [routerLink]="['profile']">
+            <mat-icon class="material-icons-outlined">account_circle</mat-icon>
+            <span class="font-lato">Perfil</span>
+        </button>
+        <button mat-menu-item [routerLink]="['payments']">
+            <mat-icon class="material-icons-outlined">payments</mat-icon>
+            <span class="font-lato">Meus pagamentos</span>
+        </button>
+        <div class="m-3">
+            <mat-divider></mat-divider>
+         </div>
+         <button mat-menu-item (click)="logout()">
+            <div class="text-center">
+                <span class="font-lato">Sair</span>
+            </div>
+        </button>
   </mat-menu>
- </mat-toolbar>
+
+</mat-toolbar>
 
     

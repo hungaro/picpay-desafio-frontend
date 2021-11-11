@@ -1,0 +1,14 @@
+.aligned-with-icon {
+    position: absolute;
+    margin-top: -0.10em;
+}
+
+.mat-button {
+    padding: 0px !important;
+  
+}
+  
+::ng-deep .mat-button-focus-overlay {
+    background-color:transparent;
+}
+  

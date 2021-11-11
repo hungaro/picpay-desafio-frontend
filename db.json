@@ -1521,16 +1521,6 @@
       "isPayed": true
     },
     {
-      "id": 171,
-      "name": "teste",
-      "username": "teste",
-      "title": "Hoje",
-      "value": 1234,
-      "date": "2021-11-09T03:00:00.000Z",
-      "image": null,
-      "isPayed": false
-    },
-    {
       "id": 172,
       "name": "teste run resolver",
       "username": "teste run resolver",
@@ -1544,7 +1534,7 @@
   "account": [
     {
       "id": 0,
-      "name": "usuario",
+      "name": "Usuario",
       "email": "usuario@gmail.com",
       "password": "usuario"
     }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Iuser } from 'src/app/shared/models/iuser';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user/user.service';
 
@@ -8,6 +9,8 @@ import { UserService } from '../services/user/user.service';
   styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent implements OnInit {
+
+  @Input() user!: Iuser;
 
   constructor(
     private userService: UserService,

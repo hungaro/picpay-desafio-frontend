@@ -3,7 +3,7 @@
     <ng-container *ngIf="user$ | async as user">
         <ng-container *ngIf="(user | json) != '{}' && verifyRouter.url !== '/login'">
             <div class="toolbar-position">
-                <app-toolbar></app-toolbar>
+                <app-toolbar [user]="user"></app-toolbar>
             </div>
 
             <ng-container *ngIf="loading">

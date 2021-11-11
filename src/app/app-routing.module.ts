@@ -20,6 +20,11 @@ const routes: Routes = [
     canLoad: [PaymentsGuard]
   },
   {
+    path: 'profile',
+    loadChildren:() => import('./modules/profile/profile.module').then((m) => m.ProfileModule),
+    canLoad: [PaymentsGuard]
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: 'login'

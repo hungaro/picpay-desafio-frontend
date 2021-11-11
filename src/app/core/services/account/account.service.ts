@@ -1,4 +1,4 @@
-import { Iuser } from './../../../shared/models/iuser';
+import { Iuser } from 'src/app/shared/models/iuser';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -22,6 +22,20 @@ export class AccountService {
 
   get(): Observable<Iuser[]> {
     return this.http.get<Iuser[]>(`${this.url_api}`);
+  }
+
+  put(user: Iuser): Observable<Iuser> {
+    return this.http.put<Iuser>(`${this.url_api}/${user.id}`, user).pipe(
+      map((users: Iuser) => {
+        console.log(users? true : false)
+        if(users) {
+          this.userService.saveUser(users);
+          return users;
+        } else {
+          throw new Error('404');
+        }
+      })
+    );
   }
 
   login(email: string, password: string): Observable<Iuser[] | string> {
