@@ -16,7 +16,35 @@
     <div class="payments__add">
         <button (click)="add()">{{'payments.add-toUpperCase' | translate}}</button>
     </div>
+
     <div class="card">
+        <div class="card__filter">
+            <div class="card__filter--search-input">
+                <mat-form-field appearance="legacy">
+                    <mat-label>{{'payments.search-by-user' | translate}}</mat-label>
+                    <input [(ngModel)]="inputSearch" type="text" matInput placeholder="Placeholder">
+                    <mat-icon matSuffix>search</mat-icon>
+                  </mat-form-field>
+            </div>
+            <div class="card__filter--button-filter">
+                <button (click)="getList()">
+                    <div>
+                        <img src="../../../assets/svg/filter.svg"/>
+                        <p>{{'payments.filter-button' | translate}}</p>
+                    </div>
+                </button>
+            </div>
+            <div class="card__filter--quantity-items-listed">
+                <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>{{'Exibir' | translate}}</mat-label>
+                    <input type="number" [(ngModel)]="pageSize" matInput>
+                </mat-form-field>
+                <mat-form-field class="full-width" appearance="fill">
+                    <mat-label>{{'Página' | translate}}</mat-label>
+                    <input type="number" min="1" [(ngModel)]="page" matInput>
+                </mat-form-field>
+            </div>
+        </div>
         <payment-table (remove)="remove($event)" (edit)="edit($event)" [paymentList]="paymentList"></payment-table>
     </div>
 </div>

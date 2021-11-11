@@ -52,6 +52,16 @@ p {
   background-color: #007DFE !important;
 }
 
+::ng-deep .mat-cell {
+  padding-right: 0px !important;
+}
+
+::ng-deep .mat-header-row {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 1 !important;
+}
+
 .icon-edit {
   width: 20px;
   height: 20px;

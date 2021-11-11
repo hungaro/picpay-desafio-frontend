@@ -1,4 +1,4 @@
-import { HttpClient } from "@angular/common/http";
+import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { urlConfig } from "../config/url.config";
@@ -10,10 +10,14 @@ export class PaymentService {
         private http: HttpClient
     ){}
 
-    getPaymentList({ _limit }): Observable<IPayment[]> {
-
-        return this.http.get<IPayment[]>(
-            urlConfig.urlPaymentList.replace(':limit', _limit.toString())
-        )
+    getPaymentList({ _limit, username, _page }): Observable<IPayment[]> {
+        let params = new HttpParams()
+            .set('_limit', _limit)
+            .set('_page', _page)
+        
+        if(username){
+            params = params.set('username_like', username);
+        }
+        return this.http.get<IPayment[]>(urlConfig.urlPaymentList, { params })
     }
 }

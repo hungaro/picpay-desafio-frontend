@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
 import { IPayment } from 'src/app/interfaces/payment.interface';
 import { PaymentService } from 'src/app/services/payment.service';
 import { AddModalComponent } from './add-modal/add-modal.component';
@@ -13,11 +15,14 @@ import { RemoveModalComponent } from './remove-modal/remove-modal.component';
 export class PaymentsComponent implements OnInit {
 
   paymentList: Array<IPayment> = [];
-
+  inputSearch: string = '';
+  pageSize: number = 10;
+  page: number = 1;
+  
   constructor(
     private paymentService: PaymentService,
-    public dialog: MatDialog
-  ) { }
+    public dialog: MatDialog,
+  ) {}
 
   ngOnInit(){
     this.getList();
@@ -30,7 +35,6 @@ export class PaymentsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      // this.animal = result;
     });
   }
 
@@ -43,7 +47,7 @@ export class PaymentsComponent implements OnInit {
   }
 
   getList(): void {
-    this.paymentService.getPaymentList({ _limit: 20 }).subscribe({
+    this.paymentService.getPaymentList({ _limit: this.pageSize, username: this.inputSearch, _page: this.page }).subscribe({
       next: (list: IPayment[]) => {
         this.paymentList = list;
       }

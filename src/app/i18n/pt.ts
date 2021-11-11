@@ -17,6 +17,9 @@ export const translations = {
         title: 'Meus Pagamentos',
         'add-toUpperCase': 'ADICIONAR PAGAMENTO',
         add: 'Adicionar pagamento',
+        'search-by-user': 'Pesquisar por usuário',
+        'filter-button': 'Filtrar',
+        'show': 'Exibir',
         table: {
             user: 'Usuário',
             title: 'Título',

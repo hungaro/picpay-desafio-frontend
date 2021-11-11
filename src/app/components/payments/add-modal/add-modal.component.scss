@@ -42,12 +42,14 @@
     }
 
     &__buttons {
-        display: flex;
-        justify-content: space-between;
+        display: grid;
+        width: 100%;
+        grid-auto-flow: column;
+        grid-template-columns: 60% 40%;
         > .btns {
-            display: flex;
-            justify-content: space-between;
-            width: 15vw;
+            display: grid;
+            grid-auto-flow: column;
+            gap: 6px;
         }
 
         &--cancel {
@@ -69,8 +71,11 @@
         }
 
         &--msg {
+            display: flex;
+            align-items: center;
             > p {
                 color: red;
+                margin: 0;
             }
         }
     }

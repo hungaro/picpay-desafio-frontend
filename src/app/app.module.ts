@@ -27,6 +27,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddModalComponent } from './components/payments/add-modal/add-modal.component';
 import { RemoveModalComponent } from './components/payments/remove-modal/remove-modal.component';
+import { MatOptionModule } from '@angular/material/core';
 
 const imports = [
   BrowserModule,
@@ -49,7 +50,8 @@ const imports = [
   MatTableModule,
   MatSortModule,
   MatCheckboxModule,
-  MatDialogModule
+  MatDialogModule,
+  MatOptionModule
 ]
 
 const providers = [AuthService, PaymentService]
