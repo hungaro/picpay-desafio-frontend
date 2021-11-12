@@ -27,6 +27,7 @@ export class AuthService {
         
         if(_email === email && _password === password){
           window.localStorage.setItem('token', `user_${randomNum.toString()}`);
+          window.localStorage.setItem('user', JSON.stringify(data));
           return data;
         }
         
