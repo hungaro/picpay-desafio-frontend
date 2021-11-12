@@ -7,13 +7,20 @@
     </h1>
     <form [formGroup]="loginForm" (ngSubmit)="fetchAccount()" novalidate>
         <div class="ipt-item">
-            <label>E-mail</label>
-            <input type="text" name="email" formControlName="email">
+            <div>
+                <label>E-mail</label>
+                <input type="text" name="email" data-testid="email" formControlName="email">
+            </div>
+            <div id="emailError" class="error" *ngIf="getControl.email.touched && getControl.email.invalid">
+                <p *ngIf="getControl.email.errors?.email">E-mail inválido</p>
+            </div>
         </div>
         <div class="ipt-item">
-            <label>Senha</label>
-            <input type="password" name="password" formControlName="password">
+            <div>
+                <label>Senha</label>
+                <input type="password" name="password" id="password" formControlName="password">
+            </div>
         </div>
-        <button [disabled]="!loginForm.valid" class="button__default">ENTRAR</button>
+        <button [disabled]="!loginForm.valid" id="button" class="button__default">ENTRAR</button>
     </form>
 </div>

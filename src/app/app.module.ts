@@ -13,7 +13,7 @@ import { SharedModule } from './shared/shared.module';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 @NgModule({
   declarations: [	
-    AppComponent, AuthComponent, DashboardComponent, LoginComponent, TasksComponent, AccountComponent, AccountComponent,
+    AppComponent, AuthComponent, DashboardComponent, LoginComponent, TasksComponent, AccountComponent
    ],
   imports: [
     BrowserModule,

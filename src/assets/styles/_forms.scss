@@ -3,6 +3,9 @@
 .ipt-item{
     margin: 16px 0;
     position: relative;
+    float: left;
+    width: 100%;
+    
     label, input, .button__default{
         font: 400 16px/24px 'Roboto', sans-serif;
     }
