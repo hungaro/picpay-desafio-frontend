@@ -1,25 +1,33 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { EmailComponent } from './email.component';
+import { EmailComponent } from "./email.component";
 
 describe('EmailComponent', () => {
   let component: EmailComponent;
-  let fixture: ComponentFixture<EmailComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ EmailComponent ]
-    })
-    .compileComponents();
-  });
-
   beforeEach(() => {
-    fixture = TestBed.createComponent(EmailComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+      component = new EmailComponent();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should create the email component', () => expect(component).toBeTruthy());
+
+  it('should call the onTyping method and emit value true', () => {
+    component.emailFormControl.patchValue('bruno@gmail.com')
+    spyOn(component.value$, 'emit')
+
+    component.onTyping();
+
+    expect(component.value$.emit).toHaveBeenCalledWith('bruno@gmail.com')
   });
-});
+
+  it('should call the onTyping method and emit value null', () => {
+    spyOn(component.value$, 'emit')
+
+    component.onTyping();
+
+    expect(component.value$.emit).toHaveBeenCalledWith(null)
+  });
+
+  it('should call the isValid method', () => {
+    component.emailFormControl.patchValue('blins44@gmail.com')
+    let res: boolean = component.isValid();
+    expect(res).toBe(true);
+  });
+})

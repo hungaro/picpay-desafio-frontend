@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -28,7 +28,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AddModalComponent } from './components/payments/add-modal/add-modal.component';
 import { RemoveModalComponent } from './components/payments/remove-modal/remove-modal.component';
 import { MatOptionModule } from '@angular/material/core';
-import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,

@@ -5,7 +5,8 @@ export const translations = {
         'value-required': 'Valor*',
         cancel: 'Cancelar',
         save: 'Salvar',
-        'edit-payment': 'Editar pagamento'
+        'edit-payment': 'Editar pagamento',
+        ok: 'Ok'
     },
     login: {
         'welcome-back': 'Bem vindo de volta',
@@ -35,5 +36,8 @@ export const translations = {
             payed: 'Pago',
             'no-payments': 'Nenhum pagamento realizado'
         }
+    },
+    errors: {
+        'no-access': 'Você não possui permissão de acesso'
     }
 }

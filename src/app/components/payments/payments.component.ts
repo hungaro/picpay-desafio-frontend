@@ -6,6 +6,7 @@ import { AddModalComponent } from './add-modal/add-modal.component';
 import { RemoveModalComponent } from './remove-modal/remove-modal.component';
 import { catchError, tap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-payments',
@@ -46,7 +47,7 @@ export class PaymentsComponent implements OnInit {
             catchError((err) => {
               console.error(err);
               this.snackBar.open('Encontramos um erro ao adicionar o pagamento', 'Ok');
-              return null;
+              return throwError(err);
             })
           ).subscribe();
       }
@@ -54,36 +55,27 @@ export class PaymentsComponent implements OnInit {
     });
   }
 
-  remove(id: number): void {
-
-    this.paymentService.getPaymentById(id).subscribe({
-      next: (payment: IPayment) => {
-        const dialogRef = this.dialog.open(RemoveModalComponent, {
-          width: '350px',
-          data: payment[0]
-        });
-
-        dialogRef.afterClosed().subscribe({
-          next: (dialogResult) => {
-            if(dialogResult){
-              this.paymentService.remove(id).subscribe({
-                next: () => {
-                  this.snackBar.open('Pagamento removido com sucesso', 'Ok');
-                  this.getList();
-                }, error: (err) => {
-                  this.snackBar.open('Encontramos um erro ao remover o pagamento selecionado', 'Ok');
-                  console.error(err);
-                }
-              })
-            }
-          }
-        })
-      },
-      error: (err) => {
-        this.snackBar.open('Encontramos um erro ao buscar o pagamento selecionado', 'Ok');
-        console.error(err);
-      }
+  remove(payment: IPayment): void {
+    const dialogRef = this.dialog.open(RemoveModalComponent, {
+      width: '350px',
+      data: payment
     });
+
+    dialogRef.afterClosed().subscribe({
+      next: (dialogResult) => {
+        if(dialogResult){
+          this.paymentService.remove(payment.id).subscribe({
+            next: () => {
+              this.snackBar.open('Pagamento removido com sucesso', 'Ok');
+              this.getList();
+            }, error: (err) => {
+              this.snackBar.open('Encontramos um erro ao remover o pagamento selecionado', 'Ok');
+              console.error(err);
+            }
+          })
+        }
+      }
+    })
   }
 
   edit(payment: IPayment): void {
@@ -114,6 +106,10 @@ export class PaymentsComponent implements OnInit {
     this.paymentService.getPaymentList({ _limit: this.pageSize, username: this.inputSearch, _page: this.page }).subscribe({
       next: (list: IPayment[]) => {
         this.paymentList = list;
+      },
+      error: (err) => {
+        console.error(err);
+        this.snackBar.open('Encontramos um erro ao buscar a lista de pagamentos', 'Ok');
       }
     })
   }

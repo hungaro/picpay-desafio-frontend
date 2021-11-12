@@ -2,7 +2,6 @@ import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { AfterViewInit, Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { MatSort, Sort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { element } from 'protractor';
 import { IPayment } from '../../../app/interfaces/payment.interface';
 
 
@@ -17,7 +16,7 @@ export class PaymentTableComponent implements AfterViewInit {
 
   hasPaymentList = false;
 
-  @Output('remove') remove$: EventEmitter<number> = new EventEmitter<number>();
+  @Output('remove') remove$: EventEmitter<IPayment> = new EventEmitter<IPayment>();
   @Output('edit') edit$: EventEmitter<IPayment> = new EventEmitter<IPayment>();
   @Output('unPay') unPay$: EventEmitter<IPayment> = new EventEmitter<IPayment>();
   @Output('pay') pay$: EventEmitter<IPayment> = new EventEmitter<IPayment>();
@@ -48,8 +47,8 @@ export class PaymentTableComponent implements AfterViewInit {
     }
   }
 
-  remove(id: number): void {
-    this.remove$.emit(id);
+  remove(pay: IPayment): void {
+    this.remove$.emit(pay);
   }
 
   edit(pay: IPayment): void {

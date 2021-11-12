@@ -1,25 +1,83 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { PaymentsComponent } from './payments.component';
+import { of, throwError } from "rxjs";
+import { IPayment } from "../../interfaces/payment.interface";
+import { PaymentsComponent } from "./payments.component";
 
 describe('PaymentsComponent', () => {
   let component: PaymentsComponent;
-  let fixture: ComponentFixture<PaymentsComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ PaymentsComponent ]
-    })
-    .compileComponents();
-  });
+  let paymentService, dialog, snackBar;
+
+  let payment: IPayment = {
+    date: '2021-11-11T11:24:55',
+    id: 1,
+    image: 'path/to/image',
+    isPayed: true,
+    name: 'Bruno Lins',
+    title: 'Front-End Developer',
+    username: '@idevnotes',
+    value: 1177
+  }
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PaymentsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+      paymentService = jasmine.createSpyObj('PaymentService', ['getPaymentList', 'addPayment', 'payUnPay', 'getPaymentById', 'remove', 'edit'])
+      dialog = jasmine.createSpyObj('MatDialog', ['open']);
+      snackBar = jasmine.createSpyObj('MatSnackBar', ['open']);
+
+      paymentService.getPaymentList.and.returnValue(of([payment]))
+      paymentService.addPayment.and.returnValue(of(payment))
+      paymentService.payUnPay.and.returnValue(of(payment))
+      paymentService.getPaymentById.and.returnValue(of([payment]))
+      paymentService.remove.and.returnValue(of({}))
+      paymentService.edit.and.returnValue(of(payment))
+
+      dialog.open.and.returnValue({
+        afterClosed: () => of({ value: 10, user: 'Bruno Lins', title: 'Front-End Developer' })
+      });
+
+      component = new PaymentsComponent(paymentService, dialog, snackBar);
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+  it('should create the component', () => expect(component).toBeTruthy());
+
+  it('should call the ngOnInit method', () => {
+    expect(() => {
+      component.ngOnInit();
+    }).not.toThrow();
+  })
+
+  it('should call the add method', () => {
+    expect(() => {
+      component.add();
+    }).not.toThrow();
+  })
+
+  it('should call the remove method', () => {
+    expect(() => {
+      component.remove(payment);
+    }).not.toThrow();
+  })
+
+  it('should call the edit method', () => {
+    expect(() => {
+      component.edit(payment);
+    }).not.toThrow();
+  })
+
+  it('should call the getList method', () => {
+    expect(() => {
+      component.getList();
+    }).not.toThrow();
+  })
+
+  it('should call the unPay method', () => {
+    expect(() => {
+      component.unPay(payment);
+    }).not.toThrow();
+  })
+
+  it('should call the pay method', () => {
+    expect(() => {
+      component.pay(payment);
+    }).not.toThrow();
+  })
+})

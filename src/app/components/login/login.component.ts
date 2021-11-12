@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -13,7 +14,8 @@ export class LoginComponent {
   constructor(
     private auth: AuthService,
     private router: Router,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private translate: TranslateService
   ) { }
 
   logoPath: string = '../../../assets/images/logo.png';
@@ -34,11 +36,14 @@ export class LoginComponent {
           this.hasAccessByPwd = !!(auth.find(auth => auth.password === this.pwd))
 
           if(!this.hasAccessByEmail && !this.hasAccessByPwd) {
-            this.openSnackBar('Você não possui permissão de acesso', 'Ok')
-            return
+            this.openSnackBar(
+              this.translate.instant('errors.no-access'),
+              this.translate.instant('common.ok')
+            )
+            return;
           }
 
-          if(this.hasAccessByEmail && this.hasAccessByPwd){
+          if( this.hasAccessByEmail && this.hasAccessByPwd ){
             this.snackBar.dismiss();
             sessionStorage.setItem('auth', JSON.stringify(auth.find(auth => auth.password === this.pwd)));
             this.router.navigate(['/payments']);

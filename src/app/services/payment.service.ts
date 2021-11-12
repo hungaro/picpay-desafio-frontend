@@ -1,7 +1,6 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { forkJoin, Observable, of, pipe } from "rxjs";
-import { map, switchMap } from "rxjs/operators";
+import { Observable } from "rxjs";
 import { urlConfig } from "../config/url.config";
 import { IPayment } from "../interfaces/payment.interface";
 
