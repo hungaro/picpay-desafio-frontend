@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/internal/Observable';
+import { environment } from '../../../environments/environment';
 
 /**
  * Service that provides some simplified methods to use the Back-end API
@@ -13,7 +14,11 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class ApiService {
   public url: string;
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient
+  ) {
+    this.url = environment.API_URL;
+  }
 
   /**
    * Send a get request to Back-end API
@@ -38,7 +43,7 @@ export class ApiService {
    post$(route, params): Observable<any> {
     return this.http.post(route, params);
   }
-
+  
   /**
    * Send a update request to Back-end API
    *

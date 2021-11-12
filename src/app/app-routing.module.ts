@@ -5,8 +5,14 @@ import { DashboardComponent } from './layouts/dashboard/dashboard.component';
 import { AccountComponent } from './pages/account/account.component';
 import { LoginComponent } from './pages/login/login.component';
 import { TasksComponent } from './pages/tasks/tasks.component';
+import { AuthGuard } from './shared/helpers/auth.guard';
 
 const routes: Routes = [
+    {
+        path: '',
+        pathMatch: 'full',
+        redirectTo: 'login'
+    },
     {
         path: '',
         component: AuthComponent,
@@ -14,17 +20,13 @@ const routes: Routes = [
             {
                 path: 'login',
                 component: LoginComponent
-            },
-            {
-                path: '',
-                pathMatch: 'full',
-                redirectTo: 'login'
             }
         ]
     },
     {
         path: '',
         component: DashboardComponent,
+        canActivate: [AuthGuard],
         children: [
             {
                 path: 'account',

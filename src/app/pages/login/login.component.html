@@ -5,13 +5,15 @@
     <h1>
         Bem vindo de volta
     </h1>
-    <div class="ipt-item">
-        <label>E-mail</label>
-        <input type="text" name="email">
-    </div>
-    <div class="ipt-item">
-        <label>Senha</label>
-        <input type="text" name="email">
-    </div>
-    <button class="button__default">ENTRAR</button>
+    <form [formGroup]="loginForm" (ngSubmit)="fetchAccount()" novalidate>
+        <div class="ipt-item">
+            <label>E-mail</label>
+            <input type="text" name="email" formControlName="email">
+        </div>
+        <div class="ipt-item">
+            <label>Senha</label>
+            <input type="text" name="email" formControlName="password">
+        </div>
+        <button [disabled]="!loginForm.valid" class="button__default">ENTRAR</button>
+    </form>
 </div>
