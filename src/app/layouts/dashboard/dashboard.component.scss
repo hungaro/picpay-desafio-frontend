@@ -1,0 +1,37 @@
+@import '../../../assets/styles/colors';
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #002D69;
+    padding: 20px 30px;
+}
+.user__info{
+    display: flex;
+    align-items: center;
+    .avatar{
+        border-radius: 100%;
+        width: 45px;
+        height: 45px;
+        background-color: $secondary-gray;
+    }
+    .logout{
+        .box-info{
+            display: none;
+        }
+        .button{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            margin: 0 20px;
+            span{
+                width: 4px;
+                height: 4px;
+                background-color: $secondary-gray;
+                border-radius: 100%;
+                display: block;
+                margin: 3px 0;
+            }
+        }
+    }   
+}
