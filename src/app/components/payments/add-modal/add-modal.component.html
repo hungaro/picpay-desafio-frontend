@@ -1,27 +1,29 @@
 <div class="add-modal">
     <div class="add-modal__title">
-        <p>{{'payments.add' | translate}}</p>
+        <p *ngIf="!data">{{'payments.add' | translate}}</p>
+        <p *ngIf="data">{{data.title | translate}}</p>
     </div>
 
     <div class="add-modal__grid">
         <div class="add-modal__grid--user">
             <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Usuário*</mat-label>
+                <mat-label>{{'common.name-required' | translate}}</mat-label>
                 <input matInput (ngModelChange)="verifyField()" [(ngModel)]="user">
             </mat-form-field>
         </div>
 
         <div class="add-modal__grid--value">
             <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Valor*</mat-label>
-                <input matInput type="number" (ngModelChange)="verifyField()" [(ngModel)]="value">
-            </mat-form-field>
-        </div>
-
-        <div class="add-modal__grid--date">
-            <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Data*</mat-label>
-                <input matInput (ngModelChange)="verifyField()" [(ngModel)]="date">
+                <mat-label>{{'common.value-required' | translate}}</mat-label>
+                <input
+                    matInput
+                    type="text"
+                    mask="separator.2"
+                    (ngModelChange)="verifyField()"
+                    [(ngModel)]="value"
+                    thousandSeparator="."
+                    decimalMarker=","
+                    [allowNegativeNumbers]="false" />
             </mat-form-field>
         </div>
 
@@ -38,8 +40,8 @@
             <p>{{msg_error}}</p>
         </div>
         <div class="btns">
-            <button class="add-modal__buttons--cancel" (click)="close()">Cancelar</button>
-            <button class="add-modal__buttons--save" (click)="save()">Salvar</button>
+            <button class="add-modal__buttons--cancel" (click)="close()">{{'common.cancel' | translate}}</button>
+            <button class="add-modal__buttons--save" (click)="save()">{{'common.save' | translate}}</button>
         </div>
     </div>
 </div>

@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
+import { forkJoin, Observable, of, pipe } from "rxjs";
+import { map, switchMap } from "rxjs/operators";
 import { urlConfig } from "../config/url.config";
 import { IPayment } from "../interfaces/payment.interface";
 
@@ -18,6 +19,45 @@ export class PaymentService {
         if(username){
             params = params.set('username_like', username);
         }
-        return this.http.get<IPayment[]>(urlConfig.urlPaymentList, { params })
+        return this.http.get<IPayment[]>(urlConfig.urlPayment, { params })
+    }
+
+    addPayment({ value, user, title }): Observable<IPayment> {
+        
+        const body = {
+            name: user,
+            username: `${user.replace(/(\s)/g, '').toLowerCase()}`,
+            title,
+            value,
+            date: new Date().toISOString(),
+            isPayed: false
+        }
+
+        return this.http.post<IPayment>(urlConfig.urlPayment, body)
+    }
+
+    payUnPay({ isPayed, id }): Observable<IPayment> {
+        return this.http.patch<IPayment>(urlConfig.urlPaymentPatch.replace(':id', id), { isPayed })
+    }
+
+    getPaymentById(id: number): Observable<IPayment> {
+        return this.http.get<IPayment>(
+            urlConfig.urlGetPaymentById.replace(':id', id.toString())
+        )
+    }
+
+    remove(id: number): Observable<{}> {
+        return this.http.delete<IPayment>(
+            urlConfig.urlPaymentPatch.replace(':id', id.toString())
+        )
+    }
+
+    edit(payment: IPayment): Observable<IPayment> {
+        let id = payment.id.toString();
+        delete payment.id;
+        return this.http.put<IPayment>(
+            urlConfig.urlPaymentPatch.replace(':id', id),
+            payment
+        )
     }
 }

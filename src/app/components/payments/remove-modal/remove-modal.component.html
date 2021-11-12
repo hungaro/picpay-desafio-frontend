@@ -1,1 +1,28 @@
-remove-modal
+<div class="remove-modal">
+    <div class="remove-modal__title">
+        <p>{{'payments.remove' | translate}}</p>
+    </div>
+
+    <div class="remove-modal__infos">
+        <div class="remove-modal__infos--labels">
+            <span>
+                Usuário:
+            </span><p>{{data.name}}</p>
+        </div>
+        <div class="remove-modal__infos--labels">
+            <span>
+                Data:
+            </span><p>{{data.date | date: 'dd/MM/yyyy'}}</p>
+        </div>
+        <div class="remove-modal__infos--labels">
+            <span>
+                Valor:
+            </span><p>{{data.value | currency: 'R$ '}}</p>
+        </div>
+    </div>
+
+    <div class="remove-modal__buttons">
+        <button class="remove-modal__buttons--cancel" (click)="close()">Cancelar</button>
+        <button class="remove-modal__buttons--save" (click)="save()">Salvar</button>
+    </div>
+</div>

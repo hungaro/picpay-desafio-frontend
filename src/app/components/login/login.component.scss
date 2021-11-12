@@ -7,7 +7,7 @@
 
 .login {
     background-color: #F2F2F2;
-    padding: 130px;
+    padding: 30vh 16% 0px 16%;
     &__logo {
         &--welcome-back {
             font-weight: 600;
@@ -17,6 +17,7 @@
     }
 
     &__button {
+        margin-top: 10px;
         > button {
             width: 100%;
             background-color: #007DFE;

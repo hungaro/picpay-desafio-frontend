@@ -37,14 +37,14 @@
             <div class="card__filter--quantity-items-listed">
                 <mat-form-field class="full-width" appearance="fill">
                     <mat-label>{{'payments.show' | translate}}</mat-label>
-                    <input type="number" [(ngModel)]="pageSize" matInput>
+                    <input type="number" min="1" (change)="getList()" [(ngModel)]="pageSize" matInput>
                 </mat-form-field>
                 <mat-form-field class="full-width" appearance="fill">
                     <mat-label>{{'payments.page' | translate}}</mat-label>
-                    <input type="number" min="1" [(ngModel)]="page" matInput>
+                    <input type="number" (change)="getList()" min="1" [(ngModel)]="page" matInput>
                 </mat-form-field>
             </div>
         </div>
-        <payment-table (remove)="remove($event)" (edit)="edit($event)" [paymentList]="paymentList"></payment-table>
+        <payment-table (pay)="pay($event)" (unPay)="unPay($event)" (remove)="remove($event)" (edit)="edit($event)" [paymentList]="paymentList"></payment-table>
     </div>
 </div>

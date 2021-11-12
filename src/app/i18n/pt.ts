@@ -1,6 +1,11 @@
 export const translations = {
     common: {
-        required: 'obrigatório'
+        required: 'obrigatório',
+        'name-required': 'Nome*',
+        'value-required': 'Valor*',
+        cancel: 'Cancelar',
+        save: 'Salvar',
+        'edit-payment': 'Editar pagamento'
     },
     login: {
         'welcome-back': 'Bem vindo de volta',
@@ -17,6 +22,7 @@ export const translations = {
         title: 'Meus Pagamentos',
         'add-toUpperCase': 'ADICIONAR PAGAMENTO',
         add: 'Adicionar pagamento',
+        remove: 'Excluir pagamento',
         'search-by-user': 'Pesquisar por usuário',
         'filter-button': 'Filtrar',
         show: 'Exibir',

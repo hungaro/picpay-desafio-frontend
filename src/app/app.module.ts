@@ -28,6 +28,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { AddModalComponent } from './components/payments/add-modal/add-modal.component';
 import { RemoveModalComponent } from './components/payments/remove-modal/remove-modal.component';
 import { MatOptionModule } from '@angular/material/core';
+import { NgxMaskModule, IConfig } from 'ngx-mask'
+
+const maskConfig: Partial<IConfig> = {
+  validation: false,
+};
 
 const imports = [
   BrowserModule,
@@ -51,7 +56,8 @@ const imports = [
   MatSortModule,
   MatCheckboxModule,
   MatDialogModule,
-  MatOptionModule
+  MatOptionModule,
+  NgxMaskModule.forRoot(maskConfig),
 ]
 
 const providers = [AuthService, PaymentService]

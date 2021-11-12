@@ -26,6 +26,11 @@
             ::ng-deep .mat-form-field {
                 width: 95% !important;
             }
+
+            input[type=number]::-webkit-inner-spin-button { 
+                -webkit-appearance: none;
+                display: none;
+            }
         }
 
         &--date {

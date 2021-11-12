@@ -16,7 +16,10 @@
     <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by title">
         <p class="font-family-lato">{{'payments.table.title' | translate }}</p>
     </th>
-    <td mat-cell *matCellDef="let element"> <p class="font-family-lato">{{element.title}}</p> </td>
+    <td mat-cell *matCellDef="let element">
+      <p *ngIf="element.title" class="font-family-lato">{{element.title}}</p>
+      <p *ngIf="!element.title" class="font-family-lato">-</p>
+    </td> 
   </ng-container>
 
  <ng-container matColumnDef="date">
@@ -43,7 +46,7 @@
         <p class="font-family-lato">{{'payments.table.payed' | translate }}</p>
     </th>
     <td mat-cell *matCellDef="let element">
-        <mat-checkbox [ngModel]="element.isPayed"></mat-checkbox>
+        <mat-checkbox (click)="element.isPayed ? unPay(element) : pay(element)" [ngModel]="element.isPayed"></mat-checkbox>
     </td>
   </ng-container>
 
@@ -51,7 +54,7 @@
     <th mat-header-cell *matHeaderCellDef mat-sort-header>
         <p></p>
     </th>
-    <td (click)="edit(element.id)" mat-cell *matCellDef="let element">
+    <td (click)="edit(element)" mat-cell *matCellDef="let element">
         <p class="icon-edit"></p>
     </td>
   </ng-container>

@@ -1,0 +1,42 @@
+.remove-modal {
+    display: grid;
+    gap: 30px;
+    &__title {
+        > p {
+            font-size: 18px;
+            font-weight: 600;
+            color: #000;
+        }
+    }
+
+    &__infos {
+        line-height: 14px;
+        &--labels {
+            display: grid;
+            grid-auto-flow: column;
+            grid-template-columns: 6vw;
+        }
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: space-between;
+        > button {
+            width: 40%;
+            padding: 5px 10px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        &--cancel {
+            background-color: #F5F5F5;
+            border: 1px solid #F5F5F5;
+        }
+
+        &--save {
+            background-color: #007DFE;
+            border: 1px solid #007DFE;
+            color: #fff;
+        }
+    }
+}
