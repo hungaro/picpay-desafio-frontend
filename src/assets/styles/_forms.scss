@@ -43,6 +43,11 @@ input[type=text], input[type=email], input[type=password], select, textarea{
         background-color: $secondary-blue;
         border-color: $secondary-blue;
     }
+    &:disabled{
+        pointer-events: none;
+        opacity: 0.3;
+        cursor: not-allowed;
+    }
     &--cancel{
         background-color: $tertiary-gray;
         border-color: $tertiary-gray;
