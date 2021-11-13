@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { ApiService } from './api.service';
 
@@ -7,7 +8,7 @@ import { ApiService } from './api.service';
 })
 export class AuthService {
 
-  constructor(private apiService: ApiService) {
+  constructor(private apiService: ApiService, private router: Router) {
   }
 
   public get isAuthenticate(): any {
@@ -33,6 +34,12 @@ export class AuthService {
         
         return {error: true, message: 'Usuário ou senha inválidos'};
       });
+  }
+
+  logout(){
+    window.localStorage.removeItem('token');
+    window.localStorage.removeItem('user');
+    this.router.navigate(['/login']);
   }
 
 
