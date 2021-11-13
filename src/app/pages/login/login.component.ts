@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
         return;
       }
       
-      this.router.navigate(['/tasks']);
+      this.router.navigate(['/pagamentos']);
     })
   }
 
