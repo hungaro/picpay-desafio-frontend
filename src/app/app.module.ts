@@ -5,14 +5,14 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
-import { LoginComponent } from './pages/login/login.component';
 import { TemplatesModule } from './components/templates/templates.module';
 import { SharedModule } from './components/shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
+import { PagesModule } from './pages/pages.module';
 
 @NgModule({
   declarations: [	
-    AppComponent, LoginComponent,
+    AppComponent
    ],
   imports: [
     BrowserModule,
@@ -22,6 +22,7 @@ import { AppRoutingModule } from './app-routing.module';
     TemplatesModule,
     SharedModule,
     AppRoutingModule,
+    PagesModule
   ],
   providers: [],
   bootstrap: [AppComponent]
