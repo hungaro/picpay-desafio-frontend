@@ -7,6 +7,7 @@ import { RemoveModalComponent } from './remove-modal/remove-modal.component';
 import { catchError, tap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { throwError } from 'rxjs';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-payments',
@@ -23,7 +24,8 @@ export class PaymentsComponent implements OnInit {
   constructor(
     private paymentService: PaymentService,
     public dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(){
@@ -37,16 +39,22 @@ export class PaymentsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if(result){
-        let { value, user, title } = result;
-        this.paymentService.addPayment({ value, user, title })
+        let { value, user, title, image } = result;
+        this.paymentService.addPayment({ value, user, title, image })
           .pipe(
             tap(() => {
-              this.snackBar.open('Pagamento adicionado com sucesso', 'Ok');
+              this.snackBar.open(
+                this.translate.instant('payments.payment-add-success'), 
+                this.translate.instant('common.ok')
+              );
               this.getList();
             }),
             catchError((err) => {
               console.error(err);
-              this.snackBar.open('Encontramos um erro ao adicionar o pagamento', 'Ok');
+              this.snackBar.open(
+                this.translate.instant('errors.we-found-errors-payment'),
+                this.translate.instant('common.ok')
+              );
               return throwError(err);
             })
           ).subscribe();
@@ -66,10 +74,16 @@ export class PaymentsComponent implements OnInit {
         if(dialogResult){
           this.paymentService.remove(payment.id).subscribe({
             next: () => {
-              this.snackBar.open('Pagamento removido com sucesso', 'Ok');
+              this.snackBar.open(
+                this.translate.instant('payments.payment-removed-success'),
+                this.translate.instant('common.ok')
+              );
               this.getList();
             }, error: (err) => {
-              this.snackBar.open('Encontramos um erro ao remover o pagamento selecionado', 'Ok');
+              this.snackBar.open(
+                this.translate.instant('payments.we-found-errors-removing-payment'),
+                this.translate.instant('common.ok')
+              );
               console.error(err);
             }
           })
@@ -90,10 +104,16 @@ export class PaymentsComponent implements OnInit {
         if(payment){
           this.paymentService.edit(payment).subscribe({
             next: () => {
-              this.snackBar.open('Pagamento editado com sucesso', 'Ok');
+              this.snackBar.open(
+                this.translate.instant('payments.edited-success'),
+                this.translate.instant('common.ok')
+              );
               this.getList();
             }, error: (err) => {
-              this.snackBar.open('Encontramos um erro ao editar o pagamento selecionado', 'Ok');
+              this.snackBar.open(
+                this.translate.instant('payments.we-found-errors-editing-payment'),
+                this.translate.instant('common.ok')
+              );
               console.error(err);
             }
           })
@@ -109,7 +129,10 @@ export class PaymentsComponent implements OnInit {
       },
       error: (err) => {
         console.error(err);
-        this.snackBar.open('Encontramos um erro ao buscar a lista de pagamentos', 'Ok');
+        this.snackBar.open(
+          this.translate.instant('errors.we-found-errors-searching-payment-list'),
+          this.translate.instant('common.ok')
+        );
       }
     })
   }
@@ -119,9 +142,15 @@ export class PaymentsComponent implements OnInit {
       .subscribe({
         next: () => {
           this.getList();
-          this.snackBar.open('Pagamento editado com sucesso', 'Ok');
+          this.snackBar.open(
+            this.translate.instant('payments.edited-success'),
+            this.translate.instant('common.ok')
+          );
         }, error: (err) => {
-          this.snackBar.open('Encontramos um problema ao editar o pagamento', 'Ok');
+          this.snackBar.open(
+            this.translate.instant('payments.we-found-errors-editing-payment'),
+            this.translate.instant('common.ok')
+          );
           console.error(err)
         }
       })
@@ -132,11 +161,25 @@ export class PaymentsComponent implements OnInit {
       .subscribe({
         next: () => {
           this.getList();
-          this.snackBar.open('Pagamento editado com sucesso', 'Ok');
+          this.snackBar.open(
+            this.translate.instant('payments.edited-success'),
+            this.translate.instant('common.ok')
+          );
         }, error: (err) => {
-          this.snackBar.open('Encontramos um problema ao editar o pagamento', 'Ok');
+          this.snackBar.open(
+            this.translate.instant('payments.we-found-errors-editing-payment'),
+            this.translate.instant('common.ok')
+          );
           console.error(err)
         }
       })
+  }
+
+  logout(): void {
+    sessionStorage.removeItem('auth');
+    this.snackBar.open(
+      this.translate.instant('payments.logout'),
+      this.translate.instant('common.ok')
+    )
   }
 }

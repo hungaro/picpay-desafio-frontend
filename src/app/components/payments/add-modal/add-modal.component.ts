@@ -13,6 +13,7 @@ export class AddModalComponent {
     value: number;
     user: string;
     msg_error: string;
+    image: string = null;
 
     constructor(
         private dialogRef: MatDialogRef<AddModalComponent>,
@@ -23,6 +24,7 @@ export class AddModalComponent {
             this.title = this.data.payment.title;
             this.value = this.data.payment.value;
             this.user = this.data.payment.name
+            this.image = this.data.payment.image;
         }
     }
 
@@ -35,6 +37,7 @@ export class AddModalComponent {
             this.data.payment.title = this.title;
             this.data.payment.value = this.value;
             this.data.payment.name = this.user;
+            this.data.payment.image = this.image
             this.dialogRef.close(this.data.payment);
             return;
         }
@@ -43,7 +46,8 @@ export class AddModalComponent {
             this.dialogRef.close({
                 value: this.value,
                 user: this.user,
-                title: this.title
+                title: this.title,
+                image: this.image
             })
             return;
         }

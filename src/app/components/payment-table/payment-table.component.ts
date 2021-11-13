@@ -20,6 +20,9 @@ export class PaymentTableComponent implements AfterViewInit {
   @Output('edit') edit$: EventEmitter<IPayment> = new EventEmitter<IPayment>();
   @Output('unPay') unPay$: EventEmitter<IPayment> = new EventEmitter<IPayment>();
   @Output('pay') pay$: EventEmitter<IPayment> = new EventEmitter<IPayment>();
+  @Input() set search(a: string) {
+    this.dataSource.filter = a;
+  }
   @Input() set paymentList(list: IPayment[]){
     if(list.length > 0){
       this.hasPaymentList = true;

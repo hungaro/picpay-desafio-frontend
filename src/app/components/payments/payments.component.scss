@@ -4,6 +4,7 @@
     gap: 50px;
     background-color: #F2F2F2;
     min-height: 100vh;
+
     &__header {
         background-color: #002D69;
         width: 100%;
@@ -19,6 +20,11 @@
         &--account {
             display: grid;
             align-items: center;
+            grid-auto-flow: column;
+            gap: 20px;
+            > img {
+                cursor: pointer;
+            }
         }
     }
 

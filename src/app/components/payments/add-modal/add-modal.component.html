@@ -29,8 +29,15 @@
 
         <div class="add-modal__grid--title">
             <mat-form-field class="example-full-width" appearance="fill">
-                <mat-label>Título</mat-label>
+                <mat-label>{{'common.title' | translate}}</mat-label>
                 <input matInput [(ngModel)]="title">
+            </mat-form-field>
+        </div>
+
+        <div class="add-modal__grid--title">
+            <mat-form-field class="example-full-width" appearance="fill">
+                <mat-label>{{'common.link-image' | translate}}</mat-label>
+                <input matInput [(ngModel)]="image">
             </mat-form-field>
         </div>
     </div>

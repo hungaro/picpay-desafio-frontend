@@ -21,7 +21,7 @@ export class PaymentService {
         return this.http.get<IPayment[]>(urlConfig.urlPayment, { params })
     }
 
-    addPayment({ value, user, title }): Observable<IPayment> {
+    addPayment({ value, user, title, image }): Observable<IPayment> {
         
         const body = {
             name: user,
@@ -29,7 +29,8 @@ export class PaymentService {
             title,
             value,
             date: new Date().toISOString(),
-            isPayed: false
+            isPayed: false,
+            image: image
         }
 
         return this.http.post<IPayment>(urlConfig.urlPayment, body)

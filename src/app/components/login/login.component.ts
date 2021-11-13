@@ -50,13 +50,18 @@ export class LoginComponent {
             return;
           }
 
-          
-          this.openSnackBar('Email e/ou senha estão incorretos', 'Ok')
+          this.openSnackBar(
+            this.translate.instant('common.email-or-pwd-wrong'),
+            this.translate.instant('common.ok')
+          )
         },
         error: (err) => {
           this.loading = false;
           console.error(err);
-          this.openSnackBar('Encontramos um erro inesperado', 'Ok')
+          this.openSnackBar(
+            this.translate.instant('errors.we-found-an-errors'),
+            this.translate.instant('common.ok')
+          )
         }
       })
       

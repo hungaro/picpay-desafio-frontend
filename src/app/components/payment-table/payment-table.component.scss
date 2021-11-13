@@ -6,6 +6,19 @@ table {
   tr:nth-child(odd){
     background-color: white;
   }
+
+  .user {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    grid-template-columns: 8vw;
+    > img {
+        width: 58px !important;
+        height: 54px !important;
+        border-radius: 100% !important;
+        border: 1px solid #c1c1c1;
+    }
+  }
 }
   
 ::ng-deep .mat-sort-header-content {

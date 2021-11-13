@@ -5,7 +5,7 @@ import { PaymentsComponent } from "./payments.component";
 describe('PaymentsComponent', () => {
   let component: PaymentsComponent;
 
-  let paymentService, dialog, snackBar;
+  let paymentService, dialog, snackBar, translate;
 
   let payment: IPayment = {
     date: '2021-11-11T11:24:55',
@@ -22,6 +22,7 @@ describe('PaymentsComponent', () => {
       paymentService = jasmine.createSpyObj('PaymentService', ['getPaymentList', 'addPayment', 'payUnPay', 'getPaymentById', 'remove', 'edit'])
       dialog = jasmine.createSpyObj('MatDialog', ['open']);
       snackBar = jasmine.createSpyObj('MatSnackBar', ['open']);
+      translate = jasmine.createSpyObj('TranslateService', ['instant']);
 
       paymentService.getPaymentList.and.returnValue(of([payment]))
       paymentService.addPayment.and.returnValue(of(payment))
@@ -31,10 +32,10 @@ describe('PaymentsComponent', () => {
       paymentService.edit.and.returnValue(of(payment))
 
       dialog.open.and.returnValue({
-        afterClosed: () => of({ value: 10, user: 'Bruno Lins', title: 'Front-End Developer' })
+        afterClosed: () => of({ value: 10, user: 'Bruno Lins', title: 'Front-End Developer', image: 'link da imagem' })
       });
 
-      component = new PaymentsComponent(paymentService, dialog, snackBar);
+      component = new PaymentsComponent(paymentService, dialog, snackBar, translate);
   });
 
   it('should create the component', () => expect(component).toBeTruthy());
@@ -85,7 +86,7 @@ describe('PaymentsComponent', () => {
 describe('PaymentsComponent errors', () => {
   let component: PaymentsComponent;
 
-  let paymentService, dialog, snackBar;
+  let paymentService, dialog, snackBar, translate;
 
   let payment: IPayment;
 
@@ -93,6 +94,7 @@ describe('PaymentsComponent errors', () => {
       paymentService = jasmine.createSpyObj('PaymentService', ['getPaymentList', 'addPayment', 'payUnPay', 'getPaymentById', 'remove', 'edit'])
       dialog = jasmine.createSpyObj('MatDialog', ['open']);
       snackBar = jasmine.createSpyObj('MatSnackBar', ['open']);
+      translate = jasmine.createSpyObj('TranslateService', ['instant']);
 
       paymentService.addPayment.and.returnValue(throwError({ error: true }));
       paymentService.remove.and.returnValue(throwError({ error: true }));
@@ -101,7 +103,7 @@ describe('PaymentsComponent errors', () => {
       paymentService.payUnPay.and.returnValue(throwError({ error: true }));
 
       dialog.open.and.returnValue({
-        afterClosed: () => of({ value: 10, user: 'Bruno Lins', title: 'Front-End Developer' })
+        afterClosed: () => of({ value: 10, user: 'Bruno Lins', title: 'Front-End Developer', image: 'link da imagem' })
       });
 
       payment = {
@@ -115,7 +117,7 @@ describe('PaymentsComponent errors', () => {
         value: 1177
       }
 
-      component = new PaymentsComponent(paymentService, dialog, snackBar);
+      component = new PaymentsComponent(paymentService, dialog, snackBar, translate);
   });
 
   it('should call the add method', () => {
