@@ -1,0 +1,118 @@
+@import '../../../../assets/styles/colors';
+header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #002D69;
+    padding: 20px 30px;
+}
+.col-nav{
+    display: flex;
+    .main__menu{
+        margin-left: 80px;
+        ul{
+            margin: 0;
+            padding: 0;
+            display: flex;
+            li{
+                list-style: none;
+                margin: 0 12px;
+                a{
+                    text-decoration: none;
+                    color: $default-white;
+                    padding: 4px;
+                    position: relative;
+                    &::before{
+                        content: '';
+                        display: block;
+                        position: absolute;
+                        bottom: 0;
+                        background-color: transparent;
+                        width: 100%;
+                        height: 1px;
+                        transition: all 0.25s ease-in-out;
+                    }
+                    &:hover, &.active{
+                        &::before{
+                            height: 1px;
+                            background-color: $default-white;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.user__info{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    .avatar{
+        border-radius: 100%;
+        width: 45px;
+        height: 45px;
+        figure{
+            margin: 0;
+            padding: 0;
+        }
+    }
+    .logout{
+        position: relative;
+        .box-info{
+            background-color: $default-white;
+            border: 1px solid $primary-gray;
+            border-top: none;
+            border-radius: 0 0 0 5px;
+            position: fixed;
+            top: 85px;
+            right: 0;
+            width: 300px;
+            display: none;
+            overflow: hidden;
+            ul{
+                margin: 0;
+                padding: 0;
+                li{
+                    list-style: none;
+                    width: 100%;
+                    a{
+                        display: flex;
+                        font-size: 14px;
+                        font-weight: 500;
+                        cursor: pointer;
+                        transition: all 0.25s ease-in-out;
+                        padding: 8px 16px;
+                        span{
+                            display: flex;
+                            margin-right: 10px;
+                            width: 20px;
+                            height: 15px;
+                            justify-content: center;
+                            align-items: center;
+                        }
+                    }
+                    
+
+                    &:hover{
+                        background-color: $secondary-gray;
+                    }
+                }
+            }
+        }
+        .button{
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+            padding: 0 30px;
+            
+            span{
+                width: 4px;
+                height: 4px;
+                background-color: $secondary-gray;
+                border-radius: 100%;
+                display: block;
+                margin: 3px 0;
+            }
+        }
+    }   
+}
