@@ -5,10 +5,10 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
-
 import { LoginComponent } from './pages/login/login.component';
 import { TemplatesModule } from './components/templates/templates.module';
 import { SharedModule } from './components/shared/shared.module';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [	
@@ -20,7 +20,8 @@ import { SharedModule } from './components/shared/shared.module';
     FontAwesomeModule,
     MaterialModule,
     TemplatesModule,
-    SharedModule
+    SharedModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
