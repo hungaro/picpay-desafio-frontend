@@ -1,1 +1,140 @@
-<p>tasks works!</p>
+<h2>Meus pagamentos</h2>
+
+<div class="add-payment">
+    <button class="button__default" (click)="addedPayment('modal-add-payment')">ADiCIONAR PAGAMENTO</button>
+</div>
+<section class="main">
+    <div class="table__area">
+        <div class="table__header">
+            <div class="table__search-data">
+                <div class="table__ipt-search">
+                    <input type="text" name="" id="" placeholder="Pesquisar por usuario">
+                </div>
+                <div class="table__button-filter">
+                    <button>
+                        <img src="../../../assets/images/icons/filter.svg" alt=""> Filtrar
+                    </button>
+                </div>
+            </div>
+            <div class="table__ordering">
+                <div class="order__by-count">
+                    <span>Exibir</span>
+                    <select name="" id="">
+                        <option value="5">5</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="50">50</option>
+                    </select>
+                </div>
+                <div class="order__pagination">
+                    <!-- <span class="prev"><</span>
+                    <ul class="pagination__page-number">
+                        <li>1</li>
+                        <li>2</li>
+                        <li>3</li>
+                        <li>4</li>
+                        <li>5</li>
+                    </ul>
+                    <span class="next">></span> -->
+                    <!-- <pagination-controls (pageChange)="" class="pagination" autoHide="true" previousLabel="Anterior" nextLabel="Próxima" maxSize="9"></pagination-controls> -->
+                </div>
+            </div>
+        </div>
+        <div class="table__content">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Usuário</th>
+                        <th>Título</th>
+                        <th>Data</th>
+                        <th>Valor</th>
+                        <th>Pago</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let payment of payments">
+                        <td>
+                            <div class="pay__info">
+                                <div class="avatar">
+                                    <figure>
+                                        <img [src]="payment.image" [alt]="payment.name">
+                                    </figure>
+                                </div>
+                                <div class="name">
+                                    <span class="text">{{payment.name | firstName}}</span>
+                                    <span class="sub">@{{payment.username}}</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="text">{{payment.title}}</span>
+                        </td>
+                        <td>
+                            <span class="text">{{payment.date | date:'d MMM YYYY'}}</span>
+                            <span class="sub">{{payment.date | date:'h:mm a'}}</span>
+                        </td>
+                        <td>
+                            <span class="text">{{payment.value | currency}}</span>
+                        </td>
+                        <td>
+                            <span class="check">
+                                <input type="checkbox" [checked]="payment.isPayed">
+                            </span>
+                        </td>
+                        <td>
+                            <div class="actions">
+                                <span title="Editar pagamento" (click)="editPayment(payment)">
+                                    <img src="../../../assets/images/icons/pencil.svg" alt="Editar pagamento">
+                                </span>
+                                <span title="Excluir pagamento" (click)="removePayment(payment)">
+                                    <img src="../../../assets/images/icons/close.svg" alt="Excluir pagamento">
+                                </span>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+
+
+<app-modal id="modal-add-payment">
+    <div class="form-modal">
+        <div class="modal__header">
+            <h4>Adicionar pagamento</h4>
+        </div>
+        <div class="modal__content">
+            <form [formGroup]="paymentForm" (ngSubmit)="savePayment()">
+                <div class="item-row grid-12">
+                    <div class="item-col span-6">
+                        <input type="text" formControlName="name" placeholder="Usuário">
+                    </div>
+                    <div class="item-col span-6">
+                        <input type="text" formControlName="value" placeholder="Valor" 
+                            currencyMask 
+                            [options]="{ 
+                                prefix: 'R$ ', 
+                                thousands: '.', 
+                                decimal: ',',
+                                align: 'left' 
+                            }">
+                    </div>
+                </div>
+                <div class="item-row grid-12">
+                    <div class="item-col span-6">
+                        <input type="date" formControlName="date" placeholder="Data">
+                    </div>
+                    <div class="item-col span-6">
+                        <input type="text" formControlName="title" placeholder="Título">
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="modal__footer">
+            <button class="button__default button__default--cancel">CANCELAR</button>
+            <button class="button__default">SALVAR</button>
+        </div>
+    </div>
+</app-modal>
