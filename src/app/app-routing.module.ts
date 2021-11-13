@@ -29,11 +29,11 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         children: [
             {
-                path: 'account',
+                path: 'perfil',
                 component: AccountComponent
             },
             {
-                path: 'tasks',
+                path: 'pagamentos',
                 component: TasksComponent
             }
         ]
