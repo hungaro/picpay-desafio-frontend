@@ -1,5 +1,6 @@
 import { Component, Inject } from "@angular/core";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
     selector: 'add-modal',
@@ -15,7 +16,8 @@ export class AddModalComponent {
 
     constructor(
         private dialogRef: MatDialogRef<AddModalComponent>,
-        @Inject(MAT_DIALOG_DATA) public data
+        @Inject(MAT_DIALOG_DATA) public data,
+        private translate: TranslateService
     ){
         if(this.data){
             this.title = this.data.payment.title;
@@ -46,10 +48,10 @@ export class AddModalComponent {
             return;
         }
 
-        this.msg_error = 'Preencha todos campos obrigatórios';
+        this.msg_error = this.translate.instant('errors.type-all-required-fields');
     }
 
-    isValid = () => this.value && this.user;
+    isValid = (): boolean => !!(this.value && this.user);
 
     verifyField(): void {
         if(this.isValid()){

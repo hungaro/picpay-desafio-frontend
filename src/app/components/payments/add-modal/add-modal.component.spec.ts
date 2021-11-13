@@ -2,11 +2,15 @@ import { AddModalComponent } from "./add-modal.component";
 
 describe('AddModalComponent', () => {
     let component: AddModalComponent;
-    let dialogRef;
+    let dialogRef, translate;
   
     beforeEach(() => {
         dialogRef = jasmine.createSpyObj('MatDialogRef', ['close']);
-        component = new AddModalComponent(dialogRef, { payment: { title: 'Front-End Developer', value: 177, name: 'Bruno Lins' } });
+        translate = jasmine.createSpyObj('TranslateService', ['instant']);
+
+        translate.instant.and.returnValue('the text translated');
+
+        component = new AddModalComponent(dialogRef, { payment: { title: 'Front-End Developer', value: 177, name: 'Bruno Lins' }}, translate);
     });
 
     it('should create the add-modal component', () => expect(component).toBeTruthy());
@@ -17,15 +21,26 @@ describe('AddModalComponent', () => {
         expect(dialogRef.close).toHaveBeenCalled();
     });
 
-    it('should call the save method', () => {
-        component.title = 'New Title';
-        component.value = 771;
-        component.user = '@idevnotes';
-        
-        component.save();
-
-        expect(component.data.payment.title).toEqual('New Title');
-        expect(component.data.payment.value).toEqual(771);
-        
+    it('should call the save method with data', () => {
+        expect(() => {
+            component.save();
+        }).not.toThrow();
     });
+
+    it('should call the isValid method', () => {
+        component.value = 100;
+        component.user = 'Bruno Lins'
+        let res = component.isValid();
+
+        expect(res).toBe(true);
+    });
+
+    it('should call the verifyField method', () => {
+        component.msg_error = 'Has error on screen'
+        component.value = 100;
+        component.user = 'Bruno Lins';
+        component.verifyField();
+
+        expect(component.msg_error).toBe(null);
+    })
 })

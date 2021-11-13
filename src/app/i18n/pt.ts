@@ -38,6 +38,7 @@ export const translations = {
         }
     },
     errors: {
-        'no-access': 'Você não possui permissão de acesso'
+        'no-access': 'Você não possui permissão de acesso',
+        'type-all-required-fields': 'Preencha todos campos obrigatórios'
     }
 }
