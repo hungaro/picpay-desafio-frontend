@@ -1,0 +1,5 @@
+@use '~@angular/material' as mat;
+
+.a-button-component-custom-shadow {
+  @include mat.elevation(2, #f7eff2, 0.8);
+}

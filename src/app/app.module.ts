@@ -6,15 +6,21 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './material.module';
 
+import { LoginComponent } from './pages/login/login.component';
+import { TemplatesModule } from './components/templates/templates.module';
+import { SharedModule } from './components/shared/shared.module';
+
 @NgModule({
   declarations: [	
-    AppComponent,
+    AppComponent, LoginComponent,
    ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     FontAwesomeModule,
-    MaterialModule
+    MaterialModule,
+    TemplatesModule,
+    SharedModule
   ],
   providers: [],
   bootstrap: [AppComponent]
