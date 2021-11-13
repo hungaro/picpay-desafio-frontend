@@ -81,3 +81,77 @@ describe('PaymentsComponent', () => {
     }).not.toThrow();
   })
 })
+
+describe('PaymentsComponent errors', () => {
+  let component: PaymentsComponent;
+
+  let paymentService, dialog, snackBar;
+
+  let payment: IPayment;
+
+  beforeEach(() => {
+      paymentService = jasmine.createSpyObj('PaymentService', ['getPaymentList', 'addPayment', 'payUnPay', 'getPaymentById', 'remove', 'edit'])
+      dialog = jasmine.createSpyObj('MatDialog', ['open']);
+      snackBar = jasmine.createSpyObj('MatSnackBar', ['open']);
+
+      paymentService.addPayment.and.returnValue(throwError({ error: true }));
+      paymentService.remove.and.returnValue(throwError({ error: true }));
+      paymentService.edit.and.returnValue(throwError({ error: true }));
+      paymentService.getPaymentList.and.returnValue(throwError({ error: true }));
+      paymentService.payUnPay.and.returnValue(throwError({ error: true }));
+
+      dialog.open.and.returnValue({
+        afterClosed: () => of({ value: 10, user: 'Bruno Lins', title: 'Front-End Developer' })
+      });
+
+      payment = {
+        date: '2021-11-11T11:24:55',
+        id: 1,
+        image: 'path/to/image',
+        isPayed: true,
+        name: 'Bruno Lins',
+        title: 'Front-End Developer',
+        username: '@idevnotes',
+        value: 1177
+      }
+
+      component = new PaymentsComponent(paymentService, dialog, snackBar);
+  });
+
+  it('should call the add method', () => {
+
+    component.add();
+
+    expect(snackBar.open).toHaveBeenCalledWith('Encontramos um erro ao adicionar o pagamento', 'Ok');
+  });
+
+  it('should call the remove method', () => {
+    expect(() => {
+      component.remove(payment);
+    }).not.toThrow()
+  });
+
+  it('should call the edit method', () => {
+    expect(() => {
+      component.edit(payment);
+    }).not.toThrow()
+  });
+
+  it('should call the getList method', () => {
+    expect(() => {
+      component.getList();
+    }).not.toThrow()
+  });
+
+  it('should call the unPay method', () => {
+    expect(() => {
+      component.unPay(payment);
+    }).not.toThrow()
+  });
+
+  it('should call the pay method', () => {
+    expect(() => {
+      component.pay(payment);
+    }).not.toThrow()
+  });
+})

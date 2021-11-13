@@ -74,7 +74,7 @@ const modals = [AddModalComponent, RemoveModalComponent]
     BrowserAnimationsModule
   ],
   providers: [...providers],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
   constructor(
