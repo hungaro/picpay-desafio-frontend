@@ -252,8 +252,6 @@ export class PaymentsComponent implements OnInit {
   }
 
   inputSearchTyping(): void {
-    this.pageSize = null;
-    this.pageSize = null;
     this.getList()
   }
 

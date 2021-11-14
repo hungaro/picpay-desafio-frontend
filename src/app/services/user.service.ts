@@ -12,7 +12,11 @@ export class UserService {
     ){}
 
     edit(user: IAccount): Observable<IAccount> {
-        let url = urlConfig.urlAccount.replace(':id', user.id.toString());
+        let url = '';
+        if(user){
+            url = urlConfig.urlAccount.replace(':id', user.id.toString());
+        }
+        
         return this.http.put<IAccount>(url, user);
     }
 }

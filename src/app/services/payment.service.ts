@@ -18,7 +18,7 @@ export class PaymentService {
         }
 
         if(inputSearch) {
-            params = params.set('name', inputSearch)
+            params = params.set('name_q', inputSearch)
         }
 
         if(_page) {

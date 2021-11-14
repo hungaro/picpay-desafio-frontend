@@ -23,6 +23,11 @@ export class ProfileComponent implements OnInit {
     }
 
     onSave(): void {
+        if(!this.pwd || !this.pwdConfirm){
+            this.dismatch = true;
+            return;
+        }
+
         if(this.pwd === this.pwdConfirm){
             this.user.password = this.pwd;
             this.dismatch = false;
