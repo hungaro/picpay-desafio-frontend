@@ -16,7 +16,9 @@ export class TasksComponent implements OnInit {
   totalItems = 0;
   activePage: number;
   page = 1;
-  itensPerPage: number = 30;
+  itemsPerPage: number = 5;
+  searchText: string; 
+
   payments: PaymentModel[] = [];
 
   constructor(
@@ -26,7 +28,8 @@ export class TasksComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.getPaymentsList();
+    this.getTotalPaymentsList();
+    this.getPaymentsList(1);
     this.paymentForm = this.fb.group({
       name: ['', [Validators.required]],
       value: ['', [Validators.required]],
@@ -46,10 +49,23 @@ export class TasksComponent implements OnInit {
 
   openFilter(){}
 
-  getPaymentsList(){
-    this.paymentService.fetchPayments(1, 10).then(data => {  
-      this.payments = data; 
+  getTotalPaymentsList(){
+    this.paymentService.fetchTotalPayments().then(data => {  
+      this.totalItems = data;
     }).catch(error => console.log(error));
+  }
+
+  getPaymentsList(e){
+    this.page = e;
+    this.paymentService.fetchPayments(this.page, this.itemsPerPage).then(data => {  
+      this.payments = data;
+      this.activePage = this.page;
+    }).catch(error => console.log(error));
+  }
+
+  showByQuantity(quantity){
+    this.itemsPerPage = quantity;
+    this.getPaymentsList(this.page);
   }
 
   editPayment({name, value, date, title}){

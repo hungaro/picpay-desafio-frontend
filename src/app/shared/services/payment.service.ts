@@ -19,5 +19,16 @@ export class PaymentService {
         return data;
       });
   }
+  fetchTotalPayments(){
+    const endpoint = `tasks`;
+    const route = this.apiService.url + endpoint;
+
+    return this.apiService
+      .get$(route)
+      .toPromise()
+      .then(data => {
+        return data.length;
+      });
+  }
 
 }

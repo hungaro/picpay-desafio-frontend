@@ -8,7 +8,7 @@
         <div class="table__header">
             <div class="table__search-data">
                 <div class="table__ipt-search">
-                    <input type="text" name="" id="" placeholder="Pesquisar por usuario">
+                    <input type="search" [(ngModel)]="searchText" placeholder="Pesquisar por usuario">
                 </div>
                 <div class="table__button-filter">
                     <button>
@@ -19,24 +19,20 @@
             <div class="table__ordering">
                 <div class="order__by-count">
                     <span>Exibir</span>
-                    <select name="" id="">
+                    <select name="" id="" (change)="showByQuantity($event.target.value)">
                         <option value="5">5</option>
                         <option value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="50">50</option>
+                        <option value="20">15</option>
                     </select>
                 </div>
                 <div class="order__pagination">
-                    <!-- <span class="prev"><</span>
-                    <ul class="pagination__page-number">
-                        <li>1</li>
-                        <li>2</li>
-                        <li>3</li>
-                        <li>4</li>
-                        <li>5</li>
-                    </ul>
-                    <span class="next">></span> -->
-                    <!-- <pagination-controls (pageChange)="" class="pagination" autoHide="true" previousLabel="Anterior" nextLabel="Próxima" maxSize="9"></pagination-controls> -->
+                    <pagination-controls
+                        class="pagination" 
+                        (pageChange)="getPaymentsList($event)" 
+                        autoHide="true" 
+                        previousLabel="" 
+                        nextLabel="" 
+                        maxSize="5"></pagination-controls>
                 </div>
             </div>
         </div>
@@ -53,7 +49,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let payment of payments">
+                    <tr 
+                        *ngFor="let payment of payments | grdFilter: { name: searchText } | paginate: {
+                            itemsPerPage: itemsPerPage,
+                            currentPage: page,
+                            totalItems: totalItems }">
                         <td>
                             <div class="pay__info">
                                 <div class="avatar">

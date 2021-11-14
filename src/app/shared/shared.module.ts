@@ -8,10 +8,12 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { ModalModule } from './components/modal/modal.module';
 import { FirstNamePipe } from './pipes/firstName.pipe';
 import { CurrencyMaskModule } from 'ng2-currency-mask';
+import { GrdFilterPipe } from './pipes/grd-filter.pipe';
 registerLocaleData(ptBr);
 @NgModule({
   declarations: [
-    FirstNamePipe
+    FirstNamePipe,
+    GrdFilterPipe
   ],
   imports: [
     CommonModule,
@@ -30,6 +32,7 @@ registerLocaleData(ptBr);
     NgxPaginationModule,
     ModalModule,
     FirstNamePipe,
+    GrdFilterPipe,
     CurrencyMaskModule
   ],
   providers: [
