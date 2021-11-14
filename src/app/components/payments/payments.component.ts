@@ -8,6 +8,8 @@ import { catchError, tap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { throwError } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
+import { FilterModalComponent } from './filter-modal/filter-modal.component';
+import { MatBottomSheet } from '@angular/material/bottom-sheet';
 
 @Component({
   selector: 'app-payments',
@@ -20,12 +22,16 @@ export class PaymentsComponent implements OnInit {
   inputSearch: string = '';
   pageSize: number = 10;
   page: number = 1;
+  filterRange: boolean = false;
+  isPayedFilter: boolean = null;
+  dateRangeFilter: string = ''
   
   constructor(
     private paymentService: PaymentService,
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private _bottomSheet: MatBottomSheet
   ) {}
 
   ngOnInit(){
@@ -81,7 +87,7 @@ export class PaymentsComponent implements OnInit {
               this.getList();
             }, error: (err) => {
               this.snackBar.open(
-                this.translate.instant('payments.we-found-errors-removing-payment'),
+                this.translate.instant('errors.we-found-errors-removing-payment'),
                 this.translate.instant('common.ok')
               );
               console.error(err);
@@ -111,7 +117,7 @@ export class PaymentsComponent implements OnInit {
               this.getList();
             }, error: (err) => {
               this.snackBar.open(
-                this.translate.instant('payments.we-found-errors-editing-payment'),
+                this.translate.instant('errors.we-found-errors-editing-payment'),
                 this.translate.instant('common.ok')
               );
               console.error(err);
@@ -122,19 +128,28 @@ export class PaymentsComponent implements OnInit {
     });
   }
 
-  getList(): void {
-    this.paymentService.getPaymentList({ _limit: this.pageSize, username: this.inputSearch, _page: this.page }).subscribe({
-      next: (list: IPayment[]) => {
-        this.paymentList = list;
-      },
-      error: (err) => {
-        console.error(err);
-        this.snackBar.open(
-          this.translate.instant('errors.we-found-errors-searching-payment-list'),
-          this.translate.instant('common.ok')
-        );
-      }
-    })
+  getList(isPayed?, date? ): void {
+    this.isPayedFilter = isPayed ? isPayed : this.isPayedFilter;
+    this.dateRangeFilter = date ? date : this.dateRangeFilter;
+
+    this.paymentService.getPaymentList({
+        _limit: this.pageSize,
+        username: this.inputSearch,
+        _page: this.page,
+        isPayed: this.isPayedFilter,
+        date: this.dateRangeFilter
+      }).subscribe({
+        next: (list: IPayment[]) => {
+          this.paymentList = list;
+        },
+        error: (err) => {
+          console.error(err);
+          this.snackBar.open(
+            this.translate.instant('errors.we-found-errors-searching-payment-list'),
+            this.translate.instant('common.ok')
+          );
+        }
+      })
   }
 
   unPay(payment: IPayment): void {
@@ -148,7 +163,7 @@ export class PaymentsComponent implements OnInit {
           );
         }, error: (err) => {
           this.snackBar.open(
-            this.translate.instant('payments.we-found-errors-editing-payment'),
+            this.translate.instant('errors.we-found-errors-editing-payment'),
             this.translate.instant('common.ok')
           );
           console.error(err)
@@ -167,7 +182,7 @@ export class PaymentsComponent implements OnInit {
           );
         }, error: (err) => {
           this.snackBar.open(
-            this.translate.instant('payments.we-found-errors-editing-payment'),
+            this.translate.instant('errors.we-found-errors-editing-payment'),
             this.translate.instant('common.ok')
           );
           console.error(err)
@@ -182,4 +197,43 @@ export class PaymentsComponent implements OnInit {
       this.translate.instant('common.ok')
     )
   }
+
+  filter(): void {
+    const bottomSheetRef = this._bottomSheet.open(FilterModalComponent);
+
+    bottomSheetRef.afterDismissed().subscribe((result: number) => {
+      if(result === Filter.PaymentByRange) {
+        this.filterRange = true;
+        return;
+      }
+
+      if(result === Filter.PaymentNotMade) {
+        this.getList({ isPayed: false });
+        return;
+      }
+
+      if(result === Filter.PaymentMade) {
+        this.getList({ isPayed: true });
+        return;
+      }
+
+      if(result === Filter.CleanAllFilters) {
+        this.filterRange = false;
+        this.isPayedFilter = null;
+        this.dateRangeFilter = null;
+        this.page = 1
+        this.pageSize = 10;
+        this.inputSearch = null;
+        this.getList();
+        return;
+      }
+    });
+  }
+}
+
+enum Filter {
+  PaymentNotMade = 1,
+  PaymentMade = 2,
+  PaymentByRange = 3,
+  CleanAllFilters = 4
 }

@@ -1,0 +1,23 @@
+<div class="filter-modal">
+    <mat-nav-list>
+        <a (click)="filter(1)" mat-list-item>
+          <span mat-line>{{'filter.payment-not-made' | translate}}</span>
+          <span mat-line>{{'filter.payment-not-made-description' | translate}}</span>
+        </a>
+      
+        <a (click)="filter(2)" mat-list-item>
+          <span mat-line>{{'filter.payment-made' | translate}}</span>
+          <span mat-line>{{'filter.payment-made-description' | translate}}</span>
+        </a>
+      
+        <a (click)="filter(3)" mat-list-item>
+          <span mat-line>{{'filter.range' | translate}}</span>
+          <span mat-line>{{'filter.range-description' | translate}}</span>
+        </a>
+
+        <a (click)="filter(4)" mat-list-item>
+            <span mat-line>{{'filter.clean' | translate}}</span>
+            <span mat-line>{{'filter.clean-description' | translate}}</span>
+          </a>
+    </mat-nav-list>
+</div>

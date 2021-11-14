@@ -31,6 +31,7 @@ export const translations = {
         'search-on-table': 'Pesquisar na tabela',
         'filter-button': 'Filtrar',
         show: 'Exibir',
+        '*anywhere-column': '*qualquer coluna',
         page: 'Página',
         'payment-add-success': 'Pagamento adicionado com sucesso',
         'payment-removed-success': 'Pagamento removido com sucesso',
@@ -52,5 +53,17 @@ export const translations = {
         'we-found-errors-removing-payment': 'Encontramos um erro ao remover o pagamento selecionado',
         'we-found-errors-editing-payment': 'Encontramos um erro ao editar o pagamento',
         'we-found-errors-searching-payment-list': 'Encontramos um erro ao buscar a lista de pagamentos',
+    },
+    filter: {
+        title: 'Filtros',
+        'payment-made': 'Pagamentos realizados',
+        'payment-made-description': 'Você poderá ver todos pagamentos que já foram pagos',
+        'payment-not-made': 'Pagamentos não realizados',
+        'payment-not-made-description': 'Você poderá ver todos pagamentos que ainda não foram pagos',
+        range: 'Filtro por range de data',
+        'range-description': 'Você poderá filtrar com uma data inicio e uma data fim',
+        'date-range': 'Escolha um range de data',
+        clean: 'Limpar todos os filtros',
+        'clean-description': 'Irá limpar todos os filtros realizados'
     }
 }

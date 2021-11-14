@@ -73,10 +73,33 @@
             ::ng-deep .mat-form-field {
                 width: 100% !important;
             }
+
+            .bold {
+                font-weight: 600;
+                text-transform: uppercase;
+            }
         }
 
         &--button-filter {
             max-width: 8vw;
+
+            // possivel exclusão
+            display: grid;
+            grid-auto-flow: column;
+            grid-template-columns: 83px;
+            gap: 20px;
+
+            ::ng-deep .mat-form-field-appearance-fill {
+                padding: 0px !important;
+                > .mat-form-field-wrapper {
+                    height: 58px !important;
+                    > .mat-form-field-flex {
+                        background: transparent;
+                        padding: 0 !important;
+                    }
+                }
+            }
+            // --------------
             :active {
                 background-color: rgba(0,0,0, .2);
             }

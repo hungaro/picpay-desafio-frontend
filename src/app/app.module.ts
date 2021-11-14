@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import {NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './components/login/login.component';
@@ -27,8 +27,13 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AddModalComponent } from './components/payments/add-modal/add-modal.component';
 import { RemoveModalComponent } from './components/payments/remove-modal/remove-modal.component';
-import { MatOptionModule } from '@angular/material/core';
+import { MatNativeDateModule, MatOptionModule } from '@angular/material/core';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { FilterModalComponent } from './components/payments/filter-modal/filter-modal.component';
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
+import { MatListModule } from '@angular/material/list';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { DateRangeComponent } from './components/date-range/date-range.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -58,15 +63,19 @@ const imports = [
   MatDialogModule,
   MatOptionModule,
   NgxMaskModule.forRoot(maskConfig),
+  MatBottomSheetModule,
+  MatListModule,
+  MatDatepickerModule,
+  MatNativeDateModule
 ]
 
 const providers = [AuthService, PaymentService]
 
-const modals = [AddModalComponent, RemoveModalComponent]
+const modals = [AddModalComponent, RemoveModalComponent, FilterModalComponent]
 
 @NgModule({
   declarations: [	
-    AppComponent, LoginComponent, EmailComponent, PasswordComponent, PaymentsComponent, PaymentTableComponent,
+    AppComponent, LoginComponent, EmailComponent, PasswordComponent, PaymentsComponent, PaymentTableComponent, DateRangeComponent,
     ...modals
    ],
   imports: [
