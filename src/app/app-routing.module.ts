@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuard } from './core/auth/auth.guard';
 import { AccessDeniedComponent } from './core/errors/access-denied/access-denied.component';
 import { NotFoundComponent } from './core/errors/not-found/not-found.component';
 import { LoginComponent } from './pages/login/login.component';
@@ -7,10 +8,15 @@ import { MyPaymentsComponent } from './pages/payments/my-payments/my-payments.co
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'my-payments', component: MyPaymentsComponent },
+  { 
+    path: 'my-payments', 
+    component: MyPaymentsComponent,
+    canActivate: [AuthGuard],
+  },
   {
     path: 'denied',
     component: AccessDeniedComponent,
+    canActivate: [AuthGuard],
   },
   { path: '**', component: NotFoundComponent },
 ];

@@ -1,5 +1,6 @@
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
@@ -9,6 +10,7 @@ import { TemplatesModule } from './components/templates/templates.module';
 import { SharedModule } from './components/shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { PagesModule } from './pages/pages.module';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [	
@@ -17,12 +19,14 @@ import { PagesModule } from './pages/pages.module';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     FontAwesomeModule,
     MaterialModule,
     TemplatesModule,
     SharedModule,
     AppRoutingModule,
-    PagesModule
+    PagesModule,
+    CoreModule
   ],
   providers: [],
   bootstrap: [AppComponent]
