@@ -5,7 +5,7 @@ import { PaymentsComponent } from "./payments.component";
 describe('PaymentsComponent', () => {
   let component: PaymentsComponent;
 
-  let paymentService, dialog, snackBar, translate, bottomSheet;
+  let paymentService, dialog, snackBar, translate, bottomSheet, userService;
 
   let payment: IPayment = {
     date: '2021-11-11T11:24:55',
@@ -24,12 +24,16 @@ describe('PaymentsComponent', () => {
       snackBar = jasmine.createSpyObj('MatSnackBar', ['open']);
       translate = jasmine.createSpyObj('TranslateService', ['instant']);
       bottomSheet = jasmine.createSpyObj('MatBottomSheet', ['open'])
+      userService = jasmine.createSpyObj('UserService', ['edit']);
+
       paymentService.getPaymentList.and.returnValue(of([payment]))
       paymentService.addPayment.and.returnValue(of(payment))
       paymentService.payUnPay.and.returnValue(of(payment))
       paymentService.getPaymentById.and.returnValue(of([payment]))
       paymentService.remove.and.returnValue(of({}))
       paymentService.edit.and.returnValue(of(payment))
+
+      userService.edit.and.returnValue(of({id:0,name:"usuario",email:"usuario@gmail.com",password:"usuario"}))
 
       dialog.open.and.returnValue({
         afterClosed: () => of({ value: 10, user: 'Bruno Lins', title: 'Front-End Developer', image: 'link da imagem' })
@@ -39,7 +43,7 @@ describe('PaymentsComponent', () => {
         afterDismissed: () => of(3)
       });
 
-      component = new PaymentsComponent(paymentService, dialog, snackBar, translate, bottomSheet);
+      component = new PaymentsComponent(paymentService, dialog, snackBar, translate, bottomSheet, userService);
   });
 
   it('should create the component', () => expect(component).toBeTruthy());
@@ -90,7 +94,7 @@ describe('PaymentsComponent', () => {
 describe('PaymentsComponent errors', () => {
   let component: PaymentsComponent;
 
-  let paymentService, dialog, snackBar, translate, bottomSheet;
+  let paymentService, dialog, snackBar, translate, bottomSheet, userService;
 
   let payment: IPayment;
 
@@ -100,12 +104,15 @@ describe('PaymentsComponent errors', () => {
       snackBar = jasmine.createSpyObj('MatSnackBar', ['open']);
       translate = jasmine.createSpyObj('TranslateService', ['instant']);
       bottomSheet = jasmine.createSpyObj('MatBottomSheet', ['open']);
+      userService = jasmine.createSpyObj('UserService', ['edit']);
 
       paymentService.addPayment.and.returnValue(throwError({ error: true }));
       paymentService.remove.and.returnValue(throwError({ error: true }));
       paymentService.edit.and.returnValue(throwError({ error: true }));
       paymentService.getPaymentList.and.returnValue(throwError({ error: true }));
       paymentService.payUnPay.and.returnValue(throwError({ error: true }));
+
+      userService.edit.and.returnValue(of({id:0,name:"usuario",email:"usuario@gmail.com",password:"usuario"}))
 
       dialog.open.and.returnValue({
         afterClosed: () => of({ value: 10, user: 'Bruno Lins', title: 'Front-End Developer', image: 'link da imagem' })
@@ -126,7 +133,7 @@ describe('PaymentsComponent errors', () => {
         value: 1177
       }
 
-      component = new PaymentsComponent(paymentService, dialog, snackBar, translate, bottomSheet);
+      component = new PaymentsComponent(paymentService, dialog, snackBar, translate, bottomSheet, userService);
   });
 
   it('should call the add method', () => {
@@ -162,6 +169,44 @@ describe('PaymentsComponent errors', () => {
   it('should call the pay method', () => {
     expect(() => {
       component.pay(payment);
+    }).not.toThrow()
+  });
+
+  it('should call the logout method', () => {
+    expect(() => {
+      component.logout();
+    }).not.toThrow()
+  });
+
+  it('should call the filter method', () => {
+    expect(() => {
+      component.filter();
+    }).not.toThrow()
+  });
+
+  it('should call the startDate method', () => {
+    expect(() => {
+      component.endDateSelected = 'date'
+      component.startDate('date');
+    }).not.toThrow()
+  });
+
+  it('should call the endDate method', () => {
+    expect(() => {
+      component.startDateSelected = 'date'
+      component.endDate('date');
+    }).not.toThrow()
+  });
+
+  it('should call the inputSearchTyping method', () => {
+    expect(() => {
+      component.inputSearchTyping();
+    }).not.toThrow()
+  });
+
+  it('should call the openProfile method', () => {
+    expect(() => {
+      component.openProfile();
     }).not.toThrow()
   });
 })

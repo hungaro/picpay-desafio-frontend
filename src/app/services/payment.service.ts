@@ -70,7 +70,7 @@ export class PaymentService {
     }
 
     remove(id: number): Observable<{}> {
-        return this.http.delete<IPayment>(
+        return this.http.delete<{}>(
             urlConfig.urlPaymentPatch.replace(':id', id.toString())
         )
     }
