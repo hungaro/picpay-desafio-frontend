@@ -2,14 +2,17 @@ export const translations = {
     common: {
         required: 'obrigatório',
         'name-required': 'Nome*',
+        name: 'Nome',
         'value-required': 'Valor*',
         cancel: 'Cancelar',
         save: 'Salvar',
+        email: 'Email',
         'edit-payment': 'Editar pagamento',
         ok: 'Ok',
         'email-or-pwd-wrong': 'Email e/ou senha estão incorretos',
         title: 'Título',
-        'link-image': 'Link da imagem'
+        'link-image': 'Link da imagem',
+        dismatch: 'As senhas devem coincidir'
     },
     login: {
         'welcome-back': 'Bem vindo de volta',
@@ -18,6 +21,7 @@ export const translations = {
     input: {
         'set-valid-email': 'Por favor digite um email valido',
         'email': 'Email',
+        'pwd-confirm': 'Confirme a senha',
         'pwd': 'Senha',
         'email-is': "Email é",
         'pwd-is': "Senha é",
@@ -28,10 +32,9 @@ export const translations = {
         'logout': 'Logout feito com sucesso',
         add: 'Adicionar pagamento',
         remove: 'Excluir pagamento',
-        'search-on-table': 'Pesquisar na tabela',
+        'search-by-user': 'Pesquisar por usuário',
         'filter-button': 'Filtrar',
         show: 'Exibir',
-        '*anywhere-column': '*qualquer coluna',
         page: 'Página',
         'payment-add-success': 'Pagamento adicionado com sucesso',
         'payment-removed-success': 'Pagamento removido com sucesso',
@@ -65,5 +68,11 @@ export const translations = {
         'date-range': 'Escolha um range de data',
         clean: 'Limpar todos os filtros',
         'clean-description': 'Irá limpar todos os filtros realizados'
+    },
+
+    profile: {
+        hi: 'Olá',
+        'updated-success': 'Alterações salvas com sucesso',
+        'updated-error': 'Encontramos um erro ao editar o usuário'
     }
 }

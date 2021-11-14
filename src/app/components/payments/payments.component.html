@@ -5,7 +5,7 @@
         </div>
         <div class="payments__header--account">
             <img routerLink="/" (click)="logout()" src="../../../assets/svg/logout.svg"/>
-            <img src="../../../assets/images/user.png"/>
+            <img (click)="openProfile()" src="../../../assets/images/user.png"/>
         </div>
     </div>
 
@@ -22,9 +22,8 @@
         <div class="card__filter">
             <div class="card__filter--search-input">
                 <mat-form-field appearance="legacy">
-                    <mat-label>{{'payments.search-on-table' | translate}}</mat-label>
-                    <mat-hint>{{'payments.*anywhere-column' | translate}}</mat-hint>
-                    <input [(ngModel)]="inputSearch" type="text" matInput>
+                    <mat-label>{{'payments.search-by-user' | translate}}</mat-label>
+                    <input (ngModelChange)="inputSearchTyping()" [(ngModel)]="inputSearch" type="text" matInput>
                     <mat-icon matSuffix>search</mat-icon>
                   </mat-form-field>
             </div>
@@ -49,7 +48,6 @@
             </div>
         </div>
         <payment-table
-            [search]="inputSearch"
             (pay)="pay($event)"
             (unPay)="unPay($event)"
             (remove)="remove($event)"

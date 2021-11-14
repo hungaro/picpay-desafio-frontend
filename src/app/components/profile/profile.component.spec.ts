@@ -1,12 +1,13 @@
-import { FilterModalComponent } from "./filter-modal.component"
+import { ProfileComponent } from './profile.component';
 
-describe('FilterModalComponent' , () => {
-    let component: FilterModalComponent;
+
+describe('ProfileComponent' , () => {
+    let component: ProfileComponent;
     let bottomSheet;
     beforeEach(() => {
         bottomSheet = jasmine.createSpyObj('MatBottomSheet', ['open']);
 
-        component = new FilterModalComponent(bottomSheet);
+        component = new ProfileComponent(bottomSheet);
     });
 
     it('should create the component', () => expect(component).toBeTruthy());

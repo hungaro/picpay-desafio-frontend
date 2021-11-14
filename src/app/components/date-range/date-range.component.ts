@@ -27,7 +27,7 @@ export class DateRangeComponent {
         });
     }
 
-    startDate(date): void {
+    startDate(date: { value: Date }): void {
         let isoString;
         if(date.value){
             isoString = new Date(date.value.toString()).toISOString();
@@ -35,7 +35,7 @@ export class DateRangeComponent {
         }
     }
 
-    endDate(date): void {
+    endDate(date: { value: Date }): void {
         let isoString;
         if(date.value){
             isoString = new Date(date.value.toString()).toISOString();

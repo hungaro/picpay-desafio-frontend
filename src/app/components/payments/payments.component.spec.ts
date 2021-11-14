@@ -5,7 +5,7 @@ import { PaymentsComponent } from "./payments.component";
 describe('PaymentsComponent', () => {
   let component: PaymentsComponent;
 
-  let paymentService, dialog, snackBar, translate;
+  let paymentService, dialog, snackBar, translate, bottomSheet;
 
   let payment: IPayment = {
     date: '2021-11-11T11:24:55',
@@ -23,7 +23,7 @@ describe('PaymentsComponent', () => {
       dialog = jasmine.createSpyObj('MatDialog', ['open']);
       snackBar = jasmine.createSpyObj('MatSnackBar', ['open']);
       translate = jasmine.createSpyObj('TranslateService', ['instant']);
-
+      bottomSheet = jasmine.createSpyObj('MatBottomSheet', ['open'])
       paymentService.getPaymentList.and.returnValue(of([payment]))
       paymentService.addPayment.and.returnValue(of(payment))
       paymentService.payUnPay.and.returnValue(of(payment))
@@ -35,7 +35,11 @@ describe('PaymentsComponent', () => {
         afterClosed: () => of({ value: 10, user: 'Bruno Lins', title: 'Front-End Developer', image: 'link da imagem' })
       });
 
-      component = new PaymentsComponent(paymentService, dialog, snackBar, translate);
+      bottomSheet.open.and.returnValue({
+        afterDismissed: () => of(3)
+      });
+
+      component = new PaymentsComponent(paymentService, dialog, snackBar, translate, bottomSheet);
   });
 
   it('should create the component', () => expect(component).toBeTruthy());
@@ -86,7 +90,7 @@ describe('PaymentsComponent', () => {
 describe('PaymentsComponent errors', () => {
   let component: PaymentsComponent;
 
-  let paymentService, dialog, snackBar, translate;
+  let paymentService, dialog, snackBar, translate, bottomSheet;
 
   let payment: IPayment;
 
@@ -95,6 +99,7 @@ describe('PaymentsComponent errors', () => {
       dialog = jasmine.createSpyObj('MatDialog', ['open']);
       snackBar = jasmine.createSpyObj('MatSnackBar', ['open']);
       translate = jasmine.createSpyObj('TranslateService', ['instant']);
+      bottomSheet = jasmine.createSpyObj('MatBottomSheet', ['open']);
 
       paymentService.addPayment.and.returnValue(throwError({ error: true }));
       paymentService.remove.and.returnValue(throwError({ error: true }));
@@ -104,6 +109,10 @@ describe('PaymentsComponent errors', () => {
 
       dialog.open.and.returnValue({
         afterClosed: () => of({ value: 10, user: 'Bruno Lins', title: 'Front-End Developer', image: 'link da imagem' })
+      });
+
+      bottomSheet.open.and.returnValue({
+        afterDismissed: () => of(2)
       });
 
       payment = {
@@ -117,7 +126,7 @@ describe('PaymentsComponent errors', () => {
         value: 1177
       }
 
-      component = new PaymentsComponent(paymentService, dialog, snackBar, translate);
+      component = new PaymentsComponent(paymentService, dialog, snackBar, translate, bottomSheet);
   });
 
   it('should call the add method', () => {

@@ -37,6 +37,10 @@ $picpay-desafio-frontend-theme: mat.define-light-theme((
   box-sizing: border-box;
   font-family: Montserrat;
   font-style: normal;
+  input[type=number]::-webkit-inner-spin-button { 
+    -webkit-appearance: none;
+    display: none;
+  }
 }
 
 @font-face {

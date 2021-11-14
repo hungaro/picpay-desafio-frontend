@@ -1,0 +1,43 @@
+<div class="profile">
+    <div class="profile__background">
+        <img
+            src="../../../assets/images/background_user.jpeg"
+            width="100%"
+            height="150px"/>
+    </div>
+    <div class="profile__hi">
+        <p>{{'profile.hi' | translate}}, {{user.name}}</p>
+    </div>
+    <div class="profile__grid">
+            <div class="profile__name">
+                <mat-form-field appearance="fill">
+                    <mat-label>{{'common.name' | translate}}</mat-label>
+                    <input
+                        matInput
+                        type="text"
+                        [(ngModel)]="user.name"/>
+                </mat-form-field>
+            </div>
+            <div class="profile__email">
+                <mat-form-field appearance="fill">
+                    <mat-label>{{'common.email' | translate}}</mat-label>
+                    <input
+                        disabled
+                        matInput
+                        type="text"
+                        [(ngModel)]="user.email"/>
+                </mat-form-field>
+            </div>
+            <div class="profile__pwd">
+                <app-password (value)="pwd = $event"></app-password>
+            </div>
+            <div class="profile__pwd-confirm">
+                <app-password label="input.pwd-confirm" (value)="pwdConfirm = $event"></app-password>
+                <mat-hint *ngIf="dismatch">{{'common.dismatch' | translate}}</mat-hint>
+            </div>
+    </div>
+
+    <div class="profile__button">
+        <button (click)="onSave()">{{'common.save' | translate}}</button>
+    </div>
+</div>

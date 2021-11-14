@@ -10,6 +10,9 @@ import { throwError } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 import { FilterModalComponent } from './filter-modal/filter-modal.component';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
+import { ProfileComponent } from '../profile/profile.component';
+import { IAccount } from 'src/app/interfaces/account.interface';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-payments',
@@ -32,7 +35,8 @@ export class PaymentsComponent implements OnInit {
     public dialog: MatDialog,
     private snackBar: MatSnackBar,
     private translate: TranslateService,
-    private _bottomSheet: MatBottomSheet
+    private _bottomSheet: MatBottomSheet,
+    private userService: UserService
   ) {}
 
   ngOnInit(){
@@ -138,7 +142,8 @@ export class PaymentsComponent implements OnInit {
         _page: this.page,
         isPayed: this.isPayedFilter,
        startDate: this.startDateSelected,
-       endDate: this.endDateSelected 
+       endDate: this.endDateSelected,
+       inputSearch: this.inputSearch
       }).subscribe({
         next: (list: IPayment[]) => {
           this.paymentList = list;
@@ -244,6 +249,40 @@ export class PaymentsComponent implements OnInit {
       this.getList();
       this.startDateSelected = ''
     }
+  }
+
+  inputSearchTyping(): void {
+    this.pageSize = null;
+    this.pageSize = null;
+    this.getList()
+  }
+
+  openProfile(): void {
+    const bottomSheetRef = this._bottomSheet.open(ProfileComponent);
+    
+    bottomSheetRef.afterDismissed().subscribe({
+      next: (result: IAccount) => {
+        this.updateUser(result);
+      }
+    })
+  }
+
+  updateUser(user: IAccount): void {
+    this.userService.edit(user).subscribe({
+      next: (user: IAccount) => {
+        this.snackBar.open(
+          this.translate.instant('profile.updated-success'),
+          this.translate.instant('common.ok')
+        )
+        sessionStorage.setItem('auth', JSON.stringify(user));
+      },
+      error: () => {
+        this.snackBar.open(
+          this.translate.instant('profile.updated-error'),
+          this.translate.instant('common.ok')
+        );
+      }
+    })
   }
 }
 

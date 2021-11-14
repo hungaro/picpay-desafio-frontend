@@ -34,6 +34,7 @@ import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 import { MatListModule } from '@angular/material/list';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { DateRangeComponent } from './components/date-range/date-range.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 const maskConfig: Partial<IConfig> = {
   validation: false,
@@ -75,7 +76,7 @@ const modals = [AddModalComponent, RemoveModalComponent, FilterModalComponent]
 
 @NgModule({
   declarations: [	
-    AppComponent, LoginComponent, EmailComponent, PasswordComponent, PaymentsComponent, PaymentTableComponent, DateRangeComponent,
+    AppComponent, LoginComponent, EmailComponent, PasswordComponent, PaymentsComponent, PaymentTableComponent, DateRangeComponent, ProfileComponent,
     ...modals
    ],
   imports: [
