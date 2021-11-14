@@ -10,7 +10,7 @@ export class PaymentService {
         private http: HttpClient
     ){}
 
-    getPaymentList({ _limit, username, _page, date, isPayed }): Observable<IPayment[]> {
+    getPaymentList({ _limit, username, _page, isPayed, startDate, endDate }): Observable<IPayment[]> {
         let params = new HttpParams()
             .set('_limit', _limit)
             .set('_page', _page)
@@ -19,8 +19,12 @@ export class PaymentService {
             params = params.set('username_like', username);
         }
 
-        if(date){
+        if(startDate){
+            params = params.set('date_gte', startDate)
+        }
 
+        if(endDate){
+            params = params.set('date_lte', endDate)
         }
 
         if(isPayed){

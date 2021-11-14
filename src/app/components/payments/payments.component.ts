@@ -24,7 +24,8 @@ export class PaymentsComponent implements OnInit {
   page: number = 1;
   filterRange: boolean = false;
   isPayedFilter: boolean = null;
-  dateRangeFilter: string = ''
+  endDateSelected: string = '';
+  startDateSelected: string = ''
   
   constructor(
     private paymentService: PaymentService,
@@ -128,16 +129,16 @@ export class PaymentsComponent implements OnInit {
     });
   }
 
-  getList(isPayed?, date? ): void {
+  getList(isPayed?): void {
     this.isPayedFilter = isPayed ? isPayed : this.isPayedFilter;
-    this.dateRangeFilter = date ? date : this.dateRangeFilter;
-
+    
     this.paymentService.getPaymentList({
         _limit: this.pageSize,
         username: this.inputSearch,
         _page: this.page,
         isPayed: this.isPayedFilter,
-        date: this.dateRangeFilter
+       startDate: this.startDateSelected,
+       endDate: this.endDateSelected 
       }).subscribe({
         next: (list: IPayment[]) => {
           this.paymentList = list;
@@ -220,7 +221,6 @@ export class PaymentsComponent implements OnInit {
       if(result === Filter.CleanAllFilters) {
         this.filterRange = false;
         this.isPayedFilter = null;
-        this.dateRangeFilter = null;
         this.page = 1
         this.pageSize = 10;
         this.inputSearch = null;
@@ -228,6 +228,22 @@ export class PaymentsComponent implements OnInit {
         return;
       }
     });
+  }
+
+  startDate(date: string): void {
+    this.startDateSelected = date;
+    if(this.endDateSelected){
+      this.getList();
+      this.endDateSelected = ''
+    }
+  }
+
+  endDate(date: string): void {
+    this.endDateSelected = date;
+    if(this.startDateSelected){
+      this.getList();
+      this.startDateSelected = ''
+    }
   }
 }
 

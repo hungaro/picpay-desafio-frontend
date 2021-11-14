@@ -35,7 +35,7 @@
                         <p>{{'payments.filter-button' | translate}}</p>
                     </div>
                 </button>
-                <date-range label="filter.date-range" *ngIf="filterRange"></date-range>
+                <date-range (startDate)="startDate($event)" (endDate)="endDate($event)" label="filter.date-range" *ngIf="filterRange"></date-range>
             </div>
             <div class="card__filter--quantity-items-listed">
                 <mat-form-field class="full-width" appearance="fill">

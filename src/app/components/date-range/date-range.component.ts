@@ -1,4 +1,4 @@
-import { Component, Input } from "@angular/core";
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 
 @Component({
@@ -10,6 +10,10 @@ export class DateRangeComponent {
     range: FormGroup;
 
     @Input() label: string = '';
+
+    @Output('startDate') startDate$: EventEmitter<string> = new EventEmitter();
+    @Output('endDate') endDate$: EventEmitter<string> = new EventEmitter();
+
     constructor(
         
     ) {
@@ -23,7 +27,19 @@ export class DateRangeComponent {
         });
     }
 
-    onChange(date): void {
-        console.log(date);
+    startDate(date): void {
+        let isoString;
+        if(date.value){
+            isoString = new Date(date.value.toString()).toISOString();
+            this.startDate$.emit(isoString);
+        }
+    }
+
+    endDate(date): void {
+        let isoString;
+        if(date.value){
+            isoString = new Date(date.value.toString()).toISOString();
+            this.endDate$.emit(isoString);
+        }
     }
 }

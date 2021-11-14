@@ -3,8 +3,8 @@
     <mat-date-range-input
       [formGroup]="range"
       [rangePicker]="campaignOnePicker">
-      <input matStartDate placeholder="Start date" formControlName="start">
-      <input matEndDate placeholder="End date" formControlName="end">
+      <input (dateInput)="startDate($event)" matStartDate placeholder="Start date" formControlName="start">
+      <input (dateInput)="endDate($event)" matEndDate placeholder="End date" formControlName="end">
     </mat-date-range-input>
     <mat-datepicker-toggle matSuffix [for]="campaignOnePicker"></mat-datepicker-toggle>
     <mat-date-range-picker #campaignOnePicker></mat-date-range-picker>
