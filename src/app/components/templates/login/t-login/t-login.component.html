@@ -1,0 +1,25 @@
+<div class="login-component">
+
+    <section class="login-section">
+
+        <label class="logo"><span>{{logoTitle}}</span>{{logoSubTitle}}</label>
+
+        <a-header-label [label]="loginTitle"></a-header-label>
+
+        <form [formGroup]="loginForm">
+
+            <a-input-text [control]="loginForm.controls.email" [inputTextLabel]="inputTextLoginFormLabel"></a-input-text>
+            
+            <a-input-password [control]="loginForm.controls.password" [inputPasswordLabel]="inputPasswordLoginFormLabel"></a-input-password>
+
+            <a-button (buttonClicked)="buttonLoginForm()" [title]="buttonLoginFormTitle"></a-button>
+
+        </form>
+
+    </section>
+
+    <section class="image-section">
+        <ng-content select="[slot='login-img']"></ng-content>
+    </section>
+
+</div>

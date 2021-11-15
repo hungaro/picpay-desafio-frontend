@@ -1,0 +1,35 @@
+.login-component {
+    display: flex;
+
+    .login-section {
+        display: flex;
+        background-color: #F2F2F2;
+        min-height: 100vh;
+        flex-direction: column;
+        justify-content: center;
+        padding: 8%;
+        letter-spacing: 5px;
+        
+        .logo {
+            font-size: 24px;
+            color: rgb(84, 141, 248);
+    
+            span {
+                font-weight: bold;
+                color: rgb(17, 17, 89);    
+            } 
+        }
+
+        h1 {
+            font-size: 30px;
+            color: #333333;
+        }
+    }
+
+    .image-section {
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+}
