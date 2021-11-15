@@ -24,6 +24,7 @@
     "moment": "^2.29.1",
     "ng2-currency-mask": "^12.0.3",
     "ngx-pagination": "^5.1.1",
+    "random-words": "^1.1.1",
     "rxjs": "~6.6.7",
     "sweetalert2": "^11.1.10",
     "tslib": "^2.0.0",
