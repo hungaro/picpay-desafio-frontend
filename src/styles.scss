@@ -39,10 +39,35 @@ $picpay-desafio-frontend-theme: mat.define-light-theme((
 
 html,
 body {
-  font-family: sans-serif;
+  font-family: 'Montserrat', sans-serif;
   margin: 0;
   padding: 0;
 }
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body { margin: 0; font-family: 'Montserrat', Roboto, "Helvetica Neue", sans-serif; }
+
+.snack-bar-style-success {
+  background-color:green;
+  color:white;
+  font-family: "Montserrat", "Roboto";
+}
+
+.snack-bar-style-error {
+  background-color:red;
+  color:white;
+  font-family: "Montserrat", "Roboto";
+}
+
+.snack-bar-style-warning {
+  background-color:#eebe21;
+  color:white;
+  font-family: "Montserrat", "Roboto";
+}
+
+.mat-focus-indicator.mat-button.mat-button-base{
+  color: white;
+  font-family: Roboto;
+  font-style: oblique;
+  font-weight: lighter;
+}
