@@ -57,20 +57,22 @@ header{
             padding: 0;
         }
     }
+    
     .logout{
         .box-info{
-            background-color: $default-white;
-            border: 1px solid $quartenary-gray;
             border-top: none;
             border-right: none;
-            border-radius: 0 0 0 5px;
             position: absolute;
-            top: 85px;
+            top: 65px;
             right: 0;
             width: 300px;
             display: none;
-            overflow: hidden;
+            padding-top: 20px;
             ul{
+                overflow: hidden;
+                border: 1px solid $quartenary-gray;
+                border-radius: 0 0 0 5px;
+                background-color: $default-white;
                 margin: 0;
                 padding: 0;
                 li{
@@ -83,6 +85,10 @@ header{
                         cursor: pointer;
                         transition: all 0.25s ease-in-out;
                         padding: 16px;
+                        text-decoration: none;
+                        & + &{
+                            border-top: 1px solid $quartenary-gray;
+                        }
                         span{
                             display: flex;
                             margin-right: 10px;
@@ -116,4 +122,25 @@ header{
             }
         }
     }   
+    &:hover{
+        .logout{
+            .box-info{
+                display: block;
+            }    
+        }    
+    }
+}
+@media (max-width: 767px) {
+    .col-nav{
+        .main__menu{
+            display: none;
+        }
+    } 
+    .user__info {
+        .logout {
+            .button{
+                padding: 0 0 0 20px;
+            }
+        }
+    }
 }

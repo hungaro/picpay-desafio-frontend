@@ -12,3 +12,9 @@ h2{
     font: 600 36px/44px 'Montserrat', sans-serif;
     color: $primary-gray;
 }
+
+@media(max-width: 767px){
+    .container{
+        margin-top: 0;
+    }
+}

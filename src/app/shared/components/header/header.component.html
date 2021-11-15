@@ -3,36 +3,18 @@
         <div class="logo">
             <img src="../../../../assets/images/logo-pay-friends-inverse.svg" alt="">
         </div>
-        <nav class="main__menu">
-            <ul>
-                <li>
-                    <a [routerLink]="['/pagamentos']" routerLinkActive="active">Pagamentos</a>
-                </li>
-            </ul>
-        </nav>
     </div>
-    <div class="user__info" (click)="showMenu()">
+    <div class="user__info">
         <div class="avatar">
             <figure>
                 <img src="../../../../assets/images/user.png" alt="">
             </figure>
         </div>
         <div class="logout">
-            <div class="box-info form animate__animated animate__fadeIn" [ngStyle]="{'display': (menuHidden) ? 'none' : 'block'}">
+            <div class="box-info form animate__animated animate__fadeIn">
                 <ul>
                     <li>
-                        <a [routerLink]="['/perfil']">
-                            <span class="icon">
-                                <img src="../../../../assets/images/icons/profile.svg" alt=""  [ngStyle]="{'width': '15px'}">
-                            </span>
-                            Perfil
-                        </a>
-                    </li>
-                    <li>
                         <a (click)="logout()">
-                            <span class="icon">
-                                <img src="../../../../assets/images/icons/logout.svg" alt=""  [ngStyle]="{'width': '10px'}">
-                            </span>
                             Sair
                         </a>
                     </li>
