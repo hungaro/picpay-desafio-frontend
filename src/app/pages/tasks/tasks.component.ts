@@ -13,9 +13,13 @@ import Swal from 'sweetalert2';
 })
 export class TasksComponent implements OnInit {
   paymentForm: FormGroup;
+  filterForm: FormGroup;
   paymentModel: PaymentModel = new PaymentModel();
   isNew: boolean = true;
   currPayment: any;
+  titleList: any[] = [];
+  querye: string = `&_limit=${20}`;
+
   //Pagination
   totalItems = 0;
   activePage: number;
@@ -33,17 +37,27 @@ export class TasksComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTotalPaymentsList();
-    this.getPaymentsList(1);
+    this.getPaymentsList(this.page, this.querye);
     this.paymentForm = this.fb.group({
       name: ['', [Validators.required]],
       value: ['', [Validators.required]],
       date: ['', [Validators.required]],
       title: ['', [Validators.required]]
-    });    
+    }); 
+    
+    this.filterForm = this.fb.group({
+      title: [''],
+      payed: [''],
+      date: ['asc']
+    }); 
   }
 
-  get getControl(){
+  get getPayControl(){
     return this.paymentForm.controls;
+  }
+
+  get getFilterControl(){
+    return this.filterForm.controls;
   }
 
   setPayment(payment?){
@@ -60,12 +74,14 @@ export class TasksComponent implements OnInit {
       this.isNew = false;
     }else{
       this.paymentForm.reset();
-      this.getControl.date.setValue(moment().format('YYYY-MM-DD'));
+      this.getPayControl.date.setValue(moment().format('YYYY-MM-DD'));
       this.isNew = true;
     }
   }
 
-  openFilter(){}
+  openModalFilter(){
+    this.modalService.open('modal-filter');
+  }
 
   closeModal(id){
     this.modalService.close(id);
@@ -74,13 +90,20 @@ export class TasksComponent implements OnInit {
 
   getTotalPaymentsList(){
     this.paymentService.fetchTotalPayments().then(data => {  
-      this.totalItems = data;
+      this.totalItems = data.length;
+
+      const uniqueValuesSet = new Set();
+      this.titleList = data.filter((obj) => {
+        const isPresentInSet = uniqueValuesSet.has(obj.title);
+        uniqueValuesSet.add(obj.title);
+        return !isPresentInSet;
+      });      
     }).catch(error => console.log(error));
   }
 
-  getPaymentsList(e){
-    this.page = e;
-    this.paymentService.fetchPayments(this.page, this.itemsPerPage).then(data => {  
+  getPaymentsList(page, querye){
+    this.page = page;
+    this.paymentService.fetchPayments(page, querye).then(data => {  
       this.payments = data;
       this.activePage = this.page;
     }).catch(error => console.log(error));
@@ -88,7 +111,7 @@ export class TasksComponent implements OnInit {
 
   showByQuantity(quantity){
     this.itemsPerPage = quantity;
-    this.getPaymentsList(this.page);
+    this.getPaymentsList(this.page, this.querye); 
   }
 
   opeModaRemovePayment(payment){
@@ -111,20 +134,20 @@ export class TasksComponent implements OnInit {
               text: 'Pagamento removido com sucesso',
               icon: 'success'
             })
-            this.getPaymentsList(this.page);
+            this.getPaymentsList(this.page, this.querye);
             this.getTotalPaymentsList();
           })
       }
     });
   }
 
-  savePayment(){    
+  handlePayment(){    
     const {
       name,
       value,
       date,
       title
-    } = this.getControl;
+    } = this.getPayControl;
 
     this.paymentModel['name'] = name.value;
     this.paymentModel['value'] = value.value;
@@ -139,13 +162,13 @@ export class TasksComponent implements OnInit {
           text: `Pagamento adicionado com sucesso`,
           icon: 'success',
         }).then(e => {
-          this.getPaymentsList(this.page);
+          this.getPaymentsList(this.page, this.querye);
           this.getTotalPaymentsList();
         })
       })
     }else{
       this.currPayment = {
-        date: `${moment(this.getControl.date.value).format("YYYY-MM-DDT")}${moment().hours()}:${moment().minutes()}:00Z`,
+        date: `${moment(this.getPayControl.date.value).format("YYYY-MM-DDT")}${moment().hours()}:${moment().minutes()}:00Z`,
         ...this.currPayment,
         ...this.paymentForm.value
       }
@@ -155,10 +178,53 @@ export class TasksComponent implements OnInit {
           text: `Pagamento atualizado com sucesso`,
           icon: 'success',
         }).then(e => {
-          this.getPaymentsList(this.page);
+          this.getPaymentsList(this.page, this.querye);
         })
       })
     }        
+  }
+
+  setIsPayed(e, currPayment){
+    Swal.fire({
+      text: `Deseja realmente atualizar esse pagamento?`,
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: 'Sim',
+      denyButtonText: `Não`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.currPayment = {
+          ...currPayment,
+          isPayed: e.target.checked
+        }
+        this.paymentService.updatePayment(this.currPayment, currPayment.id).then(data => {
+          this.modalService.close('modal-add-payment');
+          Swal.fire({
+            text: `Pagamento atualizado com sucesso`,
+            icon: 'success',
+          }).then(e => {
+            this.getPaymentsList(this.page, this.querye);
+          })
+        })
+      }else{
+        e.target.checked = !e.target.checked;
+      }
+    });
+  }
+
+  applyFilter(){
+    console.log(this.filterForm.value);    
+    
+    this.querye = `_sort=date&_order=${this.getFilterControl.date.value}${(this.getFilterControl.payed.value != '') ? "&isPayed="+this.getFilterControl.payed.value : ''}${(this.getFilterControl.title.value != '') ? "&title="+this.getFilterControl.title.value : ''}&_page=${this.page}&_limit=${this.itemsPerPage}`;
+    this.getPaymentsList(this.page, this.querye);
+    this.getTotalPaymentsList();
+    this.modalService.close('modal-filter');    
+  }
+  clearFilter(){
+    this.modalService.close('modal-filter');
+    this.querye = `&_limit=${20}`;
+    this.getPaymentsList(1, this.querye);
+    this.getTotalPaymentsList();
   }
 
   createUsername(name){

@@ -12,7 +12,7 @@
                     <input type="search" [(ngModel)]="searchText" placeholder="Pesquisar por usuario">
                 </div>
                 <div class="table__button-filter">
-                    <button>
+                    <button (click)="openModalFilter()">
                         <img src="../../../assets/images/icons/filter.svg" alt=""> Filtrar
                     </button>
                 </div>
@@ -27,7 +27,7 @@
                     </select>
                 </div>
                 <div class="order__pagination">
-                    <pagination-controls class="pagination" (pageChange)="getPaymentsList($event)" autoHide="true"
+                    <pagination-controls class="pagination" (pageChange)="getPaymentsList($event, querye)" autoHide="true"
                         previousLabel="" nextLabel="" maxSize="5"></pagination-controls>
                 </div>
             </div>
@@ -45,6 +45,11 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <tr *ngIf="payments?.length == 0">
+                        <td colspan="6" [ngStyle]="{'text-align': 'center'}">
+                            Nenhum pagamento encontrado
+                        </td>
+                    </tr>
                     <tr *ngFor="let payment of payments | grdFilter: { name: searchText } | paginate: {
                             itemsPerPage: itemsPerPage,
                             currentPage: page,
@@ -74,7 +79,7 @@
                         </td>
                         <td>
                             <span class="check">
-                                <input type="checkbox" [checked]="payment.isPayed">
+                                <input type="checkbox" [checked]="payment.isPayed" (change)="setIsPayed($event, payment)">
                             </span>
                         </td>
                         <td>
@@ -127,7 +132,7 @@
         </form>
         <div class="modal__footer">
             <button class="button__default button__default--cancel" (click)="closeModal('modal-add-payment')">CANCELAR</button>
-            <button class="button__default" [disabled]="!paymentForm.valid" (click)="savePayment()">SALVAR</button>
+            <button class="button__default" [disabled]="!paymentForm.valid" (click)="handlePayment()">SALVAR</button>
         </div>
     </div>
 </app-modal>
@@ -151,6 +156,48 @@
         <div class="modal__footer">
             <button class="button__default button__default--cancel" (click)="closeModal('modal-remove-payment')">CANCELAR</button>
             <button class="button__default" (click)="removePayment()">SALVAR</button>
+        </div>
+    </div>
+</app-modal>
+
+<app-modal id="modal-filter">
+    <div class="form-modal">
+        <div class="modal__header">
+            <h4>Filtrar por:</h4>
+        </div>
+        <form  [formGroup]="filterForm" novalidate>
+            <div class="modal__content">
+                <div class="item-row grid-12">
+                    <div class="item-col span-6">
+                        <label for="">Título</label>
+                        <select name="" id="" formControlName="title">
+                            <option value=""></option>
+                            <option [value]="item.title" *ngFor="let item of this.titleList">{{item.title}}</option>
+                        </select>
+                    </div>
+                    <div class="item-col span-6">
+                        <label for="">Pagos</label>
+                        <select name="" id="" formControlName="payed">
+                            <option value=""></option>
+                            <option value="true" selected>Sim</option>
+                            <option value="false">Não</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="item-row grid-12">
+                    <div class="item-col span-6">
+                        <label for="">Data</label>
+                        <select name="" id="" formControlName="date">
+                            <option value="desc" selected>Mais recentes</option>
+                            <option value="asc">Mais antigos</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="modal__footer">
+            <button class="button__default button__default--cancel" (click)="clearFilter()">LIMPAR</button>
+            <button class="button__default" (click)="applyFilter()">FILTRAR</button>
         </div>
     </div>
 </app-modal>

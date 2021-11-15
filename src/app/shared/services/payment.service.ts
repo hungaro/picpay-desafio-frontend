@@ -10,8 +10,8 @@ export class PaymentService {
 
   constructor(private apiService: ApiService) { }
 
-  fetchPayments(page, total){
-    const endpoint = `tasks?_sort=date&_order=desc&_page=${page}&_limit=${total}`;
+  fetchPayments(page, querye){
+    const endpoint = `tasks?_page=${page}${querye}`;
     const route = this.apiService.url + endpoint;
 
     return this.apiService
@@ -22,14 +22,26 @@ export class PaymentService {
       });
   }
   fetchTotalPayments(){
-    const endpoint = `tasks`;
+    const endpoint = `tasks?_sort=title&_order=asc`;
     const route = this.apiService.url + endpoint;
 
     return this.apiService
       .get$(route)
       .toPromise()
       .then(data => {
-        return data.length;
+        return data;
+      });
+  }
+
+  filterSearch(querye){
+    const endpoint = `tasks?${querye}`;
+    const route = this.apiService.url + endpoint;
+
+    return this.apiService
+      .get$(route)
+      .toPromise()
+      .then(data => {
+        return data;
       });
   }
 
