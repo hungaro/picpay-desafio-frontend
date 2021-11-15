@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 import { TLoginModule } from './login/t-login.module';
+import { TPaymentsModule } from './payments/t-payments.module';
+
+const modules = [
+  TLoginModule, TPaymentsModule
+]
 
 @NgModule({
-  imports: [
-    CommonModule,
-    TLoginModule
-  ],
+  imports: modules,
+  exports: modules
 })
 export class TemplatesModule { }
