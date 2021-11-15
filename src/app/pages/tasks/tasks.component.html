@@ -1,7 +1,8 @@
 <h2>Meus pagamentos</h2>
 
 <div class="add-payment">
-    <button class="button__default" (click)="addedPayment('modal-add-payment')">ADiCIONAR PAGAMENTO</button>
+    <p>Total de pagamentos: <strong>{{totalItems}}</strong></p>
+    <button class="button__default" (click)="setPayment()">ADiCIONAR PAGAMENTO</button>
 </div>
 <section class="main">
     <div class="table__area">
@@ -26,13 +27,8 @@
                     </select>
                 </div>
                 <div class="order__pagination">
-                    <pagination-controls
-                        class="pagination" 
-                        (pageChange)="getPaymentsList($event)" 
-                        autoHide="true" 
-                        previousLabel="" 
-                        nextLabel="" 
-                        maxSize="5"></pagination-controls>
+                    <pagination-controls class="pagination" (pageChange)="getPaymentsList($event)" autoHide="true"
+                        previousLabel="" nextLabel="" maxSize="5"></pagination-controls>
                 </div>
             </div>
         </div>
@@ -49,8 +45,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr 
-                        *ngFor="let payment of payments | grdFilter: { name: searchText } | paginate: {
+                    <tr *ngFor="let payment of payments | grdFilter: { name: searchText } | paginate: {
                             itemsPerPage: itemsPerPage,
                             currentPage: page,
                             totalItems: totalItems }">
@@ -72,7 +67,7 @@
                         </td>
                         <td>
                             <span class="text">{{payment.date | date:'d MMM YYYY'}}</span>
-                            <span class="sub">{{payment.date | date:'h:mm a'}}</span>
+                            <span class="sub">{{payment.date | date:'h:mm a' : '+00:00'}}</span>
                         </td>
                         <td>
                             <span class="text">{{payment.value | currency}}</span>
@@ -84,7 +79,7 @@
                         </td>
                         <td>
                             <div class="actions">
-                                <span title="Editar pagamento" (click)="editPayment(payment)">
+                                <span title="Editar pagamento" (click)="setPayment(payment)">
                                     <img src="../../../assets/images/icons/pencil.svg" alt="Editar pagamento">
                                 </span>
                                 <span title="Excluir pagamento" (click)="removePayment(payment)">
@@ -105,16 +100,14 @@
         <div class="modal__header">
             <h4>Adicionar pagamento</h4>
         </div>
-        <div class="modal__content">
-            <form [formGroup]="paymentForm" (ngSubmit)="savePayment()">
+        <form [formGroup]="paymentForm" novalidate>
+            <div class="modal__content">
                 <div class="item-row grid-12">
                     <div class="item-col span-6">
                         <input type="text" formControlName="name" placeholder="Usuário">
                     </div>
                     <div class="item-col span-6">
-                        <input type="text" formControlName="value" placeholder="Valor" 
-                            currencyMask 
-                            [options]="{ 
+                        <input type="text" formControlName="value" placeholder="Valor" currencyMask [options]="{ 
                                 prefix: 'R$ ', 
                                 thousands: '.', 
                                 decimal: ',',
@@ -130,11 +123,11 @@
                         <input type="text" formControlName="title" placeholder="Título">
                     </div>
                 </div>
-            </form>
-        </div>
+            </div>
+        </form>
         <div class="modal__footer">
-            <button class="button__default button__default--cancel">CANCELAR</button>
-            <button class="button__default">SALVAR</button>
+            <button class="button__default button__default--cancel" (click)="closeModal()">CANCELAR</button>
+            <button class="button__default" [disabled]="!paymentForm.valid" (click)="savePayment()">SALVAR</button>
         </div>
     </div>
 </app-modal>

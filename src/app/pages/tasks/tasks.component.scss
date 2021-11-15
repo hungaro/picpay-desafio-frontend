@@ -3,14 +3,18 @@
 
 .add-payment{
     display: flex;
-    justify-content: flex-end;
-    margin-bottom: 16px;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin: 32px 0 16px;
+    > p{
+        margin: 0;
+    }
     button{
         max-width: 230px;
     }
 }
 .table__header{
-    background-color: $default-white;
+    background-color: $default-white;   
     display: flex;
     align-items: center;
     justify-content: space-between;

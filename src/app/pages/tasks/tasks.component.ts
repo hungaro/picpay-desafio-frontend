@@ -4,6 +4,7 @@ import { ModalService } from 'src/app/shared/components/modal/modal.service';
 import { PaymentModel } from 'src/app/shared/models/payment.model';
 import { PaymentService } from 'src/app/shared/services/payment.service';
 import * as moment  from "moment";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-tasks',
@@ -12,11 +13,14 @@ import * as moment  from "moment";
 })
 export class TasksComponent implements OnInit {
   paymentForm: FormGroup;
+  paymentModel: PaymentModel = new PaymentModel();
+  isNew: boolean = true;
+  currPayment: any;
   //Pagination
   totalItems = 0;
   activePage: number;
   page = 1;
-  itemsPerPage: number = 5;
+  itemsPerPage: number = 20;
   searchText: string; 
 
   payments: PaymentModel[] = [];
@@ -35,19 +39,38 @@ export class TasksComponent implements OnInit {
       value: ['', [Validators.required]],
       date: ['', [Validators.required]],
       title: ['', [Validators.required]]
-    });
+    });    
   }
 
   get getControl(){
     return this.paymentForm.controls;
   }
 
-  addedPayment(id){
-    this.paymentForm.reset();
-    this.modalService.open(id);
+  setPayment(payment?){
+    this.modalService.open('modal-add-payment');
+    if(payment){
+      const {name, value, date, title} = payment;
+      this.paymentForm.setValue({
+        name,
+        value,
+        date: moment(date).format('YYYY-MM-DD'),
+        title,
+      });
+      this.currPayment = payment;
+      this.isNew = false;
+    }else{
+      this.paymentForm.reset();
+      this.getControl.date.setValue(moment().format('YYYY-MM-DD'));
+      this.isNew = true;
+    }
   }
 
   openFilter(){}
+
+  closeModal(){
+    this.modalService.close('modal-add-payment');
+    this.paymentForm.reset();
+  }
 
   getTotalPaymentsList(){
     this.paymentService.fetchTotalPayments().then(data => {  
@@ -68,21 +91,55 @@ export class TasksComponent implements OnInit {
     this.getPaymentsList(this.page);
   }
 
-  editPayment({name, value, date, title}){
-      this.modalService.open('modal-add-payment');
-      this.paymentForm.setValue({
-        name,
-        value,
-        date: moment(date).format('YYYY-MM-DD'),
-        title,
-      })
-  }
-
   removePayment(payment){
     console.log(payment);        
   }
 
-  savePayment(){
+  savePayment(){    
+    const {
+      name,
+      value,
+      date,
+      title
+    } = this.getControl;
 
+    this.paymentModel['name'] = name.value;
+    this.paymentModel['value'] = value.value;
+    this.paymentModel['date'] = `${moment(date.value).format("YYYY-MM-DDT")}${moment().hours()}:${moment().minutes()}:${moment().seconds()}Z`;
+    this.paymentModel['title'] = title.value;
+    this.paymentModel['username'] = this.createUsername(name.value);
+
+    if(this.isNew){
+      this.paymentService.savePayment(this.paymentModel).then(data => {
+        Swal.fire({
+          text: `Pagamento adicionado com sucesso`,
+          icon: 'success',
+        }).then(e => {
+          this.modalService.close('modal-add-payment');
+          this.getPaymentsList(this.page);
+          this.getTotalPaymentsList();
+        })
+      })
+    }else{
+      this.currPayment = {
+        date: `${moment(this.getControl.date.value).format("YYYY-MM-DDT")}${moment().hours()}:${moment().minutes()}:${moment().seconds()}Z`,
+        ...this.currPayment,
+        ...this.paymentForm.value
+      }
+      this.paymentService.updatePayment(this.currPayment, this.currPayment.id).then(data => {
+        Swal.fire({
+          text: `Pagamento atualizado com sucesso`,
+          icon: 'success',
+        }).then(e => {
+          this.modalService.close('modal-add-payment');
+          this.getPaymentsList(this.page);
+        })
+      })
+    }        
+  }
+
+  createUsername(name){
+    const [nome, sobrenome] = name.toLocaleLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").split(' ');
+    return `${nome.slice(0, 1)}${sobrenome}`;
   }
 }
