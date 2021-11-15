@@ -11,6 +11,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule} from '@angular/material/snack-bar'
+import { MatPaginatorModule } from '@angular/material/paginator'
+import { MatTableModule } from '@angular/material/table'
 
 const modules = [
   MatButtonModule,
@@ -24,7 +26,9 @@ const modules = [
   MatDialogModule,
   MatFormFieldModule,
   MatInputModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatPaginatorModule,
+  MatTableModule
 ]
 
 @NgModule({
