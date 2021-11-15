@@ -57,4 +57,16 @@ export class PaymentService {
       });
   }
 
+  deletePayment(paymentId){
+    const endpoint = `tasks/${paymentId}`;
+    const route = this.apiService.url + endpoint;
+
+    return this.apiService
+      .delete$(route)
+      .toPromise()
+      .then(data => {
+        return data;
+      });
+  }
+
 }

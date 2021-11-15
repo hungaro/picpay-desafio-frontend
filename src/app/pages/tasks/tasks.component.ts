@@ -67,8 +67,8 @@ export class TasksComponent implements OnInit {
 
   openFilter(){}
 
-  closeModal(){
-    this.modalService.close('modal-add-payment');
+  closeModal(id){
+    this.modalService.close(id);
     this.paymentForm.reset();
   }
 
@@ -91,8 +91,31 @@ export class TasksComponent implements OnInit {
     this.getPaymentsList(this.page);
   }
 
-  removePayment(payment){
-    console.log(payment);        
+  opeModaRemovePayment(payment){
+    this.currPayment = payment;
+    this.modalService.open('modal-remove-payment');
+  }
+
+  removePayment(){
+    Swal.fire({
+      text: `Deseja realmente remover esse pagamento?`,
+      showDenyButton: true,
+      showCancelButton: false,
+      confirmButtonText: 'Sim',
+      denyButtonText: `Não`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.paymentService.deletePayment(this.currPayment.id).then(data => {
+            this.modalService.close('modal-remove-payment');
+            Swal.fire({
+              text: 'Pagamento removido com sucesso',
+              icon: 'success'
+            })
+            this.getPaymentsList(this.page);
+            this.getTotalPaymentsList();
+          })
+      }
+    });
   }
 
   savePayment(){    
@@ -105,33 +128,33 @@ export class TasksComponent implements OnInit {
 
     this.paymentModel['name'] = name.value;
     this.paymentModel['value'] = value.value;
-    this.paymentModel['date'] = `${moment(date.value).format("YYYY-MM-DDT")}${moment().hours()}:${moment().minutes()}:${moment().seconds()}Z`;
+    this.paymentModel['date'] = `${moment(date.value).format("YYYY-MM-DDT")}${moment().hours()}:${moment().minutes()}:00Z`;
     this.paymentModel['title'] = title.value;
     this.paymentModel['username'] = this.createUsername(name.value);
 
     if(this.isNew){
       this.paymentService.savePayment(this.paymentModel).then(data => {
+        this.modalService.close('modal-add-payment');
         Swal.fire({
           text: `Pagamento adicionado com sucesso`,
           icon: 'success',
         }).then(e => {
-          this.modalService.close('modal-add-payment');
           this.getPaymentsList(this.page);
           this.getTotalPaymentsList();
         })
       })
     }else{
       this.currPayment = {
-        date: `${moment(this.getControl.date.value).format("YYYY-MM-DDT")}${moment().hours()}:${moment().minutes()}:${moment().seconds()}Z`,
+        date: `${moment(this.getControl.date.value).format("YYYY-MM-DDT")}${moment().hours()}:${moment().minutes()}:00Z`,
         ...this.currPayment,
         ...this.paymentForm.value
       }
       this.paymentService.updatePayment(this.currPayment, this.currPayment.id).then(data => {
+        this.modalService.close('modal-add-payment');
         Swal.fire({
           text: `Pagamento atualizado com sucesso`,
           icon: 'success',
         }).then(e => {
-          this.modalService.close('modal-add-payment');
           this.getPaymentsList(this.page);
         })
       })

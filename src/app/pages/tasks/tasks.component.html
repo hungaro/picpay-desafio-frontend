@@ -82,7 +82,7 @@
                                 <span title="Editar pagamento" (click)="setPayment(payment)">
                                     <img src="../../../assets/images/icons/pencil.svg" alt="Editar pagamento">
                                 </span>
-                                <span title="Excluir pagamento" (click)="removePayment(payment)">
+                                <span title="Excluir pagamento" (click)="opeModaRemovePayment(payment)">
                                     <img src="../../../assets/images/icons/close.svg" alt="Excluir pagamento">
                                 </span>
                             </div>
@@ -126,8 +126,31 @@
             </div>
         </form>
         <div class="modal__footer">
-            <button class="button__default button__default--cancel" (click)="closeModal()">CANCELAR</button>
+            <button class="button__default button__default--cancel" (click)="closeModal('modal-add-payment')">CANCELAR</button>
             <button class="button__default" [disabled]="!paymentForm.valid" (click)="savePayment()">SALVAR</button>
+        </div>
+    </div>
+</app-modal>
+
+<app-modal id="modal-remove-payment">
+    <div class="form-modal">
+        <div class="modal__header">
+            <h4>Excluir pagamento</h4>
+        </div>
+        <div class="modal__content">
+            <p>
+                Usuário: {{currPayment?.name}}
+            </p>
+            <p>
+                Data: {{currPayment?.date | date: 'dd/MM/YYYY'}}
+            </p>
+            <p>
+                Valor: {{currPayment?.value | currency}}
+            </p><br>
+        </div>
+        <div class="modal__footer">
+            <button class="button__default button__default--cancel" (click)="closeModal('modal-remove-payment')">CANCELAR</button>
+            <button class="button__default" (click)="removePayment()">SALVAR</button>
         </div>
     </div>
 </app-modal>
