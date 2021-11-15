@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'a-input-text',
@@ -8,6 +9,14 @@ import { Component, Input, OnInit } from '@angular/core';
 export class AInputTextComponent implements OnInit {
 
   @Input() inputTextLabel: string;
+  
+  @Input() set control(value: FormControl) {
+    if (this.formControl !== value) {
+      this.formControl = value;
+    }
+  }
+
+  formControl: FormControl;
 
   constructor() { }
 
