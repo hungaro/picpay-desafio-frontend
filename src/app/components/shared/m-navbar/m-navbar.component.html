@@ -1,0 +1,13 @@
+<mat-sidenav-container>
+  
+    <mat-sidenav-content>
+      
+      <mat-toolbar class="m-navbar">
+        <a-logo [title]="title" [subtitle]="subtitle" [isLoginPage]="false"></a-logo>
+      </mat-toolbar>
+      
+      <ng-content select="[navigation]"></ng-content>
+  
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  
