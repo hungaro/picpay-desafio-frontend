@@ -2,3 +2,18 @@
     background-color: #002D69;
     color: white;
 }
+
+.m-navbar-spacer {
+    flex: 1 1 auto;
+}
+
+.profile-image{
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+}
+
+.btn-logout{
+    padding-left: 10px;
+    margin-left: 20px;
+}

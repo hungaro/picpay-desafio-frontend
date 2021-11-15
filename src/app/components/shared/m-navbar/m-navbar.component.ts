@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from 'src/app/core/auth/auth.service';
+import { ProfileService } from 'src/app/core/auth/profile.service';
+import { User } from 'src/app/core/auth/user';
+import { TokenService } from 'src/app/core/token/token.service';
 import { environment } from '../../../../environments/environment';
 
 const APP_TITLE = environment.appTitle;
@@ -13,10 +17,16 @@ export class MNavbarComponent implements OnInit {
 
   title: string = APP_TITLE;
   subtitle: string = APP_SUBTITLE;
-  
-  constructor() { }
+  user: User;
+
+  constructor(private profileService: ProfileService, private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.user = this.profileService.getUserProfile();
+  }
+
+  logout(){
+    this.authService.logout();
   }
 
 }
