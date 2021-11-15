@@ -5,6 +5,7 @@ header{
     justify-content: space-between;
     background-color: #002D69;
     padding: 20px 30px;
+    position: relative;
 }
 .col-nav{
     display: flex;
@@ -57,13 +58,13 @@ header{
         }
     }
     .logout{
-        position: relative;
         .box-info{
             background-color: $default-white;
-            border: 1px solid $primary-gray;
+            border: 1px solid $quartenary-gray;
             border-top: none;
+            border-right: none;
             border-radius: 0 0 0 5px;
-            position: fixed;
+            position: absolute;
             top: 85px;
             right: 0;
             width: 300px;
@@ -81,7 +82,7 @@ header{
                         font-weight: 500;
                         cursor: pointer;
                         transition: all 0.25s ease-in-out;
-                        padding: 8px 16px;
+                        padding: 16px;
                         span{
                             display: flex;
                             margin-right: 10px;
