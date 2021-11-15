@@ -11,8 +11,8 @@ export class TLoginComponent implements OnInit {
   @Input() inputTextLoginFormLabel: string;
   @Input() inputPasswordLoginFormLabel: string;
   @Input() buttonLoginFormTitle: string;
-  @Input() logoTitle: string;
-  @Input() logoSubTitle: string;
+  @Input() title: string;
+  @Input() subtitle: string;
   @Input() loginTitle: string;
   @Input() snackbarMessage: string;
   @Input() snackbarColor: string = '';
