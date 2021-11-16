@@ -21,7 +21,7 @@ export class PaymentDialogDeleteComponent implements OnInit {
     this.title = config.title;
     this.task = config.task;
 
-    let isEdit = this.task.id !== undefined && this.task.id !== 0;
+    let isEdit = this.task !== undefined && this.task !== null && this.task.id !== undefined && this.task.id !== 0;
 
     this.taskForm = this.formBuilder.group({
       name: [isEdit ? this.task.name : "", Validators.required],

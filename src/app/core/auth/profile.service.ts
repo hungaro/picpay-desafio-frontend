@@ -9,6 +9,9 @@ export class ProfileService {
   constructor(private tokenService: TokenService) {}
 
   getUserProfile(): User{
-    return this.tokenService.getToken().value;  
+    if(this.tokenService.getToken()) {
+      return this.tokenService.getToken().value;  
+    }
+    return null;
   }
 }

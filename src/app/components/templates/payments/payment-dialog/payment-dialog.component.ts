@@ -15,7 +15,7 @@ export class PaymentDialogComponent implements OnInit {
 
   @Output() buttonClicked: EventEmitter<any> = new EventEmitter();
 
-  taskForm: FormGroup;
+  taskForm: FormGroup
 
   constructor(@Inject(MAT_DIALOG_DATA) private config: any, private dialog: MatDialogRef<PaymentDialogComponent>, private formBuilder: FormBuilder) {
     

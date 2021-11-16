@@ -22,7 +22,7 @@ export class PaymentDeleteComponent implements OnInit {
   }
 
   delete(task: Task) {
-    console.log(task);
+    
     let matDialogDataConfig = {
       data: {
         title: "Excluir pagamento",
