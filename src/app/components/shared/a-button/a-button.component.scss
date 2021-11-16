@@ -1,20 +1,29 @@
 @use '~@angular/material' as mat;
 
-.a-button-component-custom-shadow {
-  @include mat.elevation(2, #f7eff2, 0.8);
-}
-
 button {
   font-family: Roboto;
   font-size: 14px;
-  background-color: #007DFE;
   text-align: center;
   letter-spacing: 1.25px;
   text-transform: uppercase;
-  color: #FFFFFF;
   border-radius: 4px;
 }
 
 button.block {
   width: 100%;
+}
+
+button.confirm {
+  background-color: #007DFE;
+  color: #FFFFFF;
+}
+
+button.edit {
+  background-color: #fecb00cb;
+  color: #FFFFFF;
+}
+
+button.dismiss {
+  background-color: #F5F5F5;
+  color: #333333;
 }

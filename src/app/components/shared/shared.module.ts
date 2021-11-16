@@ -10,9 +10,10 @@ import { AHeaderLabelComponent } from './a-header-label/a-header-label.component
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MNavbarComponent } from './m-navbar/m-navbar.component';
 import { ALogoComponent } from './a-logo/a-logo.component';
+import { ADialogComponent } from './a-dialog/a-dialog.component';
 
 const components = [
-  AButtonComponent, AInputTextComponent, AInputPasswordComponent, AHeaderLabelComponent, MNavbarComponent, ALogoComponent
+  AButtonComponent, AInputTextComponent, AInputPasswordComponent, AHeaderLabelComponent, MNavbarComponent, ALogoComponent, ADialogComponent
 ]
 
 @NgModule({

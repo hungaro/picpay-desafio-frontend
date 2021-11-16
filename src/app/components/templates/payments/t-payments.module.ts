@@ -11,9 +11,12 @@ import { CustomPaginatorI18n } from './payment-list/custom-paginator-i18n';
 import { PaymentDeleteComponent } from './payment-delete/payment-delete.component';
 import { PaymentEditComponent } from './payment-edit/payment-edit.component';
 import { PaymentAddComponent } from './payment-add/payment-add.component';
+import { PaymentDialogComponent } from './payment-dialog/payment-dialog.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TaskService } from 'src/app/services/task.service';
 
 const components = [
-  PaymentListComponent, PaymentDeleteComponent, PaymentEditComponent, PaymentAddComponent
+  PaymentListComponent, PaymentDeleteComponent, PaymentEditComponent, PaymentAddComponent, PaymentDialogComponent
 ]
 
 @NgModule({
@@ -22,14 +25,16 @@ const components = [
     CommonModule,
     MaterialModule,
     SharedModule,
-    PageStructureModule
+    PageStructureModule,
+    FormsModule, ReactiveFormsModule
   ],
   exports: components,
   providers: [
     {
       provide: MatPaginatorIntl,
       useClass: CustomPaginatorI18n
-    }
+    },
+    TaskService
   ]
 })
 export class TPaymentsModule { }
