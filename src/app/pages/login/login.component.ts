@@ -46,7 +46,8 @@ export class LoginComponent implements OnInit {
           }
           
         },
-        () => {
+        (err) => {
+          console.log(err);
           this.snackbarService.error('Usuário ou senha inválidos')
         }
       )
