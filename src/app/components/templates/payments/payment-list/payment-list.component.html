@@ -1,0 +1,71 @@
+<page-structure>
+  <div slot="body-content">
+
+    <div class="header">
+      <a-header-label label="Meus pagamentos"></a-header-label>
+      <payment-add></payment-add>
+    </div>
+
+    <div class="table">
+      <div class="filter">
+        <mat-form-field appearance="outline">
+          <input matInput type="text" placeholder="Pesquisar por usuário" (keyup)="onKey($event)">
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+
+        <button (click)="filterByNameOrUsername()" mat-flat-button>
+          <mat-icon matPrefix>equalizer</mat-icon> Filtrar
+        </button>
+      </div>
+
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+
+      <table mat-table [dataSource]="dataSource" matSort>
+        <ng-container matColumnDef="user">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Usuário </th>
+          <td mat-cell *matCellDef="let task">
+            <p>{{task.name}}</p>
+            <p>@{{task.username}}</p>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="title">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Titulo </th>
+          <td mat-cell *matCellDef="let task">
+            <span>{{task.title}}</span>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="date">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Data </th>
+          <td mat-cell *matCellDef="let task">
+            <p>{{task.date | date: 'dd MMM y' : 'pt-BR'}}</p>
+            <p>{{task.date | date: 'HH:mm'}}</p>
+
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="value">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Valor </th>
+          <td mat-cell *matCellDef="let task">
+            <span>{{task.value | currency: "BRL"}}</span>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="isPayed">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Pago </th>
+          <td mat-cell *matCellDef="let task">
+            <mat-checkbox [disabled]="true" [checked]="task.isPayed"></mat-checkbox>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="actions">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+          <td mat-cell *matCellDef="let task">
+            <payment-edit [task]="task"></payment-edit>
+            <payment-delete [task]="task"></payment-delete>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+
+  </div>
+
+</page-structure>

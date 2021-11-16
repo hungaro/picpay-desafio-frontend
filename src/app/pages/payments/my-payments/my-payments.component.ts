@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { SnackbarService } from 'src/app/core/snackbar/snackbar.service';
 import { environment } from '../../../../environments/environment';
 
 const API_URL = environment.apiUrl;
@@ -11,21 +12,21 @@ const API_URL = environment.apiUrl;
 })
 export class MyPaymentsComponent implements OnInit {
 
-  constructor(private http: HttpClient) {}
+  tasks: Task[] = [];
+
+  constructor(private http: HttpClient, private snackbarService: SnackbarService) {}
 
   ngOnInit(): void {
-    console.log("MyPaymentsComponent")
-    this.http.get(
+    
+    this.http.get<Task[]>(
       `${API_URL}/tasks`
     )
     .subscribe( 
       (data) => {
-
-        console.log(data)
-        
+        this.tasks = data;
       },
-      (err) => {
-        console.log(err);
+      () => {
+        this.snackbarService.error("Erro ao buscar meus pagamentos")
       }
     );
   }

@@ -12,7 +12,7 @@
             
             <a-input-password [control]="loginForm.controls.password" [inputPasswordLabel]="inputPasswordLoginFormLabel"></a-input-password>
 
-            <a-button (buttonClicked)="buttonLoginForm()" [title]="buttonLoginFormTitle"></a-button>
+            <a-button [block]="true" (buttonClicked)="buttonLoginForm()" [title]="buttonLoginFormTitle"></a-button>
 
         </form>
 
