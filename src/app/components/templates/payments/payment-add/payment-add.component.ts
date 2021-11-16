@@ -36,23 +36,30 @@ export class PaymentAddComponent implements OnInit {
     };
 
     let dialogRef = this.dialog.open(PaymentDialogComponent, matDialogDataConfig);
-    console.log(dialogRef)
-    
+
     dialogRef.afterClosed().subscribe(res => {
-      let task: Task = res;
-    
-      this.taskService.save(task)
-      .subscribe(
 
-        () => {
-          this.snackbarService.success("Pagamento salvo com sucesso");
-        },
+      if (res.event == 'cancel') {
+        this.snackbarService.warning("Operação cancelada");
+      }
+      else {
 
-        (err) => {
-          console.log(err);
-          this.snackbarService.error("Erro ao salvar pagamento");
-        }
-      );
+        let task: Task = res.task;
+        console.log(task);
+
+        this.taskService.save(task)
+          .subscribe(
+
+            () => {
+              this.snackbarService.success("Pagamento salvo com sucesso");
+            },
+
+            (err) => {
+              console.log(err);
+              this.snackbarService.error("Erro ao salvar pagamento");
+            }
+          );
+      }
 
     })
 

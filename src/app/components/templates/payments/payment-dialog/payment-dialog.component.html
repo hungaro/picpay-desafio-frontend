@@ -22,7 +22,7 @@
             </mat-form-field>
         </div>
         <div class="header">
-            <a-button mat-dialog-close [block]="true" title="Cancelar"></a-button>
+            <a-button (click)="cancel()" [block]="true" title="Cancelar"></a-button>
             <a-button (click)="confirm()" [block]="true" color="primary" title="Confirmar"></a-button>
         </div>
     </form>

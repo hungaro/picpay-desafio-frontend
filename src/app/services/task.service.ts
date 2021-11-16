@@ -15,7 +15,7 @@ export class TaskService {
   constructor(private http: HttpClient) { }
 
   parseObject(task: Task): Task {
-    task.name = task?.name ?? task.username;
+    task.username = task.name.replace(/\s/g,'').toLowerCase()
     task.image = task?.image ?? "";
     task.date = new Date(task.date);
     return task;
