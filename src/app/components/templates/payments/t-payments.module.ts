@@ -14,9 +14,10 @@ import { PaymentAddComponent } from './payment-add/payment-add.component';
 import { PaymentDialogComponent } from './payment-dialog/payment-dialog.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TaskService } from 'src/app/services/task.service';
+import { PaymentDialogDeleteComponent } from './payment-dialog-delete/payment-dialog-delete.component';
 
 const components = [
-  PaymentListComponent, PaymentDeleteComponent, PaymentEditComponent, PaymentAddComponent, PaymentDialogComponent
+  PaymentListComponent, PaymentDeleteComponent, PaymentEditComponent, PaymentAddComponent, PaymentDialogComponent, PaymentDialogDeleteComponent
 ]
 
 @NgModule({

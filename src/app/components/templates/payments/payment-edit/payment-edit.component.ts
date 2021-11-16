@@ -20,7 +20,6 @@ export class PaymentEditComponent implements OnInit {
   }
 
   edit(task: Task) {
-    console.log(task)
     let matDialogDataConfig = {
       data: {
         title: "Editar pagamento",
@@ -37,7 +36,7 @@ export class PaymentEditComponent implements OnInit {
       }
       else {
 
-        let task: Task = res;
+        let task: Task = res.task;
 
         this.taskService.update(task)
           .subscribe(

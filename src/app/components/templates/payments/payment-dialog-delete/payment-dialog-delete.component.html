@@ -1,0 +1,28 @@
+<a-dialog [title]="title">
+
+    <form dialog-content [formGroup]="taskForm" *ngIf="taskForm">
+
+        <div class="body">
+            <mat-form-field appearance="outline">
+                <mat-label>Usuário</mat-label>
+                <input matInput readonly formControlName="name" [value]="task.name" type="text" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Data</mat-label>
+                <input matInput readonly formControlName="date" [value]="task.date"type="text" />
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Valor</mat-label>
+                <input matInput readonly formControlName="value" [value]="task.value" type="number" />
+            </mat-form-field>
+        </div>
+        <div class="header">
+            <a-button (click)="cancel()" [block]="true" title="Cancelar"></a-button>
+            <a-button (click)="confirm()" [block]="true" color="primary" title="Remover"></a-button>
+        </div>
+    </form>
+
+
+</a-dialog>
