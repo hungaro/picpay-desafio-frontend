@@ -35,21 +35,11 @@ export class PaymentListComponent implements OnChanges {
     this.filteredUser = event.target.value
   }
 
-  filterByNameOrUsername() {
-    this.dataSource.data = this.tasks.filter((task) => task.name.includes(this.filteredUser) || task.username.includes(this.filteredUser))
+  filterByNameOrUsername(filteredUser: string) {
+    this.dataSource.data = this.filter(filteredUser);
   }
 
-  editPayment(paymentId: Number) {
-    // const dialogRef = this.dialog.open(PaymentFormComponent, {data: {edit: true, paymentId}});
-    // dialogRef.afterClosed().subscribe(() => {
-    //   this.getListPayment();
-    // })
-  }
-
-  deletePayment(paymentId: Number) {
-    // const dialogRef = this.dialog.open(DeletePaymentComponent, {data: {paymentId}});
-    // dialogRef.afterClosed().subscribe(() => {
-    //   this.getListPayment();
-    // })
+  filter(filteredUser: string){
+    return this.tasks.filter((task) => task.name.includes(filteredUser) || task.username.includes(filteredUser))
   }
 }

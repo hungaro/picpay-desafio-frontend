@@ -46,6 +46,7 @@ export class PaymentDeleteComponent implements OnInit {
 
             () => {
               this.snackbarService.success("Pagamento excluído com sucesso");
+              window.location.reload();
             },
 
             (err) => {

@@ -17,7 +17,7 @@ export class TaskService {
   parseObject(task: Task): Task {
     task.username = task.name.replace(/\s/g,'').toLowerCase()
     task.image = task?.image ?? "";
-    task.date = new Date(task.date);
+    task.date = new Date(task.date).toISOString();
     return task;
   }
 

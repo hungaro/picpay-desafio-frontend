@@ -13,9 +13,10 @@
             </mat-form-field>
             <mat-form-field appearance="outline">
                 <mat-label>Data*</mat-label>
-                <input matInput formControlName="date" [value]="task.date | date: 'dd MMM y HH:mm' : 'pt-BR'" type="datetime-local" />
-
+                <input matInput formControlName="date" [value]="task.date | date:'yyyy-MM-ddTHH:mm'"
+                    type="datetime-local" />
             </mat-form-field>
+
             <mat-form-field appearance="outline">
                 <mat-label>Título</mat-label>
                 <input matInput formControlName="title" [value]="task.title" type="text" />

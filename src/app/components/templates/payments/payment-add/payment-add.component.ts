@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { SnackbarService } from 'src/app/core/snackbar/snackbar.service';
 import { Task } from 'src/app/models/task';
 import { TaskService } from 'src/app/services/task.service';
@@ -12,7 +13,7 @@ import { PaymentDialogComponent } from '../payment-dialog/payment-dialog.compone
 })
 export class PaymentAddComponent implements OnInit {
 
-  constructor(public dialog: MatDialog, private taskService: TaskService, private snackbarService: SnackbarService) { }
+  constructor(public dialog: MatDialog, private taskService: TaskService, private snackbarService: SnackbarService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -45,13 +46,14 @@ export class PaymentAddComponent implements OnInit {
       else {
 
         let task: Task = res.task;
-        console.log(task);
-
+        
         this.taskService.save(task)
           .subscribe(
 
             () => {
               this.snackbarService.success("Pagamento salvo com sucesso");
+              
+              window.location.reload();
             },
 
             (err) => {

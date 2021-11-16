@@ -43,6 +43,7 @@ export class PaymentEditComponent implements OnInit {
 
             () => {
               this.snackbarService.success("Pagamento atualizado com sucesso");
+              window.location.reload();
             },
 
             (err) => {

@@ -17,6 +17,8 @@ export class PaymentDialogComponent implements OnInit {
 
   taskForm: FormGroup;
 
+  filterDateFrom: Date;
+
   constructor(@Inject(MAT_DIALOG_DATA) private config: any, private dialog: MatDialogRef<PaymentDialogComponent>, private formBuilder: FormBuilder) {
     this.title = config.title;
     this.task = config.task;
