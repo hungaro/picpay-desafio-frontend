@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
-import { User } from '../auth/user';
+import { User } from '../../models/user';
 import { Item } from './item';
 
 const KEY = 'key';
 
 // Minutes * Seconds * Miliseconds
 const EXPIRE_ON_15_MINUTES = 15 * 60 * 1000;
-
-// Seconds * Miliseconds
-const EXPIRE_ON_5_SECONDS = 5 * 1000;
 
 @Injectable({ providedIn: 'root' })
 export class TokenService {

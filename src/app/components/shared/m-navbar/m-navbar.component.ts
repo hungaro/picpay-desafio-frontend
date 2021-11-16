@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { ProfileService } from 'src/app/core/auth/profile.service';
-import { User } from 'src/app/core/auth/user';
-import { TokenService } from 'src/app/core/token/token.service';
+import { User } from 'src/app/models/user';
 import { environment } from '../../../../environments/environment';
 
 const APP_TITLE = environment.appTitle;

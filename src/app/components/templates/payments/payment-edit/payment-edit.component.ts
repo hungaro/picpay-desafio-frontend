@@ -31,26 +31,38 @@ export class PaymentEditComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(res => {
 
-      if (res.event == 'cancel') {
+      if (res == undefined || res.event == 'cancel') {
         this.snackbarService.warning("Operação cancelada");
       }
       else {
 
-        let task: Task = res.task;
+        let taskUpdate: Task = res.task;
+        task.id = res.taskId;
 
-        this.taskService.update(task)
-          .subscribe(
+        this.taskService.findById(task.id)
+          .subscribe(task => {
 
-            () => {
-              this.snackbarService.success("Pagamento atualizado com sucesso");
-              window.location.reload();
-            },
+            task.date = taskUpdate.date;
+            task.name = taskUpdate.name;
+            task.title = taskUpdate.title;
+            task.value = taskUpdate.value;
 
-            (err) => {
-              console.log(err);
-              this.snackbarService.error("Erro ao editar pagamento");
-            }
-          );
+            this.taskService.update(task)
+              .subscribe(
+
+                () => {
+                  this.snackbarService.success("Pagamento atualizado com sucesso");
+                  window.location.reload();
+                },
+
+                (err) => {
+                  console.log(err);
+                  this.snackbarService.error("Erro ao editar pagamento");
+                }
+              );
+          });
+
+
       }
     })
 

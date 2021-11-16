@@ -40,7 +40,7 @@ export class PaymentAddComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(res => {
 
-      if (res.event == 'cancel') {
+      if (res == undefined || res.event == 'cancel') {
         this.snackbarService.warning("Operação cancelada");
       }
       else {

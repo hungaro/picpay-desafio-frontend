@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { TokenService } from 'src/app/core/token/token.service';
-import { User } from 'src/app/core/auth/user';
 import { SnackbarService } from 'src/app/core/snackbar/snackbar.service';
 
 import { environment } from '../../../environments/environment';
+import { User } from 'src/app/models/user';
 
 const APP_TITLE = environment.appTitle;
 const APP_SUBTITLE = environment.appSubtitle;

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TokenService } from '../token/token.service';
-import { User } from './user';
+import { User } from '../../models/user';
 
 @Injectable({
   providedIn: 'root',
