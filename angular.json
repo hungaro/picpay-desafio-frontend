@@ -29,6 +29,11 @@
               "src/favicon.ico",
               "src/assets"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/theme/"
+              ]
+            },
             "styles": [
               "src/styles.scss"
             ],
@@ -99,6 +104,11 @@
               "src/favicon.ico",
               "src/assets"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/theme/"
+              ]
+            },
             "styles": [
               "src/styles.scss"
             ],
@@ -131,6 +141,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "picpay-desafio-frontend"
 }

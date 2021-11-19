@@ -1,0 +1,35 @@
+<div fxLayout="row" fxFill>
+  <form [formGroup]="form" fxLayout="column" fxLayoutAlign="center center" fxFlex="0 1 540px" class="login-tab">
+    <div class="login-form" fxLayout="column" fxLayoutGap="16px">
+      <h2 fxLayout="row">
+        <div class="accent-color"><b>Pay</b></div>
+        <div class="primary-color">Friends</div>
+      </h2>
+      <h1>Bem vindo de volta</h1>
+
+      <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input type="email" matInput formControlName="email" placeholder="Ex: teste@gm" />
+        <mat-error *ngIf="form.controls.email.hasError('email') && !form.controls.email.hasError('required')">
+          Insira um email válido
+        </mat-error>
+        <mat-error *ngIf="form.controls.email.hasError('required')">
+          Campo obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Senha</mat-label>
+        <input type="password" matInput formControlName="password" />
+        <mat-error *ngIf="form.controls.password.hasError('required')">
+          Campo obrigatório
+        </mat-error>
+      </mat-form-field>
+
+      <button mat-flat-button color="primary">ENTRAR</button>
+    </div>
+  </form>
+  <div fxLayout="column" fxLayoutAlign="center center" fxFlex>
+    <img src="/assets/images/login-image.png" />
+  </div>
+</div>

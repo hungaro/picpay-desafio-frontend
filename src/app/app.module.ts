@@ -1,15 +1,23 @@
+import { registerLocaleData } from '@angular/common';
+import localePtExtra from '@angular/common/locales/extra/pt';
+import localePt from '@angular/common/locales/pt';
+import { LOCALE_ID, NgModule } from '@angular/core';
+import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppRoutingModule } from '@app/app-routing.module';
+import { AppComponent } from '@app/app.component';
+import { CoreModule } from '@app/core/core.module';
 
-import { AppComponent } from './app.component';
+registerLocaleData(localePt, 'pt', localePtExtra);
+
 @NgModule({
-  declarations: [	
-    AppComponent,
-   ],
-  imports: [
-    BrowserModule
+  declarations: [AppComponent],
+  imports: [BrowserModule, AppRoutingModule, CoreModule, BrowserAnimationsModule],
+  providers: [
+    { provide: LOCALE_ID, useValue: 'pt' },
+    { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } }
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}
