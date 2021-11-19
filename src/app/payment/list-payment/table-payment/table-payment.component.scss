@@ -1,0 +1,20 @@
+.app-table-wrapper {
+  overflow: hidden;
+  background-color: white;
+  border-radius: 4px;
+  .table-actions {
+    margin-left: 16px;
+  }
+  table {
+    width: 100%;
+    td {
+      border: none;
+    }
+    tr:first-child td {
+      border-top: 2px solid #cfdce5;
+    }
+    tr:nth-child(even) {
+      background-color: #f5f8fa;
+    }
+  }
+}
