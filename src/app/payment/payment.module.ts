@@ -9,11 +9,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTableModule } from '@angular/material/table';
-import { ListPaymentComponent } from './list-payment/list-payment.component';
-import { TablePaymentComponent } from './list-payment/table-payment/table-payment.component';
+import { ListPaymentComponent } from './components/list-payment/list-payment.component';
+import { TablePaymentComponent } from './components/list-payment/table-payment/table-payment.component';
 import { PaymentRoutingModule } from './payment-routing.module';
 import { PaymentComponent } from './payment.component';
-import { SharedModule } from '../shared/shared.module';
+import { SharedModule } from '@app/shared/shared.module';
 
 @NgModule({
   declarations: [PaymentComponent, ListPaymentComponent, TablePaymentComponent],

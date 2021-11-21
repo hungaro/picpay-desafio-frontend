@@ -1,12 +1,10 @@
-@import '~@angular/material/theming';
+@use '~@angular/material' as mat;
 
 $app-font-family: 'Montserrat', Roboto, 'Helvetica Neue', sans-serif;
 
 $custom-typography: mat.define-typography-config(
   $font-family: $app-font-family
 );
-
-@include mat.core($custom-typography);
 
 $primary-pallet: (
   50: #e0efff,
@@ -48,7 +46,7 @@ $accent-pallet: (
   300: #4d6c96,
   400: #264d80,
   500: #002d69,
-  600: #002861,
+  600: #090a0a,
   700: #002256,
   800: #001c4c,
   900: #00113b,
@@ -117,4 +115,5 @@ $theme: map-merge(
   )
 );
 
+@include mat.core($custom-typography);
 @include mat.all-component-themes($theme);

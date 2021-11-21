@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Route } from '@app/core/utils/route.helper';
-import { ListPaymentComponent } from './list-payment/list-payment.component';
+import { ListPaymentComponent } from './components/list-payment/list-payment.component';
 import { PaymentComponent } from './payment.component';
 
 const routes: Routes = Route.withShell([
