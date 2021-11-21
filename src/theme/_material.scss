@@ -1,8 +1,9 @@
 @import '~@angular/material/theming';
-@import 'variables';
+
+$app-font-family: 'Montserrat', Roboto, 'Helvetica Neue', sans-serif;
 
 $custom-typography: mat.define-typography-config(
-  $font-family: $font-family
+  $font-family: $app-font-family
 );
 
 @include mat.core($custom-typography);
@@ -117,13 +118,3 @@ $theme: map-merge(
 );
 
 @include mat.all-component-themes($theme);
-
-.primary-color {
-  color: mat-color($primary) !important;
-}
-.accent-color {
-  color: mat-color($accent) !important;
-}
-.warn-color {
-  color: mat-color($warn) !important;
-}

@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
@@ -12,6 +13,7 @@ import { ListPaymentComponent } from './list-payment/list-payment.component';
 import { TablePaymentComponent } from './list-payment/table-payment/table-payment.component';
 import { PaymentRoutingModule } from './payment-routing.module';
 import { PaymentComponent } from './payment.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [PaymentComponent, ListPaymentComponent, TablePaymentComponent],
@@ -24,8 +26,10 @@ import { PaymentComponent } from './payment.component';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
+    MatCheckboxModule,
     ReactiveFormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    SharedModule
   ]
 })
 export class PaymentModule {}

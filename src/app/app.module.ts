@@ -1,7 +1,7 @@
 import { registerLocaleData } from '@angular/common';
 import localePtExtra from '@angular/common/locales/extra/pt';
 import localePt from '@angular/common/locales/pt';
-import { LOCALE_ID, NgModule } from '@angular/core';
+import { DEFAULT_CURRENCY_CODE, LOCALE_ID, NgModule } from '@angular/core';
 import { MAT_FORM_FIELD_DEFAULT_OPTIONS } from '@angular/material/form-field';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -16,6 +16,10 @@ registerLocaleData(localePt, 'pt', localePtExtra);
   imports: [BrowserModule, AppRoutingModule, CoreModule, BrowserAnimationsModule],
   providers: [
     { provide: LOCALE_ID, useValue: 'pt' },
+    {
+      provide: DEFAULT_CURRENCY_CODE,
+      useValue: 'BRL'
+    },
     { provide: MAT_FORM_FIELD_DEFAULT_OPTIONS, useValue: { appearance: 'outline' } }
   ],
   bootstrap: [AppComponent]
