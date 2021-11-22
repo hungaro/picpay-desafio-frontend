@@ -7,6 +7,14 @@
       </h2>
       <h1>Bem vindo de volta</h1>
 
+      <div class="login-error" *ngIf="!!loginError" fxLayout="row" fxLayoutAlign="space-between center">
+        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+          <mat-icon>error</mat-icon>
+          <span>{{loginError}}</span>
+        </div>
+        <mat-icon class="cursor-pointer" (click)="loginError = null">close</mat-icon>
+      </div>
+
       <mat-form-field>
         <mat-label>Email</mat-label>
         <input type="email" matInput formControlName="email" placeholder="Ex: teste@gm" />
@@ -20,13 +28,16 @@
 
       <mat-form-field>
         <mat-label>Senha</mat-label>
-        <input type="password" matInput formControlName="password" />
+        <input [type]="!!passwordShow ? 'text': 'password'" matInput formControlName="password" />
         <mat-error *ngIf="form.controls.password.hasError('required')">
           Campo obrigatório
         </mat-error>
+        <span matSuffix class="cursor-pointer" (click)="passwordShow = !passwordShow">
+          <mat-icon>{{!!passwordShow ? 'visibility_off' :'visibility'}}</mat-icon>
+        </span>
       </mat-form-field>
 
-      <button mat-flat-button color="primary">ENTRAR</button>
+      <button mat-flat-button color="primary" (click)="login()">ENTRAR</button>
     </div>
   </form>
   <div fxLayout="column" fxLayoutAlign="center center" fxFlex>

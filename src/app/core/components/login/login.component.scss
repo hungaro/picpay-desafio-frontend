@@ -21,3 +21,13 @@
     width: 100%;
   }
 }
+.login-error {
+  background-color: $warn;
+  border-radius: 4px;
+  padding: 8px;
+  color: white;
+  font-weight: 600;
+  .mat-icon:first-child {
+    padding-right: 4px;
+  }
+}
