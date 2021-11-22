@@ -8,7 +8,7 @@
       <h1>Bem vindo de volta</h1>
 
       <div class="login-error" *ngIf="!!loginError" fxLayout="row" fxLayoutAlign="space-between center">
-        <div fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="4px">
+        <div fxLayout="row" fxLayoutAlign="start center">
           <mat-icon>error</mat-icon>
           <span>{{loginError}}</span>
         </div>
@@ -17,7 +17,7 @@
 
       <mat-form-field>
         <mat-label>Email</mat-label>
-        <input type="email" matInput formControlName="email" placeholder="Ex: teste@gm" />
+        <input type="email" matInput formControlName="email" placeholder="Ex: teste@gmail.com" />
         <mat-error *ngIf="form.controls.email.hasError('email') && !form.controls.email.hasError('required')">
           Insira um email válido
         </mat-error>

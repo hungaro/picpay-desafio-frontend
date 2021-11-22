@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
 import { LoginComponent, NotFoundComponent } from '@app/core/components';
+import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Route[] = [
   {
@@ -10,9 +11,14 @@ const routes: Route[] = [
   },
   {
     path: 'login',
-    component: LoginComponent,
+    component: LoginComponent
   },
-  { path: 'payment', loadChildren: () => import('./payment/payment.module').then(m => m.PaymentModule) },
+  {
+    path: 'payment',
+    canLoad: [AuthGuard],
+    canActivate: [AuthGuard],
+    loadChildren: () => import('./payment/payment.module').then(m => m.PaymentModule)
+  },
   {
     path: '**',
     component: NotFoundComponent
