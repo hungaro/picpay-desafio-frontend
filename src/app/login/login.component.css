@@ -1,0 +1,61 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:500,700");
+@import url("https://fonts.googleapis.com/css?family=Roboto:500,700");
+
+.login {
+    background-color: #F2F2F2;
+    height: 100%;
+    width: 40%;
+    clear: both;
+    text-align: center;
+}
+
+.form-area {
+    position: absolute;
+    top: 30%;
+    left: 10%;
+}
+
+.form {
+    float: left;
+    clear: left;
+    padding-top: 10px;
+}
+
+.field {
+    width: 305px;
+}
+
+.draw {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+}
+
+.draw-man {
+    width: 737px;
+    height: 579px;
+}
+
+button {
+    background-color: #007DFE;
+    color: white;
+    width: 100%;
+}
+
+h1 {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 37px;
+    float: left;
+    clear: left;
+    padding-top: 10px;
+}
+
+.logo {
+    width: 120px;
+    height: 20px;
+    float: left;
+    clear: left;
+}
