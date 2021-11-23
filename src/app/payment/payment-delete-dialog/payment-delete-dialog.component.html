@@ -1,0 +1,12 @@
+<h1 mat-dialog-title>Excluir pagamento</h1>
+
+<div class="content">
+    <p><b>Usuario:</b> {{data.name}}</p>
+    <p><b>Data:</b> {{data.date}}</p>
+    <p><b>Valor: </b>R$ {{data.value}}</p>
+</div>
+
+<div class="footer">
+    <button mat-button class="cancel" (click)="close()">Cancelar</button>
+    <button mat-button class="save" (click)="delete()">Excluir</button>
+</div>

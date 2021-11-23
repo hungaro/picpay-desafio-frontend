@@ -1662,21 +1662,11 @@
     },
     {
       "id": 173,
-      "name": "Mattheus",
+      "name": "Mattheus Editado 1",
       "username": "",
       "title": "Pagamento de Teste",
       "value": "229.90",
       "date": "2021-11-23T03:00:00.000Z",
-      "image": "",
-      "isPayed": ""
-    },
-    {
-      "id": 174,
-      "name": "Mattheus",
-      "username": "",
-      "title": "Teste",
-      "value": "220.8",
-      "date": "2021-11-17T03:00:00.000Z",
       "image": "",
       "isPayed": ""
     }

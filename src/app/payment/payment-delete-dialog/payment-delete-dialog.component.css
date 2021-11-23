@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:500,700");
+
+h1 {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 5px;
+
+    color: #333333;
+}
+
+.content {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.footer {
+    text-align: center;
+}
+
+.cancel {
+    background-color: #F5F5F5;
+    margin-right: 10px;
+}
+
+.save {
+    background-color: #f44336;
+    color: white;
+}

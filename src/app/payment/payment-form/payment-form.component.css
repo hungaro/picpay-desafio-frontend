@@ -1,0 +1,35 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:500,700");
+
+h1 {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 5px;
+
+    color: #333333;
+}
+
+.form-area {
+    padding: 20px;
+}
+
+.field {
+    width: 100%;
+    padding-right: 10px;
+}
+
+.footer {
+    float: right;
+}
+
+.cancel {
+    background-color: #F5F5F5;
+    margin-right: 10px;
+}
+
+.save {
+    background-color: #002D69;
+    color: white;
+}
+

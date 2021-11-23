@@ -13,6 +13,7 @@
         <mat-form-field>
             <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filtro">
         </mat-form-field>
+        <button class="new-payment" mat-button (click)="openDialog()">Adicionar novo pagamento</button>
         <div class="mat-elevation-z8" >
             <table mat-table [dataSource]="dataSource" matSort (matSortChange)="announceSortChange($event)">
 
@@ -43,6 +44,14 @@
                     </td>
                 </ng-container>
 
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef> Ações </th>
+                    <td mat-cell *matCellDef="let row">
+                        <mat-icon matSuffix (click)="openDialog(row, false)" class="action">{{'edit'}}</mat-icon>
+                        <mat-icon matSuffix (click)="openDialog(row, true)" class="action">{{'delete'}}</mat-icon>
+                    </td>
+                </ng-container>
+
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
             </table>
@@ -53,5 +62,3 @@
         </div>
     </div>
 </div>
-
-

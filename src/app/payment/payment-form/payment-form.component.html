@@ -1,0 +1,35 @@
+<h1 mat-dialog-title>Adicionar Pagamento</h1>
+<div class="form-area">
+    <form class="form" [formGroup]="formGroup">
+        <mat-grid-list cols="2" rowHeight="100px">
+            <mat-grid-tile>
+                <mat-form-field class="field" >
+                    <input matInput placeholder="Usuário" [type]="'text'" formControlName="name" required>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="field" >
+                    <input matInput placeholder="Título" [type]="'text'" formControlName="title" required>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="field">
+                    <input matInput placeholder="Data" [matDatepicker]="picker" formControlName="date">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+                <mat-form-field class="field" >
+                    <input matInput placeholder="Valor" [type]="'number'" formControlName="value" required>
+                </mat-form-field>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </form>
+</div>
+<div class="footer">
+    <button mat-button class="cancel" (click)="close()">Cancelar</button>
+    <button mat-button class="save" (click)="save()">Salvar</button>
+</div>
+
+

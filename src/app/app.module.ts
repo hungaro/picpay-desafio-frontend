@@ -22,12 +22,20 @@ import {MatTableModule} from '@angular/material/table';
 import {MatSortModule} from '@angular/material/sort';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import {PaymentFormComponent} from './payment/payment-form/payment-form.component';
+import {PaymentDeleteDialogComponent} from './payment/payment-delete-dialog/payment-delete-dialog.component';
+import {MatGridListModule} from '@angular/material/grid-list';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatNativeDateModule} from '@angular/material/core';
 
 @NgModule({
   declarations: [
       AppComponent,
       LoginComponent,
-      PaymentComponent
+      PaymentComponent,
+      PaymentFormComponent,
+      PaymentDeleteDialogComponent
    ],
   imports: [
       BrowserModule,
@@ -44,7 +52,11 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
       MatTableModule,
       MatSortModule,
       MatPaginatorModule,
-      MatCheckboxModule
+      MatCheckboxModule,
+      MatGridListModule,
+      MatDatepickerModule,
+      MatNativeDateModule,
+      MatDialogModule
   ],
   providers: [
         DataService,
