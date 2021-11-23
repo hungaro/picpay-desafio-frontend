@@ -6,6 +6,8 @@ import { MatPaginator, PageEvent } from '@angular/material/paginator';
   selector: '[appCustomPaginator]'
 })
 export class CustomPaginatorDirective {
+  @Input() showTotalPages = 2;
+
   private _rangeStart: number;
   private _rangeEnd: number;
   private _buttons = [];
@@ -15,8 +17,6 @@ export class CustomPaginatorDirective {
     pageSize: 0,
     previousPageIndex: 0
   };
-
-  @Input() showTotalPages = 2;
 
   constructor(@Host() @Self() @Optional() private readonly matPag: MatPaginator, private vr: ViewContainerRef, private ren: Renderer2) {
     this.matPag.page.subscribe((e: PageEvent) => {
@@ -49,7 +49,7 @@ export class CustomPaginatorDirective {
   private createButton(i: any, pageIndex: number): any {
     const linkBtn: MatButton = this.ren.createElement('button');
     this.ren.addClass(linkBtn, 'app-paginator-button');
-    const pagingTxt = (i ?? 0) + 1;
+    const pagingTxt = +(i ?? 0) + 1;
     const text = this.ren.createText(pagingTxt + '');
 
     if (i === pageIndex) {

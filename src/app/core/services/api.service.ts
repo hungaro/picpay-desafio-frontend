@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, finalize, timeout } from 'rxjs/operators';
@@ -8,6 +8,7 @@ import { LoadingService } from './loading.service';
 export interface ApiOptions {
   showLoading?: boolean;
   defaultErrorHandling?: boolean;
+  fullResponse?: boolean;
 }
 
 @Injectable({
@@ -18,10 +19,12 @@ export class ApiService {
 
   constructor(private http: HttpClient, private loading: LoadingService) {}
 
-  get<T = any>(path: string, params: any = {}, options: ApiOptions = {}): Observable<T> {
+  get<T = any>(path: string, params: any = {}, options: ApiOptions = {}): Observable<T | HttpResponse<T>> {
+    let observe = !!options?.fullResponse ? 'response' : 'body';
     return this.http
       .get<T>(`${this.apiUrl}${path}`, {
-        params: new HttpParams({ fromObject: params })
+        params: new HttpParams({ fromObject: params }),
+        observe: observe as 'response'
       })
       .pipe(this.handleDefaultOptions(options));
   }

@@ -1,0 +1,11 @@
+.app-table-wrapper {
+  overflow: hidden;
+  background-color: white;
+  border-radius: 4px;
+  .table-actions {
+    margin: 8px 16px;
+  }
+  span {
+    margin-right: 16px;
+  }
+}

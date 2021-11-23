@@ -8,12 +8,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
+import { SharedModule } from '@app/shared/shared.module';
 import { ListPaymentComponent } from './components/list-payment/list-payment.component';
 import { TablePaymentComponent } from './components/list-payment/table-payment/table-payment.component';
 import { PaymentRoutingModule } from './payment-routing.module';
 import { PaymentComponent } from './payment.component';
-import { SharedModule } from '@app/shared/shared.module';
 
 @NgModule({
   declarations: [PaymentComponent, ListPaymentComponent, TablePaymentComponent],
@@ -27,6 +28,7 @@ import { SharedModule } from '@app/shared/shared.module';
     MatInputModule,
     MatIconModule,
     MatCheckboxModule,
+    MatSortModule,
     ReactiveFormsModule,
     FlexLayoutModule,
     SharedModule

@@ -27,7 +27,7 @@ export class AuthService {
         showLoading: false
       })
       .pipe(
-        map(user => {
+        map((user: UserAccount[]) => {
           if (!!user?.length) {
             this.authenticated = true;
             this.userData.next(user[0]);

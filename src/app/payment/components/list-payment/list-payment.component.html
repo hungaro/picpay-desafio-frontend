@@ -3,4 +3,33 @@
   <button mat-flat-button color="primary">ADICIONAR PAGAMENTO</button>
 </div>
 <br />
-<app-table-payment [list]="list"></app-table-payment>
+
+<div class="mat-elevation-z1 app-table-wrapper">
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="table-actions">
+    <div>
+      <mat-form-field color="primary" class="mat-form-field-no-padding mat-form-field-no-label">
+        <input matInput name="textSearch" placeholder="Pesquisar" [formControl]="textSearchControl" />
+        <mat-icon *ngIf="!textSearchControl?.value" color="primary" matSuffix>
+          search
+        </mat-icon>
+        <mat-icon class="cursor-pointer" color="warn" *ngIf="textSearchControl?.value" matSuffix (click)="textSearchControl.setValue('')">
+          close
+        </mat-icon>
+      </mat-form-field>
+    </div>
+    <mat-paginator
+      *ngIf="!!listTotal"
+      appCustomPaginator
+      [showTotalPages]="5"
+      [length]="listTotal"
+      [(pageSize)]="listParams._limit"
+      (page)="page($event)"
+      [pageSizeOptions]="[5, 10, 20]"
+      showFirstLastButtons="false"
+    >
+    </mat-paginator>
+    <span *ngIf="!listTotal && !!textSearchControl.value">Nenhum resultado foi encontrado</span>
+  </div>
+
+  <app-table-payment *ngIf="!!list.length" [list]="list" (tsort)="sort($event)"></app-table-payment>
+</div>

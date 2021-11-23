@@ -1,20 +1,40 @@
-.app-table-wrapper {
-  overflow: hidden;
-  background-color: white;
-  border-radius: 4px;
-  .table-actions {
-    margin-left: 16px;
+@import 'variables';
+
+table {
+  width: 100%;
+  table-layout: fixed;
+  td {
+    border: none;
   }
-  table {
-    width: 100%;
-    td {
-      border: none;
+  tr:first-child td {
+    border-top: 2px solid #cfdce5;
+  }
+  tr:nth-child(even) {
+    background-color: #f5f8fa;
+  }
+  tr:hover td {
+    background-color: rgba($primary, 0.2);
+  }
+  th,
+  td {
+    &:first-child {
+      width: 30%;
     }
-    tr:first-child td {
-      border-top: 2px solid #cfdce5;
+    &:nth-child(2) {
+      width: 30%;
     }
-    tr:nth-child(even) {
-      background-color: #f5f8fa;
+    &:nth-child(3) {
+      width: 180px;
+    }
+    &:nth-child(4) {
+      width: 150px;
+    }
+    &:nth-child(5) {
+      width: 80px;
+    }
+    &:last-child {
+      width: 40%;
+      text-align: right;
     }
   }
 }
