@@ -2,6 +2,7 @@ import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
+import { SnackbarService } from '@app/core/services/snackbar.service';
 import { PaymentTask } from '@app/payment/models/payment-task.model';
 import { PaymentTaskService } from '@app/payment/services/payment-task.service';
 import { DialogConfirmationComponent } from '@app/shared/components/dialog-confirmation/dialog-confirmation.component';
@@ -24,7 +25,12 @@ export class TablePaymentComponent implements OnInit, OnChanges, OnDestroy {
   dataSource: MatTableDataSource<PaymentTask>;
   destroySubscriber: Subject<void> = new Subject();
 
-  constructor(private currencyPipe: CurrencyPipe, private datePipe: DatePipe, private paymentTaskService: PaymentTaskService) {}
+  constructor(
+    private currencyPipe: CurrencyPipe,
+    private datePipe: DatePipe,
+    private paymentTaskService: PaymentTaskService,
+    private snackBar: SnackbarService
+  ) {}
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource(this.list);
@@ -64,6 +70,7 @@ export class TablePaymentComponent implements OnInit, OnChanges, OnDestroy {
       yesCallback: dialog => {
         this.paymentTaskService.deletePaymentTask(paymentTask.id).subscribe(() => {
           this.updateList.emit(true);
+          this.snackBar.showSuccess('Registro excluído com sucesso!');
           dialog.close(true);
         });
         return true;

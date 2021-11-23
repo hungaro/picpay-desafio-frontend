@@ -1,9 +1,10 @@
-import { HttpClient, HttpEvent, HttpParams, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError, finalize, timeout } from 'rxjs/operators';
 import { Environment } from 'src/environments/environment';
 import { LoadingService } from './loading.service';
+import { SnackbarService } from './snackbar.service';
 
 export interface ApiOptions {
   showLoading?: boolean;
@@ -17,7 +18,7 @@ export interface ApiOptions {
 export class ApiService {
   private apiUrl = Environment.apiUrl;
 
-  constructor(private http: HttpClient, private loading: LoadingService) {}
+  constructor(private http: HttpClient, private loading: LoadingService, private snackBar: SnackbarService) {}
 
   get<T = any>(path: string, params: any = {}, options: ApiOptions = {}): Observable<T | HttpResponse<T>> {
     let observe = !!options?.fullResponse ? 'response' : 'body';
@@ -55,8 +56,15 @@ export class ApiService {
     return <T>(source: Observable<T>) =>
       source.pipe(
         timeout(timeoutTime),
-        catchError(error => {
+        catchError((error: HttpErrorResponse) => {
           console.log('Request Error', error);
+          switch (error.status) {
+            case 404:
+              this.snackBar.showError('Registro não encontrado.');
+              break;
+            default:
+              this.snackBar.showError('Ocorreu um erro inesperado.');
+          }
           return throwError(error);
         }),
         finalize(() => {
