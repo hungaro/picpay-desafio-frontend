@@ -112,7 +112,9 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [],
+            "sourceMap": true,
+            "codeCoverage": true
           }
         },
         "lint": {
