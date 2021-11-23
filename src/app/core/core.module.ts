@@ -12,6 +12,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent, LoadingComponent, NotFoundComponent } from '@app/core/components';
+import { SharedModule } from '@app/shared/shared.module';
 import { LoginComponent } from './components/login/login.component';
 import { ShellComponent } from './components/shell/shell.component';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';
@@ -29,7 +30,8 @@ import { SnackbarComponent } from './components/snackbar/snackbar.component';
     OverlayModule,
     ReactiveFormsModule,
     FlexLayoutModule,
-    RouterModule
+    RouterModule,
+    SharedModule
   ],
   declarations: [LoadingComponent, HeaderComponent, NotFoundComponent, LoginComponent, ShellComponent, SnackbarComponent]
 })

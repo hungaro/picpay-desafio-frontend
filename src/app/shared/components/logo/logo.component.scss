@@ -1,0 +1,18 @@
+@import 'variables';
+.logo {
+  font-size: 24px;
+  &.colored {
+    div:first-child {
+      color: $accent;
+    }
+    div:last-child {
+      color: $primary;
+    }
+  }
+  &.white {
+    color: white;
+  }
+  &.black {
+    color: $text;
+  }
+}

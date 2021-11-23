@@ -1,12 +1,8 @@
 <div fxLayout="row" fxFill>
   <form [formGroup]="form" fxLayout="column" fxLayoutAlign="center center" fxFlex="0 1 540px" class="login-tab">
     <div class="login-form" fxLayout="column" fxLayoutGap="16px">
-      <h2 fxLayout="row">
-        <div class="accent-color"><b>Pay</b></div>
-        <div class="primary-color">Friends</div>
-      </h2>
+      <app-logo color="colored"></app-logo>
       <h1>Bem vindo de volta</h1>
-
       <div class="login-error" *ngIf="!!loginError" fxLayout="row" fxLayoutAlign="space-between center">
         <div fxLayout="row" fxLayoutAlign="start center">
           <mat-icon>error</mat-icon>
