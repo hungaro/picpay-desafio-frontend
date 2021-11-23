@@ -4,7 +4,7 @@ import { ApiService } from '@app/core/services/api.service';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GetPaymentTaskParams } from '../models/get-payment-task-params.model';
-import { GetPaymentTask } from '../models/getPaymentTask.model';
+import { GetPaymentTask } from '../models/get-payment-task.model';
 import { PaymentTask } from '../models/payment-task.model';
 
 @Injectable({
