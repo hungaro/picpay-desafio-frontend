@@ -8,11 +8,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent, LoadingComponent, NotFoundComponent } from '@app/core/components';
 import { LoginComponent } from './components/login/login.component';
 import { ShellComponent } from './components/shell/shell.component';
+import { SnackbarComponent } from './components/snackbar/snackbar.component';
 
 @NgModule({
   imports: [
@@ -23,11 +25,12 @@ import { ShellComponent } from './components/shell/shell.component';
     MatToolbarModule,
     MatProgressSpinnerModule,
     MatIconModule,
+    MatSnackBarModule,
     OverlayModule,
     ReactiveFormsModule,
     FlexLayoutModule,
     RouterModule
   ],
-  declarations: [LoadingComponent, HeaderComponent, NotFoundComponent, LoginComponent, ShellComponent]
+  declarations: [LoadingComponent, HeaderComponent, NotFoundComponent, LoginComponent, ShellComponent, SnackbarComponent]
 })
 export class CoreModule {}

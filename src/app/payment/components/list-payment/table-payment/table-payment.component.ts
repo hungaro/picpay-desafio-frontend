@@ -1,9 +1,13 @@
+import { CurrencyPipe, DatePipe } from '@angular/common';
 import { Component, EventEmitter, Input, OnChanges, OnDestroy, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { PaymentTask } from '@app/payment/models/payment-task.model';
+import { PaymentTaskService } from '@app/payment/services/payment-task.service';
+import { DialogConfirmationComponent } from '@app/shared/components/dialog-confirmation/dialog-confirmation.component';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { DialogAddPaymentComponent } from '../../dialog-add-payment/dialog-add-payment.component';
 
 @Component({
   selector: 'app-table-payment',
@@ -13,13 +17,14 @@ import { takeUntil } from 'rxjs/operators';
 export class TablePaymentComponent implements OnInit, OnChanges, OnDestroy {
   @Input() list?: PaymentTask[];
   @Output() tsort: EventEmitter<MatSort> = new EventEmitter<MatSort>();
+  @Output() updateList: EventEmitter<boolean> = new EventEmitter<boolean>();
   @ViewChild(MatSort, { static: true }) sort?: MatSort;
 
   displayedColumns: string[] = ['name', 'title', 'date', 'value', 'isPayed', 'actions'];
   dataSource: MatTableDataSource<PaymentTask>;
   destroySubscriber: Subject<void> = new Subject();
 
-  constructor() {}
+  constructor(private currencyPipe: CurrencyPipe, private datePipe: DatePipe, private paymentTaskService: PaymentTaskService) {}
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource(this.list);
@@ -36,5 +41,33 @@ export class TablePaymentComponent implements OnInit, OnChanges, OnDestroy {
   ngOnDestroy(): void {
     this.destroySubscriber?.next();
     this.destroySubscriber?.complete();
+  }
+
+  editPaymentTask(paymentTask: PaymentTask): void {
+    DialogAddPaymentComponent.open({ paymentTask })
+      .afterClosed()
+      .subscribe(data => {
+        if (!!data) {
+          this.updateList.emit(true);
+        }
+      });
+  }
+
+  deletePaymentTask(paymentTask: PaymentTask) {
+    DialogConfirmationComponent.open({
+      title: 'Excluir pagamento',
+      message: `
+        <p>Usuário: ${paymentTask.name} </p>
+        <p>Data: ${this.datePipe.transform(paymentTask.date, 'shortDate')} </p>
+        <p>Valor: R$ ${this.currencyPipe.transform(paymentTask.value)} </p>
+      `,
+      yesCallback: dialog => {
+        this.paymentTaskService.deletePaymentTask(paymentTask.id).subscribe(() => {
+          this.updateList.emit(true);
+          dialog.close(true);
+        });
+        return true;
+      }
+    });
   }
 }

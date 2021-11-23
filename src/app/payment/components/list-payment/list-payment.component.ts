@@ -7,6 +7,7 @@ import { PaymentTask } from '@app/payment/models/payment-task.model';
 import { PaymentTaskService } from '@app/payment/services/payment-task.service';
 import { of, Subject, timer } from 'rxjs';
 import { debounce, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { DialogAddPaymentComponent } from '../dialog-add-payment/dialog-add-payment.component';
 
 @Component({
   templateUrl: './list-payment.component.html',
@@ -85,5 +86,11 @@ export class ListPaymentComponent implements OnInit, OnDestroy {
         this.listParams._page = 1;
         this.updateList();
       });
+  }
+
+  showDialogAddPaymentTask() {
+    DialogAddPaymentComponent.open()
+      .afterClosed()
+      .subscribe(() => this.updateList());
   }
 }

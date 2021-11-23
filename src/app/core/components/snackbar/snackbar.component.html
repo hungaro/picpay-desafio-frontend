@@ -1,0 +1,9 @@
+<div fxlayout="row" fxLayoutAlign="space-between center">
+  <mat-icon id="snack-bar-icon" *ngIf="icons[data.action]">
+    {{ icons[data.action] }}
+  </mat-icon>
+  <div fxFlex [innerHTML]="data.html" id="snack-bar-content"></div>
+  <button mat-icon-button [disableRipple]="true" (click)="dismiss()" id="snack-bar-dismiss-btn">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>

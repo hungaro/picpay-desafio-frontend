@@ -1,6 +1,6 @@
 <h1><b>Meus pagamentos</b></h1>
 <div fxLayout="row" fxLayoutAlign="end end" fxFill>
-  <button mat-flat-button color="primary">ADICIONAR PAGAMENTO</button>
+  <button mat-flat-button color="primary" (click)="showDialogAddPaymentTask()">ADICIONAR PAGAMENTO</button>
 </div>
 <br />
 
@@ -31,5 +31,5 @@
     <span *ngIf="!listTotal && !!textSearchControl.value">Nenhum resultado foi encontrado</span>
   </div>
 
-  <app-table-payment *ngIf="!!list.length" [list]="list" (tsort)="sort($event)"></app-table-payment>
+  <app-table-payment *ngIf="!!list.length" (updateList)="updateList()" [list]="list" (tsort)="sort($event)"></app-table-payment>
 </div>

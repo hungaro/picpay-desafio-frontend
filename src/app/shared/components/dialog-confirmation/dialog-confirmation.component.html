@@ -1,0 +1,15 @@
+<div class="dialog-wrapper">
+  <h1 mat-dialog-title>{{ data.title }}</h1>
+  <div mat-dialog-content>
+    <div class="message" [innerHTML]="data.message" id="dialog-confirmation-message"></div>
+  </div>
+
+  <div mat-dialog-actions class="confirmation" fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="end center">
+    <button mat-flat-button id="dialog-button-no" (click)="noClick()">
+      CANCELAR
+    </button>
+    <button mat-flat-button color="primary" id="dialog-button-yes" (click)="yesClick()">
+      CONFIRMAR
+    </button>
+  </div>
+</div>

@@ -32,8 +32,8 @@
   <ng-container matColumnDef="actions">
     <th mat-header-cell *matHeaderCellDef></th>
     <td mat-cell *matCellDef="let element">
-      <button mat-icon-button><mat-icon>edit</mat-icon></button>
-      <button mat-icon-button><mat-icon>highlight_off</mat-icon></button>
+      <button mat-icon-button (click)="editPaymentTask(element)"><mat-icon>edit</mat-icon></button>
+      <button mat-icon-button (click)="deletePaymentTask(element)"><mat-icon>highlight_off</mat-icon></button>
     </td>
   </ng-container>
 

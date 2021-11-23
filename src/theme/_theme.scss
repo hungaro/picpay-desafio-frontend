@@ -74,6 +74,46 @@ mat-form-field {
   cursor: default;
 }
 
+.mat-dialog-title,
+.mat-dialog-content,
+.mat-dialog-actions {
+  margin: 0 !important;
+  padding: 16px 24px !important;
+}
+
+.mat-dialog-title {
+  font-weight: 600 !important;
+  font-size: 16px !important;
+}
+
+.mat-flat-button {
+  background-color: rgba(0, 0, 0, 0.12);
+}
+
+.mat-button-wrapper {
+  font-weight: 600;
+}
+
+// Snackbar Custom css
+.mat-snack-bar-container.app-snackbar {
+  min-width: 0;
+  min-height: 0;
+  max-width: 100%;
+  padding: 12px 16px;
+  border-radius: 4px;
+  color: white;
+  &.success {
+    background-color: $success;
+  }
+  &.error {
+    background-color: $warn;
+  }
+  &.info {
+    color: #000000;
+    background-color: $background-color;
+  }
+}
+
 .primary-color {
   color: $primary !important;
 }

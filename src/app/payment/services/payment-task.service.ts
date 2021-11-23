@@ -23,4 +23,16 @@ export class PaymentTaskService {
         })
       );
   }
+
+  savePaymentTask(paymentTask: PaymentTask): Observable<PaymentTask> {
+    return this.api.post<PaymentTask>(this.apiUrl, paymentTask, { showLoading: true, defaultErrorHandling: true });
+  }
+
+  updatePaymentTask(paymentTask: PaymentTask): Observable<PaymentTask> {
+    return this.api.patch<PaymentTask>(`${this.apiUrl}/${paymentTask.id}`, paymentTask, { showLoading: true, defaultErrorHandling: true });
+  }
+
+  deletePaymentTask(id: number): Observable<null> {
+    return this.api.delete(`${this.apiUrl}/${id}`, { showLoading: true, defaultErrorHandling: true });
+  }
 }

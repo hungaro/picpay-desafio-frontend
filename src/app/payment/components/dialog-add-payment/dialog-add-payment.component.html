@@ -1,0 +1,45 @@
+<div class="dialog-wrapper">
+  <h1 mat-dialog-title>Adicionar pagamento</h1>
+  <div mat-dialog-content>
+    <form [formGroup]="form" autocomplete="off" fxLayout="column" fxLayoutGap="16px">
+      <div fxLayout="row" fxLayoutGap="42px">
+        <mat-form-field>
+          <mat-label>Usuário</mat-label>
+          <input required matInput formControlName="name" />
+          <mat-error *ngIf="form.controls.name.hasError('required')">
+            Campo obrigatório
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Valor</mat-label>
+          <input type="number" required matInput formControlName="value" />
+          <mat-error *ngIf="form.controls.value.hasError('required')">
+            Campo obrigatório
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutGap="42px">
+        <mat-form-field>
+          <mat-label>Data</mat-label>
+          <input required matInput formControlName="date" />
+          <mat-error *ngIf="form.controls.date.hasError('required')">
+            Campo obrigatório
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Título</mat-label>
+          <input matInput formControlName="title" />
+        </mat-form-field>
+      </div>
+    </form>
+  </div>
+
+  <div mat-dialog-actions fxLayout="row" fxLayoutGap="8px" fxLayoutAlign="end center">
+    <button mat-flat-button id="dialog-button-cancel" (click)="cancel()">
+      CANCELAR
+    </button>
+    <button mat-flat-button color="primary" id="dialog-button-save" (click)="save()">
+      SALVAR
+    </button>
+  </div>
+</div>
