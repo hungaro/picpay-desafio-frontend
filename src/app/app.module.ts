@@ -16,11 +16,18 @@ import {SecurityService} from './services/security.service';
 import {DatePipe} from '@angular/common';
 import {MAT_SNACK_BAR_DEFAULT_OPTIONS, MatSnackBarModule} from '@angular/material/snack-bar';
 import {NotificationService} from './services/notification.service';
+import {PaymentComponent} from './payment/payment.component';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatTableModule} from '@angular/material/table';
+import {MatSortModule} from '@angular/material/sort';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatCheckboxModule} from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
       AppComponent,
-      LoginComponent
+      LoginComponent,
+      PaymentComponent
    ],
   imports: [
       BrowserModule,
@@ -32,7 +39,12 @@ import {NotificationService} from './services/notification.service';
       MatInputModule,
       MatIconModule,
       MatButtonModule,
-      MatSnackBarModule
+      MatSnackBarModule,
+      MatMenuModule,
+      MatTableModule,
+      MatSortModule,
+      MatPaginatorModule,
+      MatCheckboxModule
   ],
   providers: [
         DataService,

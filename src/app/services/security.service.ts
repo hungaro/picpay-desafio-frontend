@@ -30,7 +30,7 @@ export class SecurityService {
         this.http.post<any>('http://localhost:3000/login', usuario).pipe(tap(data => {
             localStorage.setItem('TOKEN', data.accessToken);
             localStorage.setItem('USER', data.user);
-            this.notificationService.success('Login realizado com sucesso');
+            this.router.navigate(['payment']);
         })).subscribe(data => console.log(data), err => this.notificationService.error(err.message));
     }
 
@@ -42,6 +42,8 @@ export class SecurityService {
        // Caso não exista um token, navegar para o login
        if (!token) {
            this.router.navigate(['']);
+       } else {
+           this.router.navigate(['payment']);
        }
     }
 
