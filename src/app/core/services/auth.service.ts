@@ -6,7 +6,7 @@ import { UserAccount } from '../models/user-account.model';
 import { ApiService } from './api.service';
 
 interface UserAuthentication {
-  username: string;
+  email: string;
   password: string;
 }
 

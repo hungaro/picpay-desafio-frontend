@@ -21,7 +21,7 @@ export class ApiService {
   constructor(private http: HttpClient, private loading: LoadingService, private snackBar: SnackbarService) {}
 
   get<T = any>(path: string, params: any = {}, options: ApiOptions = {}): Observable<T | HttpResponse<T>> {
-    let observe = !!options?.fullResponse ? 'response' : 'body';
+    let observe = !!options.fullResponse ? 'response' : 'body';
     return this.http
       .get<T>(`${this.apiUrl}${path}`, {
         params: new HttpParams({ fromObject: params }),
@@ -58,12 +58,14 @@ export class ApiService {
         timeout(timeoutTime),
         catchError((error: HttpErrorResponse) => {
           console.log('Request Error', error);
-          switch (error.status) {
-            case 404:
-              this.snackBar.showError('Registro não encontrado.');
-              break;
-            default:
-              this.snackBar.showError('Ocorreu um erro inesperado.');
+          if (!!options.defaultErrorHandling) {
+            switch (error?.status) {
+              case 404:
+                this.snackBar.showError('Registro não encontrado.');
+                break;
+              default:
+                this.snackBar.showError('Ocorreu um erro inesperado.');
+            }
           }
           return throwError(error);
         }),

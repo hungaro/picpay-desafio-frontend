@@ -32,6 +32,4 @@ export class SnackbarService {
 
     this.snackBar.openFromComponent(SnackbarComponent, config);
   }
-
-  dismiss = (): void => this.snackBar.dismiss();
 }
