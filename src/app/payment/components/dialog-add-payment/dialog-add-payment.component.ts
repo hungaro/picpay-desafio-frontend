@@ -55,4 +55,6 @@ export class DialogAddPaymentComponent {
       }
     }
   }
+
+  castAny = (a: any) => a as any;
 }

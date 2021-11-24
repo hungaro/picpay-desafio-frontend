@@ -1,9 +1,12 @@
+import { NgxMatDatetimePickerModule, NgxMatTimepickerModule } from '@angular-material-components/datetime-picker';
+import { NgxMatMomentModule } from '@angular-material-components/moment-adapter';
 import { CommonModule } from '@angular/common';
 import { Injector, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
@@ -33,6 +36,10 @@ import { PaymentComponent } from './payment.component';
     MatCheckboxModule,
     MatSortModule,
     MatDialogModule,
+    MatDatepickerModule,
+    NgxMatDatetimePickerModule,
+    NgxMatTimepickerModule,
+    NgxMatMomentModule,
     ReactiveFormsModule,
     FlexLayoutModule,
     SharedModule
