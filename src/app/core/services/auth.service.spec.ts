@@ -2,7 +2,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
-import { anything, instance, mock, when } from 'ts-mockito';
+import { anything, instance, mock, verify, when } from 'ts-mockito';
 import { UserAccount } from '../models/user-account.model';
 import { ApiService } from './api.service';
 import { AuthService } from './auth.service';
@@ -60,5 +60,23 @@ describe('AuthService', () => {
       },
       err => expect(err).toEqual(new HttpErrorResponse({ status: 404, error: 'Email ou senha incorretos' }))
     );
+  });
+
+  it('isAuthenticated should get token from session storage', () => {
+    sessionStorage.setItem(
+      'token_key',
+      'eyJpZCI6MCwibmFtZSI6InVzdWFyaW8iLCJlbWFpbCI6InVzdWFyaW9AZ21haWwuY29tIiwicGFzc3dvcmQiOiJ1c3VhcmlvIn0='
+    );
+    spyOn(sessionStorage, 'getItem').and.callThrough();
+    service.isAuthenticated().subscribe(data => expect(data).toBeTruthy());
+  });
+
+  it('logout should clear token', () => {
+    spyOn((service as any).userData, 'next');
+    spyOn(sessionStorage, 'removeItem').and.callThrough();
+    service.logout();
+    verify(mockRouter.navigate(anything())).once();
+    expect((service as any).userData.next).toHaveBeenCalledOnceWith(null);
+    expect(sessionStorage.removeItem).toHaveBeenCalledOnceWith('token_key');
   });
 });

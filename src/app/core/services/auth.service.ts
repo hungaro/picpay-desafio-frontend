@@ -12,7 +12,6 @@ interface UserAuthentication {
 }
 
 const TOKEN_KEY = 'token_key';
-const TOKEN_EXPIRATION = 3600;
 
 @Injectable({
   providedIn: 'root'
