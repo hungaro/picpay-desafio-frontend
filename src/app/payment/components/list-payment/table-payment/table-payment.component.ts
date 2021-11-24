@@ -7,7 +7,7 @@ import { PaymentTask } from '@app/payment/models/payment-task.model';
 import { PaymentTaskService } from '@app/payment/services/payment-task.service';
 import { DialogConfirmationComponent } from '@app/shared/components/dialog-confirmation/dialog-confirmation.component';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
+import { filter, takeUntil } from 'rxjs/operators';
 import { DialogAddPaymentComponent } from '../../dialog-add-payment/dialog-add-payment.component';
 
 @Component({
@@ -45,18 +45,15 @@ export class TablePaymentComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.destroySubscriber?.next();
-    this.destroySubscriber?.complete();
+    this.destroySubscriber.next();
+    this.destroySubscriber.complete();
   }
 
   editPaymentTask(paymentTask: PaymentTask): void {
     DialogAddPaymentComponent.open({ paymentTask })
       .afterClosed()
-      .subscribe(data => {
-        if (!!data) {
-          this.updateList.emit(true);
-        }
-      });
+      .pipe(filter(result => !!result))
+      .subscribe(data => this.updateList.emit(true));
   }
 
   deletePaymentTask(paymentTask: PaymentTask) {

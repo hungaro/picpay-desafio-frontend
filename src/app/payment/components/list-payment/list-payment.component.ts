@@ -6,7 +6,7 @@ import { GetPaymentTaskParams } from '@app/payment/models/get-payment-task-param
 import { PaymentTask } from '@app/payment/models/payment-task.model';
 import { PaymentTaskService } from '@app/payment/services/payment-task.service';
 import { of, Subject, timer } from 'rxjs';
-import { debounce, debounceTime, distinctUntilChanged, takeUntil } from 'rxjs/operators';
+import { debounce, debounceTime, distinctUntilChanged, filter, takeUntil } from 'rxjs/operators';
 import { DialogAddPaymentComponent } from '../dialog-add-payment/dialog-add-payment.component';
 
 @Component({
@@ -35,8 +35,8 @@ export class ListPaymentComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.destroySubscriber?.next();
-    this.destroySubscriber?.complete();
+    this.destroySubscriber.next();
+    this.destroySubscriber.complete();
   }
 
   sort(event: MatSort) {
@@ -91,6 +91,7 @@ export class ListPaymentComponent implements OnInit, OnDestroy {
   showDialogAddPaymentTask() {
     DialogAddPaymentComponent.open()
       .afterClosed()
+      .pipe(filter(result => !!result))
       .subscribe(() => this.updateList());
   }
 }
