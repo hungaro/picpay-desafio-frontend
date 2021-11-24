@@ -4,7 +4,7 @@ export interface PaymentTask {
   username: string;
   title: string;
   value: number;
-  date: Date;
+  date: string;
   image: string;
   isPayed: boolean;
 }
