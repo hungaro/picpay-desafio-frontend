@@ -6,7 +6,7 @@ import { of, throwError } from 'rxjs';
 import { anything, capture, instance, mock, verify, when } from 'ts-mockito';
 import { LoginComponent } from './login.component';
 
-fdescribe('LoginComponent', () => {
+describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let mockAuthService: AuthService;
@@ -80,5 +80,6 @@ fdescribe('LoginComponent', () => {
     component.form.patchValue({ email: 'email', password: '' });
     component.login();
     verify(mockAuthService.authenticate(anything())).never();
+    expect().nothing();
   });
 });
