@@ -4,24 +4,31 @@
     <form [formGroup]="form" autocomplete="off" fxLayout="column" fxLayoutGap="16px">
       <div fxLayout="row" fxLayoutGap="42px">
         <mat-form-field>
-          <mat-label>Usuário</mat-label>
-          <input required matInput formControlName="name" />
+          <mat-label>Nome</mat-label>
+          <input id="payment-name-input" required matInput formControlName="name" />
           <mat-error *ngIf="form.controls.name.hasError('required')">
             Campo obrigatório
           </mat-error>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Valor</mat-label>
-          <input type="number" required matInput formControlName="value" />
-          <mat-error *ngIf="form.controls.value.hasError('required')">
+          <mat-label>Usuário</mat-label>
+          <input id="payment-username-input" required matInput formControlName="username" />
+          <mat-error *ngIf="form.controls.name.hasError('required')">
             Campo obrigatório
           </mat-error>
+          <span matPrefix><b>@</b>&nbsp;</span>
+        </mat-form-field>
+      </div>
+      <div fxLayout="row" fxLayoutGap="42px">
+        <mat-form-field>
+          <mat-label>Título</mat-label>
+          <input matInput formControlName="title" />
         </mat-form-field>
       </div>
       <div fxLayout="row" fxLayoutGap="42px">
         <mat-form-field>
           <mat-label>Data</mat-label>
-          <input id="payment-date-input" matInput [ngxMatDatetimePicker]="pickerEndDate" formControlName="date" />
+          <input id="payment-date-input" required matInput [ngxMatDatetimePicker]="pickerEndDate" formControlName="date" />
           <mat-datepicker-toggle id="payment-date-toggle" matSuffix [for]="castAny(pickerEndDate)"></mat-datepicker-toggle>
           <ngx-mat-datetime-picker
             id="payment-date-picker"
@@ -42,8 +49,21 @@
           </mat-error>
         </mat-form-field>
         <mat-form-field>
-          <mat-label>Título</mat-label>
-          <input matInput formControlName="title" />
+          <mat-label>Valor</mat-label>
+          <input
+            id="payment-value-input"
+            type="text"
+            prefix="R$ "
+            mask="separator.2"
+            thousandSeparator="."
+            separatorLimit="999999999999"
+            required
+            matInput
+            formControlName="value"
+          />
+          <mat-error *ngIf="form.controls.value.hasError('required')">
+            Campo obrigatório
+          </mat-error>
         </mat-form-field>
       </div>
     </form>

@@ -14,6 +14,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { RouterModule } from '@angular/router';
 import { HeaderComponent, LoadingComponent, NotFoundComponent } from '@app/core/components';
 import { SharedModule } from '@app/shared/shared.module';
+import { NgxMaskModule } from 'ngx-mask';
 import { LoginComponent } from './components/login/login.component';
 import { ShellComponent } from './components/shell/shell.component';
 import { SnackbarComponent } from './components/snackbar/snackbar.component';

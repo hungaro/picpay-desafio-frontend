@@ -61,7 +61,7 @@ export class TablePaymentComponent implements OnInit, OnChanges, OnDestroy {
       title: 'Excluir pagamento',
       message: `
         <p>Usuário: ${paymentTask.name} </p>
-        <p>Data: ${this.datePipe.transform(paymentTask.date, 'shortDate')} </p>
+        <p>Data: ${this.datePipe.transform(paymentTask.date, 'short')} </p>
         <p>Valor: R$ ${this.currencyPipe.transform(paymentTask.value)} </p>
       `,
       yesCallback: dialog => {

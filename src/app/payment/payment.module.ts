@@ -15,6 +15,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableModule } from '@angular/material/table';
 import { SharedModule } from '@app/shared/shared.module';
+import { NgxMaskModule } from 'ngx-mask';
 import { DialogAddPaymentComponent } from './components/dialog-add-payment/dialog-add-payment.component';
 import { ListPaymentComponent } from './components/list-payment/list-payment.component';
 import { TablePaymentComponent } from './components/list-payment/table-payment/table-payment.component';
@@ -40,6 +41,7 @@ import { PaymentComponent } from './payment.component';
     NgxMatDatetimePickerModule,
     NgxMatTimepickerModule,
     NgxMatMomentModule,
+    NgxMaskModule.forRoot(),
     ReactiveFormsModule,
     FlexLayoutModule,
     SharedModule

@@ -2,8 +2,11 @@
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Usuário</b></th>
     <td mat-cell *matCellDef="let element">
-      {{element.name}} <br />
-      @{{element.username}}
+      {{element.name}}
+      <span class="subtitle">
+        <br />
+        @{{element.username}}
+      </span>
     </td>
   </ng-container>
 
@@ -14,7 +17,10 @@
 
   <ng-container matColumnDef="date">
     <th mat-header-cell *matHeaderCellDef mat-sort-header><b>Data</b></th>
-    <td mat-cell *matCellDef="let element">{{element.date | date}}</td>
+    <td mat-cell *matCellDef="let element">
+      {{element.date | date}}
+      <span class="subtitle"><br />{{element.date | date: 'shortTime'}}</span>
+    </td>
   </ng-container>
 
   <ng-container matColumnDef="value">

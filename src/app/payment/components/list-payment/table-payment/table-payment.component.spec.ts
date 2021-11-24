@@ -130,7 +130,7 @@ describe('TablePaymentComponent', () => {
       data.yesCallback(dialogMock);
       expect(dialogMock.close).toHaveBeenCalledOnceWith(true);
       expect(component.updateList.emit).toHaveBeenCalledWith(true);
-      verify(mockDatePipe.transform(myPaymentTask.date, 'shortDate')).once();
+      verify(mockDatePipe.transform(myPaymentTask.date, 'short')).once();
       verify(mockCurrencyPipe.transform(myPaymentTask.value)).once();
       verify(mockPaymentTaskService.deletePaymentTask(myPaymentTask.id)).once();
       verify(mockSnackbarService.showSuccess('Registro excluído com sucesso!')).once();
