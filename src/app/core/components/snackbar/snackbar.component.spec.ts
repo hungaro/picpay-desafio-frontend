@@ -27,7 +27,7 @@ describe('SnackbarComponent', () => {
   });
 
   beforeEach(() => {
-    mockSnackBarRef = mock(MatSnackBarRef);
+    mockSnackBarRef = mock(MatSnackBarRef) as MatSnackBarRef<SnackbarComponent>;
     fixture = TestBed.createComponent(SnackbarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

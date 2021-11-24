@@ -1,6 +1,7 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, Subject } from 'rxjs';
+import { Router } from '@angular/router';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { map, mergeMap } from 'rxjs/operators';
 import { UserAccount } from '../models/user-account.model';
 import { ApiService } from './api.service';
@@ -10,6 +11,9 @@ interface UserAuthentication {
   password: string;
 }
 
+const TOKEN_KEY = 'token_key';
+const TOKEN_EXPIRATION = 3600;
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,7 +22,7 @@ export class AuthService {
   private userData: BehaviorSubject<UserAccount> = new BehaviorSubject(null);
   private authenticated = false;
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService, private router: Router) {}
 
   authenticate(authentication: UserAuthentication): Observable<UserAccount> {
     return this.api
@@ -29,6 +33,7 @@ export class AuthService {
       .pipe(
         map((user: UserAccount[]) => {
           if (!!user?.length) {
+            sessionStorage.setItem(TOKEN_KEY, btoa(JSON.stringify(user[0])));
             this.authenticated = true;
             this.userData.next(user[0]);
             return user[0];
@@ -39,6 +44,11 @@ export class AuthService {
   }
 
   isAuthenticated(): Observable<boolean> {
+    let token = sessionStorage.getItem(TOKEN_KEY);
+    if (!this.authenticated && !!token) {
+      this.authenticated = !!token;
+      this.userData.next(JSON.parse(atob(token)));
+    }
     return of(this.authenticated).pipe(
       mergeMap(() => this.getUserData()),
       map(userData => !!userData)
@@ -46,4 +56,10 @@ export class AuthService {
   }
 
   getUserData = (): Observable<UserAccount> => this.userData.asObservable();
+
+  logout() {
+    this.userData.next(null);
+    sessionStorage.removeItem(TOKEN_KEY);
+    this.router.navigate(['/login']);
+  }
 }

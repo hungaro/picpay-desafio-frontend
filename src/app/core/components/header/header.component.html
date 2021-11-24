@@ -1,4 +1,10 @@
 <mat-toolbar color="accent" fxLayout="row" fxLayoutAlign="space-between center">
   <app-logo color="white"></app-logo>
-  <div class="avatar"></div>
+  <div fxLayout="row" fxLayoutAlign="space-evenly center" fxLayoutGap="16px">
+    <span *ngIf="userData | async; let user" id="header-logged-user-name">Olá {{user.name}}</span>
+    <div class="avatar"></div>
+    <button (click)="logout()" mat-icon-button id="header-logout-button">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </div>
 </mat-toolbar>

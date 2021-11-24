@@ -1,5 +1,5 @@
 <div fxLayout="row" fxFill>
-  <form [formGroup]="form" fxLayout="column" fxLayoutAlign="center center" fxFlex="0 1 540px" class="login-tab">
+  <form [formGroup]="form" fxLayout="column" fxLayoutAlign="center center" fxFlex="0 1 540px" class="login-tab" (submit)="login()">
     <div class="login-form" fxLayout="column" fxLayoutGap="16px">
       <app-logo color="colored"></app-logo>
       <h1>Bem vindo de volta</h1>
@@ -36,7 +36,7 @@
       <button mat-flat-button color="primary" (click)="login()" id="login-button-enter">ENTRAR</button>
     </div>
   </form>
-  <div fxLayout="column" fxLayoutAlign="center center" fxFlex>
+  <div fxLayout="column" fxLayoutAlign="center center" fxFlex class="login-image">
     <img src="/assets/images/login-image.png" />
   </div>
 </div>

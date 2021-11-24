@@ -1,5 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { anything, instance, mock, when } from 'ts-mockito';
 import { UserAccount } from '../models/user-account.model';
@@ -9,12 +10,18 @@ import { AuthService } from './auth.service';
 describe('AuthService', () => {
   let service: AuthService;
   let mockApiService: ApiService;
+  let mockRouter: Router;
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
         {
           provide: ApiService,
           useFactory: () => instance(mockApiService)
+        },
+        {
+          provide: Router,
+          useFactory: () => instance(mockRouter)
         }
       ]
     });
@@ -22,6 +29,7 @@ describe('AuthService', () => {
 
   beforeEach(() => {
     mockApiService = mock(ApiService);
+    mockRouter = mock(Router);
     service = TestBed.inject(AuthService);
   });
 
