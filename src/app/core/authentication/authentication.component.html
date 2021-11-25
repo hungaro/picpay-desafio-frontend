@@ -13,26 +13,32 @@
                         <small>Email</small>
                     </label>
                     <div class="col-sm-10 w-100">
-                        <input type="text" class="form-control pic-input" id="staticEmail">
+                        <input type="text" #email class="form-control pic-input" id="staticEmail">
                     </div>
-                    <label for="inputPassword" class="col-sm-2 col-form-label pic-label-senha">
+                    <label for="inputPassword"  class="col-sm-2 col-form-label pic-label-senha">
                         <span>Senha</span>
                     </label>
                     <div class="col-sm-10 w-100 mt-3">
-                        <input type="password" class="form-control pic-input" id="inputPassword">
+                        <input type="password" #senha class="form-control pic-input" id="inputPassword">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-12">
-                        <button type="button" class="btn btn-primary w-100 text-uppercase">entrar</button>
+                        <button type="button" (click)="login(email, senha)" class="btn btn-primary w-100 text-uppercase">entrar</button>
+                    </div>
+                    <div class="alert alert-danger mt-5" role="alert" *ngIf="error">
+                        <strong>Ops!</strong> Parece que ocorreu um problema com eu usuário e senha, vamos tentar novamente ?
+                    </div>
+                    <div class="alert alert-warning mt-5" role="alert" *ngIf="alert">
+                        <strong>Ei!</strong> Não esqueceu nada não ?
                     </div>
                 </div>
             </div>
         </div>
         <div class="col-7 pic-color-icon position-relative">
-            <div class="top-50 start-50 translate-middle position-absolute">
+            <figure class="top-50 start-50 translate-middle position-absolute">
                 <img src="assets/img/man-doing-online-payment 1.svg">
-            </div>
+            </figure>
         </div>
     </div>
     

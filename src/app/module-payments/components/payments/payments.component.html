@@ -1,3 +1,52 @@
 <app-navbar></app-navbar>
-
-<p>payments works!</p>
+<section class="container-fluid min-vh-100">
+    <div class="row pt-5">
+        <div class="col-md-10 offset-md-1">
+            <h1>Meus pagamentos</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-10 offset-md-1 pic-my-payments rounded">
+            <div id="table">
+                <div class="row mt-3">
+                    <div class="col-md-3 ">
+                        <form>
+                            <div class="form-group form-inline">
+                                <input class="form-control ml-2" type="text" [formControl]="filter" placeholder="Pesquisar por usuário"/>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-md-5 offset-md-4">
+                        <ngb-pagination
+                        [(page)]="page"
+                        [pageSize]="pageSize"
+                        [maxSize]="5"
+                        (pageChange)="load()"
+                        [collectionSize]="169"></ngb-pagination>
+                    </div>
+                </div>
+                
+                <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">Usuário</th>
+                    <th scope="col">Título</th>
+                    <th scope="col">Data</th>
+                    <th scope="col">Valor</th>
+                    <th scope="col">Pago</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let element of data ; index as i">
+                    <td><ngb-highlight [result]="element.name" [term]="filter.value"></ngb-highlight></td>
+                    <td><ngb-highlight [result]="element.title " [term]="filter.value"></ngb-highlight></td>
+                    <td><ngb-highlight [result]="element.date" [term]="filter.value"></ngb-highlight></td>
+                    <td><ngb-highlight [result]="element.value " [term]="filter.value"></ngb-highlight></td>
+                    <td><ngb-highlight [result]="element.isPayed " [term]="filter.value"></ngb-highlight></td>
+                </tr>
+                </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>

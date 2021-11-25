@@ -4,7 +4,8 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AuthenticationComponent } from './core/authentication/authentication.component';
 import { AppRoutingModule } from './app-routing.module';
-import { PaymentsComponent } from './module-payments/components/payments/payments.component';
+import { HttpClientModule } from '@angular/common/http';
+import { PicGuard } from './core/guard/pic-guard';
 
 @NgModule({
   declarations: [	
@@ -12,9 +13,10 @@ import { PaymentsComponent } from './module-payments/components/payments/payment
    ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [PicGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

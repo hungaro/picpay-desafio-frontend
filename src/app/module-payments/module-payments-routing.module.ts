@@ -1,11 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PicGuard } from '../core/guard/pic-guard';
 import { PaymentsComponent } from './components/payments/payments.component';
 
 const routes: Routes = [
   {
     path: '',
-    component: PaymentsComponent
+    component: PaymentsComponent,
+    canActivate: [ PicGuard ],
+    canLoad: [ PicGuard ]
   }
 ];
 
