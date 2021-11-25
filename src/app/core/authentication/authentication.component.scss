@@ -1,0 +1,65 @@
+.pic-color-icon {
+    background-color: white;
+}
+
+.pic-color-auth {
+    background-color: #F2F2F2;
+}
+
+.pic-wellcome {
+    font-family: Montserrat;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 37px;
+    color: #333333;
+}
+
+.pic-log-txt1, .pic-log-txt2 {
+    font-family: 'Montserrat', sans-serif;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 29px;
+}
+.pic-log-txt1{
+    color: #002D69;
+    font-weight: 800;
+}
+.pic-log-txt2 {
+    font-weight: 400;
+    color: #90BAE7
+}
+
+input {
+    background-color: transparent;
+}
+
+.pic-input:focus {
+    background-color: transparent;
+    border: none;
+    box-shadow: rgb(0, 0, 0);
+}
+
+.pic-label-senha, .pic-label-email {
+    position: absolute;
+    height: 16px;
+    background-color: #F2F2F2;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 12px;
+    line-height: 16px;
+    color: rgba(0, 0, 0, 0.6);
+}
+
+.pic-label-email {
+    left: 6%;
+    right: 84%;
+    top: -15px;
+}
+
+.pic-label-senha {
+    left: 6%;
+    right: 84%;
+    top: 39px;
+}
