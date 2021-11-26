@@ -1,8 +1,11 @@
 <app-navbar></app-navbar>
 <section class="container-fluid min-vh-100">
     <div class="row pt-5">
-        <div class="col-md-10 offset-md-1">
+        <div class="col-md-7 offset-md-1">
             <h1>Meus pagamentos</h1>
+        </div>
+        <div class="col-md-3">
+            <button type="button" (click)="openNewPayment(addPayment)" class="btn btn-primary w-100">Adicionar pagamento</button>
         </div>
     </div>
     <div class="row">
@@ -16,13 +19,13 @@
                             </div>
                         </form>
                     </div>
-                    <div class="col-md-5 offset-md-4">
+                    <div class="col-md-9 d-flex justify-content-end">
                         <ngb-pagination
                         [(page)]="page"
                         [pageSize]="pageSize"
                         [maxSize]="5"
                         (pageChange)="load()"
-                        [collectionSize]="169"></ngb-pagination>
+                        [collectionSize]="totalPages"></ngb-pagination>
                     </div>
                 </div>
                 
@@ -43,10 +46,80 @@
                     <td><ngb-highlight [result]="element.date" [term]="filter.value"></ngb-highlight></td>
                     <td><ngb-highlight [result]="element.value " [term]="filter.value"></ngb-highlight></td>
                     <td><ngb-highlight [result]="element.isPayed " [term]="filter.value"></ngb-highlight></td>
+                    <td><a (click)="edit(element, addPayment)"><span class="material-icons">edit</span></a></td>
+                    <td><a (click)="delete(element.id)"><span class="material-icons">highlight_off</span></a></td>
                 </tr>
                 </tbody>
                 </table>
             </div>
+            <div class="alert alert-success mt-5" *ngIf="success" role="alert">
+                Cadastrado com sucesso!
+            </div>
+            <div class="alert alert-danger mt-5" *ngIf="deleted" role="alert">
+                Apagado com sucesso!
+            </div>
+            <div class="alert alert-warning mt-5" *ngIf="error" role="alert">
+                Algo deu errado...
+            </div>
         </div>
     </div>
 </section>
+
+
+<ng-template #addPayment let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Adicionar pagamento</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-6">
+                <input class="form-control form-control-sm" [(ngModel)]="newPayment.username" type="text" placeholder="Usuário*" aria-label="Usuário">
+            </div>
+            <div class="col-6">
+                <input class="form-control form-control-sm" [(ngModel)]="newPayment.value" type="number" placeholder="Valor*" aria-label="Valor">
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-6">
+                <input class="form-control form-control-sm" [(ngModel)]="newPayment.date" type="date" placeholder="Data*" aria-label="data">
+            </div>
+            <div class="col-6">
+                <input class="form-control form-control-sm" [(ngModel)]="newPayment.title" type="texdt" placeholder="Título" aria-label="título">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Cancelar</button>
+      <button type="button" class="btn btn-primary" (click)="modal.close('save')">Salvar</button>
+    </div>
+</ng-template>
+
+<ng-template #delPayment let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title">Adicionar pagamento</h4>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-6">
+                <input class="form-control form-control-sm" [(ngModel)]="newPayment.username" type="text" placeholder="Usuário*" aria-label="Usuário">
+            </div>
+            <div class="col-6">
+                <input class="form-control form-control-sm" [(ngModel)]="newPayment.value" type="number" placeholder="Valor*" aria-label="Valor">
+            </div>
+        </div>
+        <div class="row mt-4">
+            <div class="col-6">
+                <input class="form-control form-control-sm" [(ngModel)]="newPayment.date" type="date" placeholder="Data*" aria-label="data">
+            </div>
+            <div class="col-6">
+                <input class="form-control form-control-sm" [(ngModel)]="newPayment.title" type="texdt" placeholder="Título" aria-label="título">
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">Cancelar</button>
+      <button type="button" class="btn btn-primary" (click)="modal.close('save')">Salvar</button>
+    </div>
+</ng-template>
+
+

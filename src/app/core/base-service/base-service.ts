@@ -17,4 +17,30 @@ export class BaseService {
                 return throwError(err);
             }))
     }
+
+    public post(value): Observable<any> {
+        return this.http
+            .post(`${this.url}`, value)
+            .pipe(map(data => data),
+            catchError(err => {
+                return throwError(err);
+            }))
+    }
+    public put(value): Observable<any> {
+        return this.http
+            .put(`${this.url}/${value.id}`, value)
+            .pipe(map(data => data),
+            catchError(err => {
+                return throwError(err);
+            }))
+    }
+
+    public delete(value): Observable<any> {
+        return this.http
+            .delete(`${this.url}/${value}`)
+            .pipe(map(data => data),
+            catchError(err => {
+                return throwError(err);
+            }))
+    }
 }
